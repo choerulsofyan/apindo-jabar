@@ -1,0 +1,9 @@
+// Import Bootstrap variables
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+// Override variables here
+$primary: #ff5733; // Example: Change the primary color
+
+// Import Bootstrap styles
+@import "bootstrap/scss/bootstrap";
