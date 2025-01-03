@@ -1,5 +1,5 @@
 // Fonts
-@import url("https://fonts.bunny.net/css?family=Nunito");
+@import "typeface-lato/index.css";
 
 // Import Bootstrap functions
 @import "bootstrap/scss/functions";
@@ -12,3 +12,11 @@
 
 // Import Bootstrap styles
 @import "bootstrap/scss/bootstrap";
+
+.text-primary {
+    color: $font-color-primary !important;
+}
+
+.text-secondary {
+    color: $font-color-secondary !important;
+}
