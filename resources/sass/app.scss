@@ -1,5 +1,9 @@
+@import "@fontsource/source-sans-3/index.css"; // Import Source Sans font from npm
+
+@import "overlayscrollbars/styles/overlayscrollbars.css"; // Using ~ to indicate node_modules
+
 // Fonts
-@import "typeface-lato/index.css";
+// @import "typeface-lato/index.css";
 
 // Import Bootstrap functions
 @import "bootstrap/scss/functions";
@@ -12,6 +16,15 @@
 
 // Import Bootstrap styles
 @import "bootstrap/scss/bootstrap";
+
+// Import AdminLTE styles
+@import "admin-lte/dist/css/adminlte.min.css"; // This assumes AdminLTE is installed via npm
+
+// Import Bootstrap Icons
+@import "bootstrap-icons/font/bootstrap-icons.min.css";
+
+// Import Font Awesome styles
+@import "@fortawesome/fontawesome-free/css/all.min.css";
 
 .text-primary {
     color: $font-color-primary !important;
