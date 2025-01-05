@@ -25,6 +25,17 @@ document.addEventListener("DOMContentLoaded", function () {
             },
         });
     }
+
+    // Auto dismiss success alert after 5 seconds
+    const successAlert = document.querySelector(".alert-success");
+    if (successAlert) {
+        setTimeout(function () {
+            const closeButton = successAlert.querySelector(".btn-close");
+            if (closeButton) {
+                closeButton.click();
+            }
+        }, 5000); // 5 seconds
+    }
 });
 
 import { createPopper } from "@popperjs/core";

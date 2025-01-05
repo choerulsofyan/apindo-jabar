@@ -29,7 +29,7 @@ class UserController extends Controller
     public function create(): View
     {
         $roles = Role::pluck('name', 'name')->all();
-        return view('users.create', compact('roles'));
+        return view('users.form', compact('roles'));
     }
 
     /**
@@ -49,7 +49,10 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')->with('success', 'User created successfully');
+        return redirect()->route('users.index')->with([
+            'message' => 'User created successfully!',
+            'alert-type' => 'success'
+        ]);
     }
 
     /**
@@ -70,7 +73,7 @@ class UserController extends Controller
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('users.edit', compact('user', 'roles', 'userRole'));
+        return view('users.form', compact('user', 'roles', 'userRole'));
     }
 
     /**
@@ -100,7 +103,10 @@ class UserController extends Controller
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')->with('success', 'User updated successfully');
+        return redirect()->route('users.index')->with([
+            'message' => 'User updated successfully!',
+            'alert-type' => 'success'
+        ]);
     }
 
     /**
@@ -109,6 +115,9 @@ class UserController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         User::find($id)->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully');
+        return redirect()->route('users.index')->with([
+            'message' => 'User deleted successfully!',
+            'alert-type' => 'success'
+        ]);
     }
 }
