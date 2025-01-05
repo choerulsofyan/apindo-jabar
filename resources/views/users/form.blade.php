@@ -8,7 +8,10 @@
         'breadcrumbs' => [
             ['name' => 'Dashboard', 'url' => route('home')],
             ['name' => 'Manajemen User', 'url' => route('users.index')],
-            ['name' => 'Tambah User Baru', 'url' => route('users.create')],
+            [
+                'name' => isset($user) ? 'Edit User' : 'Tambah User Baru',
+                'url' => isset($user) ? route('users.edit', $user->id) : route('users.create'),
+            ],
         ],
     ])
 @endsection
@@ -31,7 +34,7 @@
             ]) !!}
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
-                    <h3 class="card-title">Tambah User Baru</h3>
+                    <h3 class="card-title">{{ isset($user) ? 'Edit User' : 'Tambah User Baru' }}</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
