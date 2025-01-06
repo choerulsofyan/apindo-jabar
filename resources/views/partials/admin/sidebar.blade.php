@@ -25,7 +25,7 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item {{ Request::is('users*', 'roles*', 'privileges*') ? 'menu-open' : '' }}">
+                <li class="nav-item {{ Request::is('users*', 'roles*', 'permissions*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa-solid fa-users"></i>
                         <p>
@@ -49,7 +49,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../index3.html" class="nav-link {{ Request::is('privileges*') ? 'active' : '' }}">
+                            <a href="{{ route('permissions.index') }}"
+                                class="nav-link {{ Request::is('permissions*') ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-user-shield"></i>
                                 <p>Hak Akses</p>
                             </a>
