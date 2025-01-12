@@ -57,8 +57,9 @@
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal" data-id="{{ $role->id }}"
-                                            data-name="{{ $role->name }}">
+                                            data-bs-target="#deleteConfirmationModal" data-item-id="{{ $role->id }}"
+                                            data-item-name="{{ $role->name }}"
+                                            data-delete-route="{{ route('roles.destroy', $role->id) }}">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -107,24 +108,5 @@
     <!--end::Row-->
 
     <!-- Delete Confirmation Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Apakah Anda yakin ingin menghapus <strong id="deleteRoleName"></strong>?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id]]) !!}
-                    <button type="submit" class="btn btn-danger">Hapus</button>
-                    {!! Form::close() !!}
-                </div>
-            </div>
-        </div>
-    </div>
-
+    @include('components.delete-confirmation-modal')
 @endsection

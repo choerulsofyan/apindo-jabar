@@ -16,7 +16,7 @@
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
     <!--end::Primary Meta Tags-->
 
-    @vite(['resources/js/app.js', 'resources/sass/app.scss'])
+    @vite(['resources/sass/app.scss'])
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -78,6 +78,7 @@
             }
         });
     </script>
+    @vite(['resources/js/app.js'])
     @stack('scripts')
     <!--end::Script-->
 </body>

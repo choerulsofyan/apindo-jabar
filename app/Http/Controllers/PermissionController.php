@@ -13,9 +13,9 @@ class PermissionController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:HAK_AKSES_LIST|HAK_AKSES_ADD|HAK_AKSES_UPDATE|HAK_AKSES_DELETE', ['only' => ['index', 'store']]);
+        $this->middleware('permission:HAK_AKSES_LIST|HAK_AKSES_ADD|HAK_AKSES_EDIT|HAK_AKSES_DELETE', ['only' => ['index', 'store']]);
         $this->middleware('permission:HAK_AKSES_ADD', ['only' => ['create', 'store']]);
-        $this->middleware('permission:HAK_AKSES_UPDATE', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:HAK_AKSES_EDIT', ['only' => ['edit', 'update']]);
         $this->middleware('permission:HAK_AKSES_DELETE', ['only' => ['destroy']]);
     }
 

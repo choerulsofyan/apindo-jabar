@@ -38,4 +38,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+const deleteConfirmationModal = document.getElementById(
+    "deleteConfirmationModal"
+);
+
+if (deleteConfirmationModal) {
+    deleteConfirmationModal.addEventListener("show.bs.modal", function (event) {
+        const button = event.relatedTarget;
+
+        // Get data from button
+        const itemId = button.getAttribute("data-item-id");
+        const itemName = button.getAttribute("data-item-name");
+        const deleteRoute = button.getAttribute("data-delete-route");
+
+        // Update modal content
+        const modalBodyInput =
+            deleteConfirmationModal.querySelector("#deleteItemName");
+        modalBodyInput.textContent = itemName;
+
+        // Update form action
+        const deleteForm =
+            deleteConfirmationModal.querySelector("#deleteItemForm");
+        deleteForm.action = deleteRoute;
+    });
+}
+
 import { createPopper } from "@popperjs/core";

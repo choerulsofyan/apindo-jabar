@@ -65,9 +65,12 @@
                                         <a class="btn btn-warning" href="{{ route('users.edit', $user->id) }}">
                                             <i class="fa fa-edit"></i>
                                         </a>
+
+                                        {{-- delete button should trigger the confirmation modal --}}
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal" data-id="{{ $user->id }}"
-                                            data-name="{{ $user->name }}">
+                                            data-bs-target="#deleteConfirmationModal" data-item-id="{{ $user->id }}"
+                                            data-item-name="{{ $user->name }}"
+                                            data-delete-route="{{ route('users.destroy', $user->id) }}">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
@@ -77,7 +80,6 @@
                     </table>
                 </div>
                 <!-- /.card-body -->
-
 
                 <div class="card-footer clearfix">
                     <div class="text-muted float-start">
@@ -116,24 +118,5 @@
     <!--end::Row-->
 
     <!-- Delete Confirmation Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Apakah Anda yakin ingin menghapus <strong id="deleteUserName"></strong>?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id]]) !!}
-                    <button type="submit" class="btn btn-danger">Hapus</button>
-                    {!! Form::close() !!}
-                </div>
-            </div>
-        </div>
-    </div>
-
+    @include('components.delete-confirmation-modal')
 @endsection
