@@ -66,21 +66,20 @@
                         <div class="row mb-3">
                             <label for="photo" class="col-sm-2 col-form-label">Photo</label>
                             <div class="col-sm-10">
-                                @if (isset($news) && $news->photo)
-                                    @if (Storage::disk('public')->exists($news->photo))
-                                        <img src="{{ Storage::url($news->photo) }}" alt="Current Photo"
-                                            style="max-width: 200px;" class="mb-2">
-                                    @else
-                                        <img src="{{ asset('assets/images/image-not-found.png') }}" alt="Image Not Found"
-                                            style="max-width: 200px;" class="mb-2">
-                                    @endif
-                                @else
-                                    <img src="{{ asset('assets/images/no-image-available.png') }}" alt="No Image Available"
-                                        style="max-width: 200px;" class="mb-2">
-                                @endif
+                                @php
+                                    $imageSrc =
+                                        isset($news) && $news->photo
+                                            ? (Storage::disk('public')->exists($news->photo)
+                                                ? Storage::url($news->photo)
+                                                : asset('assets/images/image-not-found.png'))
+                                            : asset('assets/images/no-image-available.png');
+                                @endphp
+
+                                <img id="imagePreview" src="{{ $imageSrc }}" alt="Image Preview"
+                                    style="max-width: 200px;" class="mb-2">
 
                                 <input type="file" class="form-control @error('photo') is-invalid @enderror"
-                                    id="photo" name="photo" accept="image/jpeg,image/jpg,image/png">
+                                    id="photo" name="photo">
                                 @error('photo')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -96,3 +95,28 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        const photoInput = document.getElementById('photo');
+        const imagePreview = document.getElementById('imagePreview');
+        let originalImageSrc = imagePreview.src; // Store the initial image source
+
+        photoInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                }
+
+                reader.readAsDataURL(file);
+            } else {
+                // Reset to the original image if no file is selected
+                imagePreview.src = originalImageSrc;
+            }
+        });
+    </script>
+@endpush
