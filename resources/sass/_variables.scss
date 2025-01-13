@@ -2,6 +2,21 @@
 $body-bg: #f8fafc;
 
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
+$font-family-sans-serif: "Lato", sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+// Override Bootstrap Variables
+$primary: #007cc2; // Change primary color to black
+
+// font color #19385e
+// font color #007CC2
+
+// Font Colors
+// $font-color-default: #000000; // Default black for body text
+$font-color-primary: #19385e; // Dark blue for general use
+$font-color-secondary: #007cc2; // Light blue for general use
+
+// Override Bootstrap Typography Colors
+// $body-color: $font-color-default; // Default text color
+$headings-color: $font-color-primary; // Default color for h1-h6

@@ -14,10 +14,10 @@ class RoleController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
-        $this->middleware('permission:role-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:GRUP_USER_LIST|GRUP_USER_ADD|GRUP_USER_EDIT|GRUP_USER_DELETE', ['only' => ['index', 'store']]);
+        $this->middleware('permission:GRUP_USER_ADD', ['only' => ['create', 'store']]);
+        $this->middleware('permission:GRUP_USER_EDIT', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:GRUP_USER_DELETE', ['only' => ['destroy']]);
     }
 
     /**
@@ -25,9 +25,9 @@ class RoleController extends Controller
      */
     public function index(Request $request): View
     {
-        $roles = Role::orderBy('id', 'DESC')->paginate(5);
+        $data = Role::orderBy('id', 'DESC')->paginate(5);
 
-        return view('roles.index', compact('roles'))->with('i', ($request->input('page', 1) - 1) * 5);
+        return view('roles.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -35,9 +35,9 @@ class RoleController extends Controller
      */
     public function create(): View
     {
-        $permission = Permission::get();
+        $permissions = Permission::get();
 
-        return view('roles.create', compact('permission'));
+        return view('roles.form', compact('permissions'));
     }
 
     /**
@@ -47,13 +47,13 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:roles,name',
-            'permission' => 'required',
+            'permissions' => 'required',
         ]);
 
         $role = Role::create(['name' => $request->input('name')]);
-        $role->syncPermissions($request->input('permission'));
+        $role->syncPermissions($request->input('permissions'));
 
-        return redirect()->route('roles.index')->with('success', 'Role created successfully');
+        return redirect()->route('roles.index')->with('message', 'Role created successfully');
     }
 
     /**
@@ -73,12 +73,12 @@ class RoleController extends Controller
     public function edit($id): View
     {
         $role = Role::find($id);
-        $permission = Permission::get();
+        $permissions = Permission::get();
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();
 
-        return view('roles.edit', compact('role', 'permission', 'rolePermissions'));
+        return view('roles.form', compact('role', 'permissions', 'rolePermissions'));
     }
 
     /**
@@ -88,15 +88,15 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'permission' => 'required',
+            'permissions' => 'required',
         ]);
 
         $role = Role::find($id);
         $role->name = $request->input('name');
         $role->save();
-        $role->syncPermissions($request->input('permission'));
+        $role->syncPermissions($request->input('permissions'));
 
-        return redirect()->route('roles.index')->with('success', 'Role updated successfully');
+        return redirect()->route('roles.index')->with('message', 'Role updated successfully');
     }
 
     /**
@@ -104,7 +104,8 @@ class RoleController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
+        $test = DB::table("roles")->where('id', $id)->first();
         DB::table("roles")->where('id', $id)->delete();
-        return redirect()->route('roles.index')->with('success', 'Role deleted successfully');
+        return redirect()->route('roles.index')->with('message', 'Role deleted successfully');
     }
 }

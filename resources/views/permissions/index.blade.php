@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Grup User')
+@section('title', 'Manajemen Hak Akses')
 
 @section('subheader')
     @include('partials.admin.subheader', [
-        'title' => 'Manajemen Grup User',
+        'title' => 'Manajemen Hak Akses',
         'breadcrumbs' => [
             ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Grup User', 'url' => route('roles.index')],
-            ['name' => 'Daftar Grup User', 'url' => route('roles.index')],
+            ['name' => 'Manajemen Hak Akses', 'url' => route('permissions.index')],
+            ['name' => 'Daftar Hak Akses', 'url' => route('permissions.index')],
         ],
     ])
 @endsection
@@ -27,8 +27,8 @@
         <div class="col-md-12">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
-                    <h3 class="card-title">Daftar Grup User</h3>
-                    <a href="{{ route('roles.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>
+                    <h3 class="card-title">Daftar Hak Akses</h3>
+                    <a href="{{ route('permissions.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>
                         Tambah
                         Baru</a>
                 </div>
@@ -43,23 +43,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $key => $role)
+                            @foreach ($data as $key => $permission)
                                 <tr class="align-middle">
                                     <td class="text-center">{{ ++$i }}</td>
-                                    <td>{{ $role->name }}</td>
+                                    <td>{{ $permission->name }}</td>
                                     <td class="text-center">
-                                        @can('GRUP_USER_LIST')
-                                            <a class="btn btn-info" href="{{ route('roles.show', $role->id) }}">
+                                        @can('view permissions')
+                                            <a class="btn btn-info" href="{{ route('permissions.show', $permission->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
-                                        <a class="btn btn-warning" href="{{ route('roles.edit', $role->id) }}">
+                                        <a class="btn btn-warning" href="{{ route('permissions.edit', $permission->id) }}">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteConfirmationModal" data-item-id="{{ $role->id }}"
-                                            data-item-name="{{ $role->name }}"
-                                            data-delete-route="{{ route('roles.destroy', $role->id) }}">
+                                            data-bs-target="#deleteConfirmationModal" data-item-id="{{ $permission->id }}"
+                                            data-item-name="{{ $permission->name }}"
+                                            data-delete-route="{{ route('permissions.destroy', $permission->id) }}">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>
