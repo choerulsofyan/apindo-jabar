@@ -34,7 +34,9 @@ class NewsController extends Controller
      */
     public function create(): View
     {
-        return view('news.form');
+        $imageSrc = asset('assets/images/no-image-available.png');
+
+        return view('news.form', compact('imageSrc'));
     }
 
     /**
@@ -95,7 +97,17 @@ class NewsController extends Controller
      */
     public function edit(News $news): View
     {
-        return view('news.form', compact('news'));
+        $imageSrc = asset('assets/images/no-image-available.png'); // Default placeholder
+
+        if ($news->photo) {
+            if (Storage::disk('public')->exists($news->photo)) {
+                $imageSrc = Storage::url($news->photo);
+            } else {
+                $imageSrc = asset('assets/images/image-not-found.png');
+            }
+        }
+
+        return view('news.form', compact('news', 'imageSrc'));
     }
 
     /**
