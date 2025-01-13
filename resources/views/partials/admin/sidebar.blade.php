@@ -58,7 +58,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="../generate/theme.html" class="nav-link">
+                    <a href="{{ route('news.index') }}" class="nav-link">
                         <i class="nav-icon fa-regular fa-newspaper"></i>
                         <p>Berita</p>
                     </a>
