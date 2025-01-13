@@ -62,19 +62,9 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <label for="photo" class="col-sm-2 col-form-label">Photo</label>
                             <div class="col-sm-10">
-                                @php
-                                    $imageSrc =
-                                        isset($news) && $news->photo
-                                            ? (Storage::disk('public')->exists($news->photo)
-                                                ? Storage::url($news->photo)
-                                                : asset('assets/images/image-not-found.png'))
-                                            : asset('assets/images/no-image-available.png');
-                                @endphp
-
                                 <img id="imagePreview" src="{{ $imageSrc }}" alt="Image Preview"
                                     style="max-width: 200px;" class="mb-2">
 
