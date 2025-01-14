@@ -63,6 +63,12 @@
                         <p>Berita</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('organizational-positions.index') }}" class="nav-link">
+                        <i class="nav-icon fa-regular fa-newspaper"></i>
+                        <p>Jabatan</p>
+                    </a>
+                </li>
                 {{-- <li class="nav-header">EXAMPLES</li> --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
