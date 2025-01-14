@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OrganizationalPositionController;
+use App\Http\Controllers\SectorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,4 +42,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('news', NewsController::class);
     Route::resource('news', NewsController::class);
     Route::resource('organizational-positions', OrganizationalPositionController::class);
+    Route::resource('sectors', SectorController::class);
 });

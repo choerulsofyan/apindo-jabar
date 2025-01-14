@@ -65,8 +65,14 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('organizational-positions.index') }}" class="nav-link">
-                        <i class="nav-icon fa-solid fa-sitemap"></i>
+                        <i class="nav-icon fa-solid fa-user-tie"></i>
                         <p>Jabatan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('sectors.index') }}" class="nav-link">
+                        <i class="nav-icon fa-solid fa-sitemap"></i>
+                        <p>Bidang</p>
                     </a>
                 </li>
                 {{-- <li class="nav-header">EXAMPLES</li> --}}
