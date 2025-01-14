@@ -16,6 +16,8 @@
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
     <!--end::Primary Meta Tags-->
 
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
+
     @vite(['resources/sass/app.scss'])
 </head>
 <!--end::Head-->
