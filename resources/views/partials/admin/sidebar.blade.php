@@ -75,6 +75,12 @@
                         <p>Bidang</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('regulations.index') }}" class="nav-link">
+                        <i class="nav-icon fa-solid fa-file-contract"></i>
+                        <p>Regulation</p>
+                    </a>
+                </li>
                 {{-- <li class="nav-header">EXAMPLES</li> --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
