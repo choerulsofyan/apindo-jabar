@@ -72,7 +72,7 @@
                 </li>
                 {{-- <li class="nav-header">EXAMPLES</li> --}}
                 <li
-                    class="nav-item {{ Request::is('sectors*', 'organizational-positions*', 'councils*') ? 'menu-open' : '' }}"">
+                    class="nav-item {{ Request::is('managements*', 'sectors*', 'organizational-positions*', 'councils*') ? 'menu-open' : '' }}"">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa-solid fa-users"></i>
                         <p>
@@ -89,6 +89,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('councils.index') }}"
+                                class="nav-link {{ Request::is('councils*') ? 'active' : '' }}">
+                                <i class="nav-icon fa-solid fa-users-rectangle"></i>
+                                <p>Dewan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('organizational-positions.index') }}"
                                 class="nav-link {{ Request::is('organizational-positions*') ? 'active' : '' }}">
                                 <i class="nav-icon fa-solid fa-user-tie"></i>
@@ -96,16 +103,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../index3.html" class="nav-link">
-                                <i class="nav-icon bi bi-circle"></i>
+                            <a href="{{ route('managements.index') }}"
+                                class="nav-link {{ Request::is('managements*') ? 'active' : '' }}">
+                                <i class="nav-icon fa-solid fa-people-roof"></i>
                                 <p>Kepengurusan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('councils.index') }}"
-                                class="nav-link {{ Request::is('councils*') ? 'active' : '' }}">
-                                <i class="nav-icon fa-solid fa-users-rectangle"></i>
-                                <p>Dewan</p>
                             </a>
                         </li>
                     </ul>
