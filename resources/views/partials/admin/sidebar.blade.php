@@ -64,6 +64,13 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('members.index') }}"
+                        class="nav-link {{ Request::is('news*') ? 'active' : '' }}">
+                        <i class="nav-icon fa-regular fa-user"></i>
+                        <p>Keanggotaan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('regulations.index') }}"
                         class="nav-link {{ Request::is('regulations*') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-file-contract"></i>
