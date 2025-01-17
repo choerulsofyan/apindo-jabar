@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             NewsSeeder::class,
             OrganizationalPositionSeeder::class,
             SectorSeeder::class,
+            CouncilSeeder::class,
         ]);
     }
 }
