@@ -17,10 +17,10 @@ class ManagementController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:MANAGEMENT_LIST|MANAGEMENT_ADD|MANAGEMENT_EDIT|MANAGEMENT_DELETE', ['only' => ['index', 'show']]);
-        $this->middleware('permission:MANAGEMENT_ADD', ['only' => ['create', 'store']]);
-        $this->middleware('permission:MANAGEMENT_EDIT', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:MANAGEMENT_DELETE', ['only' => ['destroy']]);
+        $this->middleware('permission:KEPENGURUSAN_LIST|KEPENGURUSAN_ADD|KEPENGURUSAN_EDIT|KEPENGURUSAN_DELETE', ['only' => ['index', 'show']]);
+        $this->middleware('permission:KEPENGURUSAN_ADD', ['only' => ['create', 'store']]);
+        $this->middleware('permission:KEPENGURUSAN_EDIT', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:KEPENGURUSAN_DELETE', ['only' => ['destroy']]);
     }
 
     /**

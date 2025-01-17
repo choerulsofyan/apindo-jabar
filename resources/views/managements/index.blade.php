@@ -27,7 +27,7 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Kepengurusan</h3>
-                    @can('MANAGEMENT_ADD')
+                    @can('KEPENGURUSAN_ADD')
                         <a href="{{ route('managements.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>
                             Tambah Baru</a>
                     @endcan
@@ -59,15 +59,15 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        @can('MANAGEMENT_LIST')
+                                        @can('KEPENGURUSAN_LIST')
                                             <a class="btn btn-info" href="{{ route('managements.show', $item->id) }}"><i
                                                     class="fa fa-eye"></i></a>
                                         @endcan
-                                        @can('MANAGEMENT_EDIT')
+                                        @can('KEPENGURUSAN_EDIT')
                                             <a class="btn btn-warning" href="{{ route('managements.edit', $item->id) }}"><i
                                                     class="fa fa-edit"></i></a>
                                         @endcan
-                                        @can('MANAGEMENT_DELETE')
+                                        @can('KEPENGURUSAN_DELETE')
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#deleteConfirmationModal" data-item-id="{{ $item->id }}"
                                                 data-item-name="{{ $item->name }}"
