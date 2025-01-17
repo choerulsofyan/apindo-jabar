@@ -26,7 +26,7 @@
         <div class="col-md-12">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
-                    <h3 class="card-title">Daftar Manajemen</h3>
+                    <h3 class="card-title">Daftar Kepengurusan</h3>
                     @can('MANAGEMENT_ADD')
                         <a href="{{ route('managements.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>
                             Tambah Baru</a>
