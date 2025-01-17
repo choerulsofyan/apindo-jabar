@@ -58,31 +58,21 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('news.index') }}" class="nav-link">
+                    <a href="{{ route('news.index') }}" class="nav-link {{ Request::is('news*') ? 'active' : '' }}">
                         <i class="nav-icon fa-regular fa-newspaper"></i>
                         <p>Berita</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('organizational-positions.index') }}" class="nav-link">
-                        <i class="nav-icon fa-solid fa-user-tie"></i>
-                        <p>Jabatan</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('sectors.index') }}" class="nav-link">
-                        <i class="nav-icon fa-solid fa-sitemap"></i>
-                        <p>Bidang</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('regulations.index') }}" class="nav-link">
+                    <a href="{{ route('regulations.index') }}"
+                        class="nav-link {{ Request::is('regulations*') ? 'active' : '' }}">
                         <i class="nav-icon fa-solid fa-file-contract"></i>
                         <p>Regulation</p>
                     </a>
                 </li>
                 {{-- <li class="nav-header">EXAMPLES</li> --}}
-                <li class="nav-item">
+                <li
+                    class="nav-item {{ Request::is('sectors*', 'organizational-positions*', 'councils*') ? 'menu-open' : '' }}"">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa-solid fa-users"></i>
                         <p>
@@ -92,14 +82,16 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../index.html" class="nav-link">
-                                <i class="nav-icon bi bi-circle"></i>
+                            <a href="{{ route('sectors.index') }}"
+                                class="nav-link {{ Request::is('sectors*') ? 'active' : '' }}">
+                                <i class="nav-icon fa-solid fa-sitemap"></i>
                                 <p>Bidang</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../index2.html" class="nav-link">
-                                <i class="nav-icon bi bi-circle"></i>
+                            <a href="{{ route('organizational-positions.index') }}"
+                                class="nav-link {{ Request::is('organizational-positions*') ? 'active' : '' }}">
+                                <i class="nav-icon fa-solid fa-user-tie"></i>
                                 <p>Jabatan</p>
                             </a>
                         </li>
@@ -107,6 +99,13 @@
                             <a href="../index3.html" class="nav-link">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Kepengurusan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('councils.index') }}"
+                                class="nav-link {{ Request::is('councils*') ? 'active' : '' }}">
+                                <i class="nav-icon fa-solid fa-users-rectangle"></i>
+                                <p>Dewan</p>
                             </a>
                         </li>
                     </ul>
