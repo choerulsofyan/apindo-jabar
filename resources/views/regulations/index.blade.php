@@ -28,8 +28,10 @@
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Regulasi</h3>
                     @can('REGULASI_ADD')
-                        <a href="{{ route('regulations.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>
-                            Tambah Baru</a>
+                        <a href="{{ route('regulations.create') }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-plus"></i>
+                            Buat Baru
+                        </a>
                     @endcan
                 </div>
                 <div class="card-body">
@@ -61,12 +63,14 @@
                                     </td>
                                     <td class="text-center">
                                         @can('REGULASI_LIST')
-                                            <a class="btn btn-info btn-sm" href="{{ route('regulations.show', $item->id) }}"><i
-                                                    class="fa fa-eye"></i></a>
+                                            <a class="btn btn-info btn-sm" href="{{ route('regulations.show', $item->id) }}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
                                         @endcan
                                         @can('REGULASI_EDIT')
-                                            <a class="btn btn-warning btn-sm"
-                                                href="{{ route('regulations.edit', $item->id) }}"><i class="fa fa-edit"></i></a>
+                                            <a class="btn btn-warning btn-sm" href="{{ route('regulations.edit', $item->id) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
                                         @endcan
                                         @can('REGULASI_DELETE')
                                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"

@@ -28,8 +28,10 @@
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Anggota</h3>
                     @can('KEANGGOTAAN_ADD')
-                        <a href="{{ route('members.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>
-                            Tambah Baru</a>
+                        <a href="{{ route('members.create') }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-plus"></i>
+                            Buat Baru
+                        </a>
                     @endcan
                 </div>
                 <div class="card-body">
@@ -52,12 +54,14 @@
                                     <td>{{ $member->email }}</td>
                                     <td class="text-center">
                                         @can('KEANGGOTAAN_LIST')
-                                            <a class="btn btn-info" href="{{ route('members.show', $member->id) }}"><i
-                                                    class="fa fa-eye"></i></a>
+                                            <a class="btn btn-info" href="{{ route('members.show', $member->id) }}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
                                         @endcan
                                         @can('KEANGGOTAAN_EDIT')
-                                            <a class="btn btn-warning" href="{{ route('members.edit', $member->id) }}"><i
-                                                    class="fa fa-edit"></i></a>
+                                            <a class="btn btn-warning" href="{{ route('members.edit', $member->id) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
                                         @endcan
                                         @can('KEANGGOTAAN_DELETE')
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"

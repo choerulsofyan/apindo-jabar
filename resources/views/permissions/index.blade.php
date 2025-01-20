@@ -28,9 +28,12 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Hak Akses</h3>
-                    <a href="{{ route('permissions.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>
-                        Tambah
-                        Baru</a>
+                    @can('HAK_AKSES_ADD')
+                        <a href="{{ route('permissions.create') }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-plus"></i>
+                            Buat Baru
+                        </a>
+                    @endcan
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -48,20 +51,24 @@
                                     <td class="text-center">{{ ++$i }}</td>
                                     <td>{{ $permission->name }}</td>
                                     <td class="text-center">
-                                        @can('view permissions')
+                                        @can('HAK_AKSES_LIST')
                                             <a class="btn btn-info" href="{{ route('permissions.show', $permission->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
-                                        <a class="btn btn-warning" href="{{ route('permissions.edit', $permission->id) }}">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteConfirmationModal" data-item-id="{{ $permission->id }}"
-                                            data-item-name="{{ $permission->name }}"
-                                            data-delete-route="{{ route('permissions.destroy', $permission->id) }}">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                        @can('HAK_AKSES_EDIT')
+                                            <a class="btn btn-warning" href="{{ route('permissions.edit', $permission->id) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                        @can('HAK_AKSES_DELETE')
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteConfirmationModal" data-item-id="{{ $permission->id }}"
+                                                data-item-name="{{ $permission->name }}"
+                                                data-delete-route="{{ route('permissions.destroy', $permission->id) }}">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
