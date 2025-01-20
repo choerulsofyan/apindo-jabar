@@ -499,24 +499,48 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="user_id" class="col-sm-2 col-form-label">User</label>
-                            <div class="col-sm-10">
-                                <select class="form-select @error('user_id') is-invalid @enderror" id="user_id"
-                                    name="user_id" required>
-                                    <option value="">Select User</option>
-                                    @foreach ($users as $id => $name)
-                                        <option value="{{ $id }}"
-                                            {{ old('user_id', $member->user_id ?? '') == $id ? 'selected' : '' }}>
-                                            {{ $name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('user_id')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                        <input type="hidden" name="create_new_user" value="1">
+
+                        {{-- New User Fields --}}
+                        <div id="new_user_fields">
+                            <div class="row mb-3">
+                                <label for="new_user_name" class="col-sm-2 col-form-label">User Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text"
+                                        class="form-control @error('new_user_name') is-invalid @enderror"
+                                        id="new_user_name" name="new_user_name"
+                                        value="{{ old('new_user_name', $user->name ?? '') }}">
+                                    @error('new_user_name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="new_user_email" class="col-sm-2 col-form-label">User Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email"
+                                        class="form-control @error('new_user_email') is-invalid @enderror"
+                                        id="new_user_email" name="new_user_email"
+                                        value="{{ old('new_user_email', $user->email ?? '') }}">
+                                    @error('new_user_email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="new_user_password" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password"
+                                        class="form-control @error('new_user_password') is-invalid @enderror"
+                                        id="new_user_password" name="new_user_password">
+                                    @error('new_user_password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary me-2">Save</button>
