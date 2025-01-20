@@ -22,8 +22,9 @@ class CouncilController extends Controller
      */
     public function index(Request $request): View
     {
-        $data = Council::latest()->paginate(5);
-        return view('councils.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
+        $perPage = 20;
+        $data = Council::orderBy('name', 'asc')->paginate($perPage);
+        return view('councils.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**

@@ -28,8 +28,9 @@ class ManagementController extends Controller
      */
     public function index(Request $request): View
     {
-        $data = Management::latest()->paginate(5);
-        return view('managements.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
+        $perPage = 20;
+        $data = Management::orderBy('name', 'asc')->paginate($perPage);
+        return view('managements.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
