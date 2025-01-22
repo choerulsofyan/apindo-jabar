@@ -105,6 +105,12 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('galeri.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-image"></i>
+                        <p>Galeri</p>
+                    </a>
+                </li>
             </ul>
             <!--end::Sidebar Menu-->
         </nav>
