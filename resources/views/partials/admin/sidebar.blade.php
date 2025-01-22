@@ -9,12 +9,12 @@
         <nav class="mt-2">
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="../generate/theme.html"
-                        class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}">
+                    <a href="../generate/theme.html" class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
+
                 @canany(['USER_LIST', 'GRUP_USER_LIST', 'HAK_AKSES_LIST'])
                     <li class="nav-item {{ Request::is('users*', 'roles*', 'permissions*') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link">
@@ -27,8 +27,7 @@
                         <ul class="nav nav-treeview">
                             @can('USER_LIST')
                                 <li class="nav-item">
-                                    <a href="{{ route('users.index') }}"
-                                        class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
+                                    <a href="{{ route('users.index') }}" class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
                                         <i class="nav-icon fa-solid fa-user"></i>
                                         <p>User</p>
                                     </a>
@@ -36,8 +35,7 @@
                             @endcan
                             @can('GRUP_USER_LIST')
                                 <li class="nav-item">
-                                    <a href="{{ route('roles.index') }}"
-                                        class="nav-link {{ Request::is('roles*') ? 'active' : '' }}">
+                                    <a href="{{ route('roles.index') }}" class="nav-link {{ Request::is('roles*') ? 'active' : '' }}">
                                         <i class="nav-icon fa-solid fa-people-group"></i>
                                         <p>Grup User</p>
                                     </a>
@@ -45,8 +43,7 @@
                             @endcan
                             @can('HAK_AKSES_LIST')
                                 <li class="nav-item">
-                                    <a href="{{ route('permissions.index') }}"
-                                        class="nav-link {{ Request::is('permissions*') ? 'active' : '' }}">
+                                    <a href="{{ route('permissions.index') }}" class="nav-link {{ Request::is('permissions*') ? 'active' : '' }}">
                                         <i class="nav-icon fa-solid fa-user-shield"></i>
                                         <p>Hak Akses</p>
                                     </a>
@@ -55,6 +52,7 @@
                         </ul>
                     </li>
                 @endcanany
+
                 @can('BERITA_LIST')
                     <li class="nav-item">
                         <a href="{{ route('news.index') }}" class="nav-link {{ Request::is('news*') ? 'active' : '' }}">
@@ -63,27 +61,27 @@
                         </a>
                     </li>
                 @endcan
+
                 @can('KEANGGOTAAN_LIST')
                     <li class="nav-item">
-                        <a href="{{ route('members.index') }}"
-                            class="nav-link {{ Request::is('members*') ? 'active' : '' }}">
+                        <a href="{{ route('members.index') }}" class="nav-link {{ Request::is('members*') ? 'active' : '' }}">
                             <i class="nav-icon fa-regular fa-user"></i>
                             <p>Keanggotaan</p>
                         </a>
                     </li>
                 @endcan
+
                 @can('REGULASI_LIST')
                     <li class="nav-item">
-                        <a href="{{ route('regulations.index') }}"
-                            class="nav-link {{ Request::is('regulations*') ? 'active' : '' }}">
+                        <a href="{{ route('regulations.index') }}" class="nav-link {{ Request::is('regulations*') ? 'active' : '' }}">
                             <i class="nav-icon fa-solid fa-file-contract"></i>
                             <p>Regulation</p>
                         </a>
                     </li>
                 @endcan
+
                 @canany(['BIDANG_LIST', 'DEWAN_LIST', 'JABATAN_LIST', 'KEPENGURUSAN_LIST'])
-                    <li
-                        class="nav-item {{ Request::is('managements*', 'sectors*', 'organizational-positions*', 'councils*') ? 'menu-open' : '' }}">
+                    <li class="nav-item {{ Request::is('managements*', 'sectors*', 'organizational-positions*', 'councils*') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fa-solid fa-users"></i>
                             <p>
@@ -94,8 +92,7 @@
                         <ul class="nav nav-treeview">
                             @can('BIDANG_LIST')
                                 <li class="nav-item">
-                                    <a href="{{ route('sectors.index') }}"
-                                        class="nav-link {{ Request::is('sectors*') ? 'active' : '' }}">
+                                    <a href="{{ route('sectors.index') }}" class="nav-link {{ Request::is('sectors*') ? 'active' : '' }}">
                                         <i class="nav-icon fa-solid fa-sitemap"></i>
                                         <p>Bidang</p>
                                     </a>
@@ -103,8 +100,7 @@
                             @endcan
                             @can('DEWAN_LIST')
                                 <li class="nav-item">
-                                    <a href="{{ route('councils.index') }}"
-                                        class="nav-link {{ Request::is('councils*') ? 'active' : '' }}">
+                                    <a href="{{ route('councils.index') }}" class="nav-link {{ Request::is('councils*') ? 'active' : '' }}">
                                         <i class="nav-icon fa-solid fa-users-rectangle"></i>
                                         <p>Dewan</p>
                                     </a>
@@ -112,8 +108,7 @@
                             @endcan
                             @can('JABATAN_LIST')
                                 <li class="nav-item">
-                                    <a href="{{ route('organizational-positions.index') }}"
-                                        class="nav-link {{ Request::is('organizational-positions*') ? 'active' : '' }}">
+                                    <a href="{{ route('organizational-positions.index') }}" class="nav-link {{ Request::is('organizational-positions*') ? 'active' : '' }}">
                                         <i class="nav-icon fa-solid fa-user-tie"></i>
                                         <p>Jabatan</p>
                                     </a>
@@ -121,8 +116,7 @@
                             @endcan
                             @can('KEPENGURUSAN_LIST')
                                 <li class="nav-item">
-                                    <a href="{{ route('managements.index') }}"
-                                        class="nav-link {{ Request::is('managements*') ? 'active' : '' }}">
+                                    <a href="{{ route('managements.index') }}" class="nav-link {{ Request::is('managements*') ? 'active' : '' }}">
                                         <i class="nav-icon fa-solid fa-people-roof"></i>
                                         <p>Kepengurusan</p>
                                     </a>
@@ -131,6 +125,15 @@
                         </ul>
                     </li>
                 @endcanany
+
+                @can('GALERI_LIST')
+                    <li class="nav-item">
+                        <a href="{{ route('galeri.index') }}" class="nav-link">
+                            <i class="nav-icon fa fa-image"></i>
+                            <p>Galeri</p>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </nav>
     </div>
