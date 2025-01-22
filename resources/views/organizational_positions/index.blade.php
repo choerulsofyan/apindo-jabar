@@ -28,10 +28,12 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Jabatan</h3>
-                    <a href="{{ route('organizational-positions.create') }}" class="btn btn-sm btn-primary"><i
-                            class="fa fa-plus"></i>
-                        Tambah
-                        Baru</a>
+                    @can('JABATAN_ADD')
+                        <a href="{{ route('organizational-positions.create') }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-plus"></i>
+                            Buat Baru
+                        </a>
+                    @endcan
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -55,17 +57,21 @@
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
-                                        <a class="btn btn-warning"
-                                            href="{{ route('organizational-positions.edit', $organizational_position->id) }}">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteConfirmationModal"
-                                            data-item-id="{{ $organizational_position->id }}"
-                                            data-item-name="{{ $organizational_position->name }}"
-                                            data-delete-route="{{ route('organizational-positions.destroy', $organizational_position->id) }}">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                        @can('JABATAN_EDIT')
+                                            <a class="btn btn-warning"
+                                                href="{{ route('organizational-positions.edit', $organizational_position->id) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                        @can('JABATAN_DELETE')
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteConfirmationModal"
+                                                data-item-id="{{ $organizational_position->id }}"
+                                                data-item-name="{{ $organizational_position->name }}"
+                                                data-delete-route="{{ route('organizational-positions.destroy', $organizational_position->id) }}">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

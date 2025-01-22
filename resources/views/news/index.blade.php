@@ -28,9 +28,12 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Berita</h3>
-                    <a href="{{ route('news.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>
-                        Tambah
-                        Baru</a>
+                    @can('BERITA_ADD')
+                        <a href="{{ route('news.create') }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-plus"></i>
+                            Buat Baru
+                        </a>
+                    @endcan
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -57,15 +60,19 @@
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
-                                        <a class="btn btn-warning" href="{{ route('news.edit', $item->id) }}">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteConfirmationModal" data-item-id="{{ $item->id }}"
-                                            data-item-name="{{ $item->title }}"
-                                            data-delete-route="{{ route('news.destroy', $item->id) }}">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                        @can('BERITA_EDIT')
+                                            <a class="btn btn-warning" href="{{ route('news.edit', $item->id) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                        @can('BERITA_DELETE')
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteConfirmationModal" data-item-id="{{ $item->id }}"
+                                                data-item-name="{{ $item->title }}"
+                                                data-delete-route="{{ route('news.destroy', $item->id) }}">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

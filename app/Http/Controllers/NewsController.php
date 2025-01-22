@@ -9,7 +9,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
-use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
@@ -25,8 +24,9 @@ class NewsController extends Controller
      */
     public function index(Request $request): View
     {
-        $data = News::latest()->paginate(5);
-        return view('news.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
+        $perPage = 20;
+        $data = News::orderBy('title', 'asc')->paginate($perPage);
+        return view('news.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**

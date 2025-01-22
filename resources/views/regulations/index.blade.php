@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Hak Akses')
+@section('title', 'Manajemen Regulasi')
 
 @section('subheader')
     @include('partials.admin.subheader', [
-        'title' => 'Manajemen Hak Akses',
+        'title' => 'Manajemen Regulasi',
         'breadcrumbs' => [
             ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Hak Akses', 'url' => route('permissions.index')],
-            ['name' => 'Daftar Hak Akses', 'url' => route('permissions.index')],
+            ['name' => 'Manajemen Regulasi', 'url' => route('regulations.index')],
+            ['name' => 'Daftar Regulasi', 'url' => route('regulations.index')],
         ],
     ])
 @endsection
@@ -22,50 +22,61 @@
         </div>
     @endif
 
-    <!--begin::Row-->
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
-                    <h3 class="card-title">Daftar Hak Akses</h3>
-                    @can('HAK_AKSES_ADD')
-                        <a href="{{ route('permissions.create') }}" class="btn btn-sm btn-primary">
+                    <h3 class="card-title">Daftar Regulasi</h3>
+                    @can('REGULASI_ADD')
+                        <a href="{{ route('regulations.create') }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-plus"></i>
                             Buat Baru
                         </a>
                     @endcan
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th class="text-center w-5">#</th>
-                                <th class="w-75">Nama</th>
-                                <th class="text-center w-20">Aksi</th>
+                                <th class="w-20">Judul</th>
+                                <th class="w-10">Tanggal</th>
+                                <th class="">File</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $key => $permission)
+                            @foreach ($data as $key => $item)
                                 <tr class="align-middle">
                                     <td class="text-center">{{ ++$i }}</td>
-                                    <td>{{ $permission->name }}</td>
+                                    <td>{{ $item->title }}</td>
+                                    <td>{{ $item->date }}</td>
+                                    <td>
+                                        @if ($item->file)
+                                            <a href="{{ Storage::url('public/regulations/' . $item->file) }}"
+                                                target="_blank">
+                                                <i class="fa fa-file-pdf"></i> {{ $item->file }}
+                                            </a>
+                                        @else
+                                            N/A
+                                        @endif
+                                    </td>
                                     <td class="text-center">
-                                        @can('HAK_AKSES_LIST')
-                                            <a class="btn btn-info" href="{{ route('permissions.show', $permission->id) }}">
+                                        @can('REGULASI_LIST')
+                                            <a class="btn btn-info btn-sm" href="{{ route('regulations.show', $item->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
-                                        @can('HAK_AKSES_EDIT')
-                                            <a class="btn btn-warning" href="{{ route('permissions.edit', $permission->id) }}">
+                                        @can('REGULASI_EDIT')
+                                            <a class="btn btn-warning btn-sm" href="{{ route('regulations.edit', $item->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
-                                        @can('HAK_AKSES_DELETE')
-                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteConfirmationModal" data-item-id="{{ $permission->id }}"
-                                                data-item-name="{{ $permission->name }}"
-                                                data-delete-route="{{ route('permissions.destroy', $permission->id) }}">
+                                        @can('REGULASI_DELETE')
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#deleteConfirmationModal" data-item-id="{{ $item->id }}"
+                                                data-item-name="{{ $item->title }}"
+                                                data-delete-route="{{ route('regulations.destroy', $item->id) }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         @endcan
@@ -75,9 +86,6 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- /.card-body -->
-
-
                 <div class="card-footer clearfix">
                     <div class="text-muted float-start">
                         Showing {{ $data->firstItem() }} to {{ $data->lastItem() }} of {{ $data->total() }} results
@@ -107,13 +115,8 @@
                     @endif
                 </div>
             </div>
-            <!-- /.card -->
         </div>
     </div>
-    <!-- /.col -->
-    </div>
-    <!--end::Row-->
 
-    <!-- Delete Confirmation Modal -->
     @include('components.delete-confirmation-modal')
 @endsection

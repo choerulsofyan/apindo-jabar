@@ -9,7 +9,9 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OrganizationalPositionController;
 use App\Http\Controllers\SectorController;
-use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\RegulationController;
+use App\Http\Controllers\CouncilController;
+use App\Http\Controllers\ManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,5 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('news', NewsController::class);
     Route::resource('organizational-positions', OrganizationalPositionController::class);
     Route::resource('sectors', SectorController::class);
-    Route::resource('galeri', GaleriController::class);
+    Route::resource('regulations', RegulationController::class);
+    Route::resource('councils', CouncilController::class);
+    Route::resource('managements', ManagementController::class);
 });

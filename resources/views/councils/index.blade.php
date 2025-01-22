@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Hak Akses')
+@section('title', 'Manajemen Dewan')
 
 @section('subheader')
     @include('partials.admin.subheader', [
-        'title' => 'Manajemen Hak Akses',
+        'title' => 'Manajemen Dewan',
         'breadcrumbs' => [
             ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Hak Akses', 'url' => route('permissions.index')],
-            ['name' => 'Daftar Hak Akses', 'url' => route('permissions.index')],
+            ['name' => 'Manajemen Dewan', 'url' => route('councils.index')],
+            ['name' => 'Daftar Dewan', 'url' => route('councils.index')],
         ],
     ])
 @endsection
@@ -27,11 +27,11 @@
         <div class="col-md-12">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
-                    <h3 class="card-title">Daftar Hak Akses</h3>
-                    @can('HAK_AKSES_ADD')
-                        <a href="{{ route('permissions.create') }}" class="btn btn-sm btn-primary">
+                    <h3 class="card-title">Daftar Dewan</h3>
+                    @can('DEWAN_ADD')
+                        <a href="{{ route('councils.create') }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-plus"></i>
-                            Buat Baru
+                            Tambah Baru
                         </a>
                     @endcan
                 </div>
@@ -46,26 +46,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $key => $permission)
+                            @foreach ($data as $key => $council)
                                 <tr class="align-middle">
                                     <td class="text-center">{{ ++$i }}</td>
-                                    <td>{{ $permission->name }}</td>
+                                    <td>{{ $council->name }}</td>
                                     <td class="text-center">
-                                        @can('HAK_AKSES_LIST')
-                                            <a class="btn btn-info" href="{{ route('permissions.show', $permission->id) }}">
+                                        @can('DEWAN_LIST')
+                                            <a class="btn btn-info" href="{{ route('councils.show', $council->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
-                                        @can('HAK_AKSES_EDIT')
-                                            <a class="btn btn-warning" href="{{ route('permissions.edit', $permission->id) }}">
+                                        @can('DEWAN_EDIT')
+                                            <a class="btn btn-warning" href="{{ route('councils.edit', $council->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
-                                        @can('HAK_AKSES_DELETE')
+                                        @can('DEWAN_DELETE')
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteConfirmationModal" data-item-id="{{ $permission->id }}"
-                                                data-item-name="{{ $permission->name }}"
-                                                data-delete-route="{{ route('permissions.destroy', $permission->id) }}">
+                                                data-bs-target="#deleteConfirmationModal" data-item-id="{{ $council->id }}"
+                                                data-item-name="{{ $council->name }}"
+                                                data-delete-route="{{ route('councils.destroy', $council->id) }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         @endcan

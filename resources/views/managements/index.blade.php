@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
-@section('title', 'Manajemen Hak Akses')
+@section('title', 'Manajemen')
 
 @section('subheader')
     @include('partials.admin.subheader', [
-        'title' => 'Manajemen Hak Akses',
+        'title' => 'Manajemen Kepengurusan',
         'breadcrumbs' => [
             ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Hak Akses', 'url' => route('permissions.index')],
-            ['name' => 'Daftar Hak Akses', 'url' => route('permissions.index')],
+            ['name' => 'Manajemen Kepengurusan', 'url' => route('managements.index')],
+            ['name' => 'Daftar Kepengurusan', 'url' => route('managements.index')],
         ],
     ])
 @endsection
@@ -22,50 +22,60 @@
         </div>
     @endif
 
-    <!--begin::Row-->
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
-                    <h3 class="card-title">Daftar Hak Akses</h3>
-                    @can('HAK_AKSES_ADD')
-                        <a href="{{ route('permissions.create') }}" class="btn btn-sm btn-primary">
+                    <h3 class="card-title">Daftar Kepengurusan</h3>
+                    @can('KEPENGURUSAN_ADD')
+                        <a href="{{ route('managements.create') }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-plus"></i>
                             Buat Baru
                         </a>
                     @endcan
                 </div>
-                <!-- /.card-header -->
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th class="text-center w-5">#</th>
-                                <th class="w-75">Nama</th>
-                                <th class="text-center w-20">Aksi</th>
+                                <th class="text-center">#</th>
+                                <th>No. Anggota</th>
+                                <th>Nama</th>
+                                <th>Perusahaan</th>
+                                <th>Status</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $key => $permission)
+                            @foreach ($data as $key => $item)
                                 <tr class="align-middle">
                                     <td class="text-center">{{ ++$i }}</td>
-                                    <td>{{ $permission->name }}</td>
+                                    <td>{{ $item->member_number }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->company }}</td>
+                                    <td>
+                                        @if ($item->status)
+                                            <span class="badge bg-success">Aktif</span>
+                                        @else
+                                            <span class="badge bg-danger">Non-Aktif</span>
+                                        @endif
+                                    </td>
                                     <td class="text-center">
-                                        @can('HAK_AKSES_LIST')
-                                            <a class="btn btn-info" href="{{ route('permissions.show', $permission->id) }}">
+                                        @can('KEPENGURUSAN_LIST')
+                                            <a class="btn btn-info" href="{{ route('managements.show', $item->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
-                                        @can('HAK_AKSES_EDIT')
-                                            <a class="btn btn-warning" href="{{ route('permissions.edit', $permission->id) }}">
+                                        @can('KEPENGURUSAN_EDIT')
+                                            <a class="btn btn-warning" href="{{ route('managements.edit', $item->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
-                                        @can('HAK_AKSES_DELETE')
+                                        @can('KEPENGURUSAN_DELETE')
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteConfirmationModal" data-item-id="{{ $permission->id }}"
-                                                data-item-name="{{ $permission->name }}"
-                                                data-delete-route="{{ route('permissions.destroy', $permission->id) }}">
+                                                data-bs-target="#deleteConfirmationModal" data-item-id="{{ $item->id }}"
+                                                data-item-name="{{ $item->name }}"
+                                                data-delete-route="{{ route('managements.destroy', $item->id) }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         @endcan
@@ -75,9 +85,6 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- /.card-body -->
-
-
                 <div class="card-footer clearfix">
                     <div class="text-muted float-start">
                         Showing {{ $data->firstItem() }} to {{ $data->lastItem() }} of {{ $data->total() }} results
@@ -107,12 +114,8 @@
                     @endif
                 </div>
             </div>
-            <!-- /.card -->
         </div>
     </div>
-    <!-- /.col -->
-    </div>
-    <!--end::Row-->
 
     <!-- Delete Confirmation Modal -->
     @include('components.delete-confirmation-modal')

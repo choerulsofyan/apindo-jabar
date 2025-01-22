@@ -69,7 +69,7 @@
                                     style="max-width: 200px;" class="mb-2">
 
                                 <input type="file" class="form-control @error('photo') is-invalid @enderror"
-                                    id="photo" name="photo">
+                                    id="photo" name="photo" accept="image/jpeg,image/jpg,image/png">
                                 @error('photo')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
