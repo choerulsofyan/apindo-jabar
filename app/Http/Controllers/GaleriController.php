@@ -4,13 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Galeri;
 use Illuminate\Http\Request;
-use App\Models\News;
+use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
-use Illuminate\Support\Facades\Auth;
 
 class GaleriController extends Controller
 {
@@ -51,7 +48,10 @@ class GaleriController extends Controller
         $galeri->file = $image_name;
         $galeri->save();
 
-        return redirect()->route('galeri.index')->with('success', 'Galeri created successfully.');
+        return redirect()->route('galeri.index')->with([
+            'message' => 'Galeri created successfully.',
+            'alert-type' => 'success'
+        ]);
     }
 
     public function edit(Galeri $galeri): View
@@ -79,7 +79,10 @@ class GaleriController extends Controller
         $galeri->deskripsi = $request->deskripsi;
         $galeri->save();
 
-        return redirect()->route('galeri.index')->with('success', 'Galeri updated successfully');
+        return redirect()->route('galeri.index')->with([
+            'message' => 'Galeri updated successfully.',
+            'alert-type' => 'success'
+        ]);
     }
 
     public function destroy(Galeri $galeri): RedirectResponse
@@ -87,6 +90,9 @@ class GaleriController extends Controller
         Storage::delete('public/galeri/' . $galeri->file);
         $galeri->delete();
 
-        return redirect()->route('galeri.index')->with('success', 'Galeri deleted successfully');
+        return redirect()->route('galeri.index')->with([
+            'message' => 'Galeri deleted successfully.',
+            'alert-type' => 'success'
+        ]);
     }
 }
