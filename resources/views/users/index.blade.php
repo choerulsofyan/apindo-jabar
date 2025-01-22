@@ -28,8 +28,12 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar User</h3>
-                    <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah
-                        Baru</a>
+                    @can('USER_ADD')
+                        <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-plus"></i>
+                            Buat Baru
+                        </a>
+                    @endcan
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -57,22 +61,24 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        @can('view users')
+                                        @can('USER_LIST')
                                             <a class="btn btn-info" href="{{ route('users.show', $user->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
-                                        <a class="btn btn-warning" href="{{ route('users.edit', $user->id) }}">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-
-                                        {{-- delete button should trigger the confirmation modal --}}
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteConfirmationModal" data-item-id="{{ $user->id }}"
-                                            data-item-name="{{ $user->name }}"
-                                            data-delete-route="{{ route('users.destroy', $user->id) }}">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                        @can('USER_EDIT')
+                                            <a class="btn btn-warning" href="{{ route('users.edit', $user->id) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                        @can('USER_DELETE')
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteConfirmationModal" data-item-id="{{ $user->id }}"
+                                                data-item-name="{{ $user->name }}"
+                                                data-delete-route="{{ route('users.destroy', $user->id) }}">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

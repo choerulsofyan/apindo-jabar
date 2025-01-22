@@ -157,15 +157,13 @@
                     </li>
                     <!--end::User Image-->
                     <!--begin::Menu Body-->
-                    <li class="user-body">
-                        <!--begin::Row-->
+                    {{-- <li class="user-body">
                         <div class="row">
                             <div class="col-4 text-center"><a href="#">Followers</a></div>
                             <div class="col-4 text-center"><a href="#">Sales</a></div>
                             <div class="col-4 text-center"><a href="#">Friends</a></div>
                         </div>
-                        <!--end::Row-->
-                    </li>
+                    </li> --}}
                     <!--end::Menu Body-->
                     <!--begin::Menu Footer-->
                     <li class="user-footer">

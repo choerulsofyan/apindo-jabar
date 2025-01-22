@@ -22,9 +22,11 @@ class RegulationController extends Controller
      */
     public function index(Request $request): View
     {
-        $data = Regulation::latest()->paginate(5);
-        return view('regulations.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
+        $perPage = 20;
+        $data = Regulation::orderBy('title', 'asc')->paginate($perPage);
+        return view('regulations.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
+
 
     /**
      * Show the form for creating a new resource.

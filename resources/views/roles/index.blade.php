@@ -28,9 +28,12 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Grup User</h3>
-                    <a href="{{ route('roles.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>
-                        Tambah
-                        Baru</a>
+                    @can('GRUP_USER_ADD')
+                        <a href="{{ route('roles.create') }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-plus"></i>
+                            Buat Baru
+                        </a>
+                    @endcan
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -53,15 +56,19 @@
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
-                                        <a class="btn btn-warning" href="{{ route('roles.edit', $role->id) }}">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteConfirmationModal" data-item-id="{{ $role->id }}"
-                                            data-item-name="{{ $role->name }}"
-                                            data-delete-route="{{ route('roles.destroy', $role->id) }}">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                        @can('GRUP_USER_EDIT')
+                                            <a class="btn btn-warning" href="{{ route('roles.edit', $role->id) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                        @can('GRUP_USER_DELETE')
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteConfirmationModal" data-item-id="{{ $role->id }}"
+                                                data-item-name="{{ $role->name }}"
+                                                data-delete-route="{{ route('roles.destroy', $role->id) }}">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

@@ -22,8 +22,9 @@ class OrganizationalPositionController extends Controller
      */
     public function index(Request $request): View
     {
-        $data = OrganizationalPosition::latest()->paginate(5);
-        return view('organizational_positions.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
+        $perPage = 20;
+        $data = OrganizationalPosition::orderBy('name', 'asc')->paginate($perPage);
+        return view('organizational_positions.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**

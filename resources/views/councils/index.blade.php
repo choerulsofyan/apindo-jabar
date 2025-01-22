@@ -28,9 +28,12 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Dewan</h3>
-                    <a href="{{ route('councils.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>
-                        Tambah
-                        Baru</a>
+                    @can('DEWAN_ADD')
+                        <a href="{{ route('councils.create') }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-plus"></i>
+                            Tambah Baru
+                        </a>
+                    @endcan
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -53,15 +56,19 @@
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
-                                        <a class="btn btn-warning" href="{{ route('councils.edit', $council->id) }}">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteConfirmationModal" data-item-id="{{ $council->id }}"
-                                            data-item-name="{{ $council->name }}"
-                                            data-delete-route="{{ route('councils.destroy', $council->id) }}">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                        @can('DEWAN_EDIT')
+                                            <a class="btn btn-warning" href="{{ route('councils.edit', $council->id) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                        @can('DEWAN_DELETE')
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteConfirmationModal" data-item-id="{{ $council->id }}"
+                                                data-item-name="{{ $council->name }}"
+                                                data-delete-route="{{ route('councils.destroy', $council->id) }}">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class MemberController extends Controller
 {
@@ -24,8 +25,9 @@ class MemberController extends Controller
      */
     public function index(Request $request): View
     {
-        $data = Member::latest()->paginate(5);
-        return view('members.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
+        $perPage = 20;
+        $data = Member::orderBy('company_name', 'asc')->paginate($perPage);
+        return view('members.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -71,10 +73,32 @@ class MemberController extends Controller
             'tdp' => 'required|file|mimes:pdf|max:5120',
             'contact_person' => 'required',
             'mobile_number' => 'required',
-            'user_id' => 'required|exists:users,id',
+            'new_user_name' => 'required|string|max:255',
+            'new_user_email' => 'required|string|email|max:255|unique:users,email',
+            'new_user_password' => 'required|string|min:8',
         ]);
 
-        $memberData = $request->except(['_token', 'declaration_letter', 'pp_pkb', 'company_profile', 'tdp']);
+        // Create new user
+        $user = User::create([
+            'name' => $request->new_user_name,
+            'email' => $request->new_user_email,
+            'password' => Hash::make($request->new_user_password),
+        ]);
+
+        $user->assignRole('Member'); // Assign the "Member" role
+
+        $memberData = $request->except([
+            '_token',
+            'declaration_letter',
+            'pp_pkb',
+            'company_profile',
+            'tdp',
+            'new_user_name',
+            'new_user_email',
+            'new_user_password'
+        ]);
+
+        $memberData['user_id'] = $user->id; // Set the user_id for the new member
 
         // Convert array fields to comma-separated strings
         $memberData['investment_facilities'] = is_array($request->investment_facilities)
@@ -116,7 +140,8 @@ class MemberController extends Controller
      */
     public function edit(Member $member): View
     {
-        $users = User::pluck('name', 'id')->all();
+        // Get the associated user data
+        $user = $member->user;
 
         // Get file URLs only if they exist
         $declaration_letter_url = $member->declaration_letter
@@ -149,7 +174,8 @@ class MemberController extends Controller
                 : asset('images/image-not-found.png'))
             : asset('images/no-image-available.png');
 
-        return view('members.form', compact('member', 'users', 'declaration_letter_url', 'pp_pkb_url', 'company_profile_url', 'tdp_url', 'imageSrc'));
+        // Pass the user to the view along with the member
+        return view('members.form', compact('member', 'declaration_letter_url', 'pp_pkb_url', 'company_profile_url', 'tdp_url', 'imageSrc', 'user'));
     }
 
 
@@ -186,10 +212,12 @@ class MemberController extends Controller
             'tdp' => 'sometimes|file|mimes:pdf|max:5120',
             'contact_person' => 'required',
             'mobile_number' => 'required',
-            'user_id' => 'required|exists:users,id',
+            'new_user_name' => 'required|string|max:255',
+            'new_user_email' => 'required|string|email|max:255|unique:users,email,' . $member->user_id,
+            'new_user_password' => 'nullable|string|min:8',
         ]);
 
-        $memberData = $request->except(['_token', 'declaration_letter', 'pp_pkb', 'company_profile', 'tdp']);
+        $memberData = $request->except(['_token', 'declaration_letter', 'pp_pkb', 'company_profile', 'tdp', 'new_user_name', 'new_user_email', 'new_user_password']);
 
         // Convert array fields to comma-separated strings
         $memberData['investment_facilities'] = is_array($request->investment_facilities)
@@ -198,6 +226,26 @@ class MemberController extends Controller
         $memberData['bpjs'] = is_array($request->bpjs)
             ? implode(', ', $request->bpjs)
             : $request->bpjs;
+
+        // Update or create the associated user
+        if ($member->user) {
+            // Update existing user
+            $member->user->update([
+                'name' => $request->new_user_name,
+                'email' => $request->new_user_email,
+                'password' => $request->filled('new_user_password') ? Hash::make($request->new_user_password) : $member->user->password,
+            ]);
+        } else {
+            // Create a new user
+            $user = User::create([
+                'name' => $request->new_user_name,
+                'email' => $request->new_user_email,
+                'password' => Hash::make($request->new_user_password),
+            ]);
+
+            $user->assignRole('Member');
+            $memberData['user_id'] = $user->id;
+        }
 
         // Handle file uploads
         $files = ['declaration_letter', 'pp_pkb', 'company_profile', 'tdp'];
