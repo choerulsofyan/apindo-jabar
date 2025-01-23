@@ -15,6 +15,7 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+
                 @canany(['USER_LIST', 'GRUP_USER_LIST', 'HAK_AKSES_LIST'])
                     <li class="nav-item {{ Request::is('users*', 'roles*', 'permissions*') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link">
@@ -55,6 +56,7 @@
                         </ul>
                     </li>
                 @endcanany
+
                 @can('BERITA_LIST')
                     <li class="nav-item">
                         <a href="{{ route('news.index') }}" class="nav-link {{ Request::is('news*') ? 'active' : '' }}">
@@ -63,6 +65,7 @@
                         </a>
                     </li>
                 @endcan
+
                 @can('KEANGGOTAAN_LIST')
                     <li class="nav-item">
                         <a href="{{ route('members.index') }}"
@@ -72,6 +75,7 @@
                         </a>
                     </li>
                 @endcan
+
                 @can('REGULASI_LIST')
                     <li class="nav-item">
                         <a href="{{ route('regulations.index') }}"
@@ -140,6 +144,15 @@
                         </ul>
                     </li>
                 @endcanany
+
+                @can('GALERI_LIST')
+                    <li class="nav-item">
+                        <a href="{{ route('galeri.index') }}" class="nav-link">
+                            <i class="nav-icon fa fa-image"></i>
+                            <p>Galeri</p>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </nav>
     </div>
