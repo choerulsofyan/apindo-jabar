@@ -19,8 +19,8 @@
                     @endif
                 </p>
                 <p><strong>Email:</strong>
-                    @if (isset($activity->properties['email']))
-                        {{ $activity->properties['email'] }}
+                    @if ($activity->causer)
+                        {{ $activity->causer->email }}
                     @else
                         -
                     @endif
