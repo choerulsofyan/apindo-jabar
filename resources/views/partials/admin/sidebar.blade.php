@@ -81,6 +81,15 @@
                         </a>
                     </li>
                 @endcan
+                @can('LOG_LIST')
+                    <li class="nav-item">
+                        <a href="{{ route('activity-logs.index') }}"
+                            class="nav-link {{ Request::is('activity-logs*') ? 'active' : '' }}">
+                            <i class="nav-icon fa-solid fa-clock-rotate-left"></i>
+                            <p>Logs</p>
+                        </a>
+                    </li>
+                @endcan
                 @canany(['BIDANG_LIST', 'DEWAN_LIST', 'JABATAN_LIST', 'KEPENGURUSAN_LIST'])
                     <li
                         class="nav-item {{ Request::is('managements*', 'sectors*', 'organizational-positions*', 'councils*') ? 'menu-open' : '' }}">

@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Permission\Traits\HasRoles;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class News extends Model
 {
-    use HasFactory, HasRoles;
+    use HasFactory, LogsActivity;
 
     protected $fillable = [
         'title',
@@ -16,4 +17,14 @@ class News extends Model
         'photo',
         'place',
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['title', 'content', 'photo', 'place'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs()
+            ->useLogName('Berita')
+            ->setDescriptionForEvent(fn(string $eventName) => "Berita {$eventName}");
+    }
 }
