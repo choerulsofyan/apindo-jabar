@@ -13,6 +13,7 @@ use App\Http\Controllers\RegulationController;
 use App\Http\Controllers\CouncilController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\PesanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,4 +52,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('councils', CouncilController::class);
     Route::resource('managements', ManagementController::class);
     Route::resource('galeri', GaleriController::class);
+    Route::resource('pesan', PesanController::class);
 });

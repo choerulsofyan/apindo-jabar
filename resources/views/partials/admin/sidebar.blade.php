@@ -128,9 +128,18 @@
 
                 @can('GALERI_LIST')
                     <li class="nav-item">
-                        <a href="{{ route('galeri.index') }}" class="nav-link">
+                        <a href="{{ route('galeri.index') }}" class="nav-link {{ Request::is('galeri*') ? 'active' : '' }}">
                             <i class="nav-icon fa fa-image"></i>
                             <p>Galeri</p>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('PESAN_LIST')
+                    <li class="nav-item">
+                        <a href="{{ route('pesan.index') }}" class="nav-link {{ Request::is('pesan*') ? 'active' : '' }}">
+                            <i class="nav-icon fa-solid fa-file-contract"></i>
+                            <p>Pesan</p>
                         </a>
                     </li>
                 @endcan
