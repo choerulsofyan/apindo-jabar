@@ -26,13 +26,15 @@ use App\Http\Controllers\GaleriController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/public', function () {
+    return view('public.index');
+})->name('public.index');
 
 Route::group(['middleware' => ['auth']], function () {
 
