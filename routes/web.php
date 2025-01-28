@@ -14,6 +14,7 @@ use App\Http\Controllers\CouncilController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\PesanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,4 +55,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('activity-logs', [ActivityLogController::class, 'index'])->name('activity-logs.index');
     Route::get('activity-logs/{activity}', [ActivityLogController::class, 'show'])->name('activity-logs.show');
     Route::resource('galeri', GaleriController::class);
+    Route::resource('pesan', PesanController::class);
 });
