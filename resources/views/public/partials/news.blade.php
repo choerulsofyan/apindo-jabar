@@ -1,4 +1,4 @@
-<section class="news-section py-5">
+<section id="news-section" class="py-5">
     <div class="container">
         <h2 class="text-center fw-bolder mb-4 text-primary">BERITA</h2>
 

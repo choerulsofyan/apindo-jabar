@@ -13,25 +13,25 @@
                     <a class="nav-link active" aria-current="page" href="#">Beranda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Tentang Kami</a>
+                    <a class="nav-link" href="#about-section">Tentang Kami</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Berita</a>
+                    <a class="nav-link" href="#news-section">Berita</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Regulasi</a>
+                    <a class="nav-link" href="#regulation-section">Regulasi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Anggota</a>
+                    <a class="nav-link" href="#member-section">Anggota</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Kontak</a>
+                    <a class="nav-link" href="#contact-section">Kontak</a>
                 </li>
             </ul>
         </div>
         <div class="d-flex justify-content-end">
-            <a class="btn btn-outline-light me-2" href="#">Login</a>
-            <a class="btn btn-light text-primary" href="#">Registrasi</a>
+            <a class="btn btn-outline-light me-2" href="{{ route('login') }}">Login</a>
+            <a class="btn btn-light text-primary" href="{{ route('register') }}">Registrasi</a>
         </div>
     </div>
 </nav>

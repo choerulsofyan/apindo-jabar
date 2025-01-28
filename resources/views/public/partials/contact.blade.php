@@ -1,4 +1,4 @@
-<section class="contact-form py-5">
+<section id="contact-section" class="py-5">
     <div class="container">
         <h2 class="text-center fw-bolder mb-4 text-primary">KONTAK KAMI</h2>
         <form>
