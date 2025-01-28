@@ -3,6 +3,6 @@
     {{-- <div class="float-end d-none d-sm-inline">Anything you want</div> --}}
     <!--end::To the end-->
     <!--begin::Copyright-->
-    &copy; Copyright <strong> APINDO </strong>. All rights reserved
+    &copy; Copyright <strong> APINDO Jabar </strong>. All rights reserved
     <!--end::Copyright-->
 </footer>

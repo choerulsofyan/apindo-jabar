@@ -9,6 +9,7 @@ export default defineConfig({
                 "resources/js/app.js",
                 "node_modules/admin-lte/dist/js/adminlte.min.js",
                 "node_modules/admin-lte/dist/css/adminlte.min.css",
+                "resources/sass/public.scss", // For public pages (add this line)
             ],
             refresh: true,
         }),
