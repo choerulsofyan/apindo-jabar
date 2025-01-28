@@ -8,30 +8,30 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto d-flex gap-2">
+            <ul class="navbar-nav mx-auto d-flex gap-1">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Beranda</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}">BERANDA</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#about-section">Tentang Kami</a>
+                    <a class="nav-link" href="#about-section">TENTANG KAMI</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#news-section">Berita</a>
+                    <a class="nav-link" href="#news-section">BERITA</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#regulation-section">Regulasi</a>
+                    <a class="nav-link" href="#regulation-section">REGULASI</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#member-section">Anggota</a>
+                    <a class="nav-link" href="#member-section">ANGGOTA</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact-section">Kontak</a>
+                    <a class="nav-link" href="#contact-section">KONTAK</a>
                 </li>
             </ul>
-        </div>
-        <div class="d-flex justify-content-end">
-            <a class="btn btn-outline-light me-2" href="{{ route('login') }}">Login</a>
-            <a class="btn btn-light text-primary" href="{{ route('register') }}">Registrasi</a>
+            <div class="d-flex">
+                <a class="btn btn-outline-light me-2" href="{{ route('login') }}">Login</a>
+                <a class="btn btn-light text-primary" href="{{ route('register') }}">Registrasi</a>
+            </div>
         </div>
     </div>
 </nav>
