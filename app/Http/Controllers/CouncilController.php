@@ -24,7 +24,7 @@ class CouncilController extends Controller
     {
         $perPage = 20;
         $data = Council::orderBy('name', 'asc')->paginate($perPage);
-        return view('councils.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+        return view('admin.pages.councils.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -32,7 +32,7 @@ class CouncilController extends Controller
      */
     public function create(): View
     {
-        return view('councils.form');
+        return view('admin.pages.councils.form');
     }
 
     /**
@@ -58,14 +58,14 @@ class CouncilController extends Controller
      */
     public function show(Council $council): View
     {
-        return view('councils.show', compact('council'));
+        return view('admin.pages.councils.show', compact('council'));
     }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Council $council): View
     {
-        return view('councils.form', compact('council'));
+        return view('admin.pages.councils.form', compact('council'));
     }
 
     /**

@@ -24,7 +24,7 @@ class SectorController extends Controller
     {
         $perPage = 20;
         $data = Sector::orderBy('name', 'asc')->paginate($perPage);
-        return view('sectors.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+        return view('admin.pages.sectors.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -32,7 +32,7 @@ class SectorController extends Controller
      */
     public function create(): View
     {
-        return view('sectors.form');
+        return view('admin.pages.sectors.form');
     }
 
     /**
@@ -58,7 +58,7 @@ class SectorController extends Controller
      */
     public function show(Sector $sector)
     {
-        return view('sectors.show', compact('sector'));
+        return view('admin.pages.sectors.show', compact('sector'));
     }
 
     /**
@@ -66,7 +66,7 @@ class SectorController extends Controller
      */
     public function edit(Sector $sector)
     {
-        return view('sectors.form', compact('sector'));
+        return view('admin.pages.sectors.form', compact('sector'));
     }
 
     /**

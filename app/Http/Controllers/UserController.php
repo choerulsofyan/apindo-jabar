@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         $perPage = 20;
         $data = User::orderBy('name', 'asc')->paginate($perPage);
-        return view('users.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+        return view('admin.pages.users.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -30,7 +30,7 @@ class UserController extends Controller
     public function create(): View
     {
         $roles = Role::pluck('name', 'name')->all();
-        return view('users.form', compact('roles'));
+        return view('admin.pages.users.form', compact('roles'));
     }
 
     /**
@@ -62,7 +62,7 @@ class UserController extends Controller
     public function show(string $id): View
     {
         $user = User::find($id);
-        return view('users.show', compact('user'));
+        return view('admin.pages.users.show', compact('user'));
     }
 
     /**
@@ -74,7 +74,7 @@ class UserController extends Controller
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('users.form', compact('user', 'roles', 'userRole'));
+        return view('admin.pages.users.form', compact('user', 'roles', 'userRole'));
     }
 
     /**

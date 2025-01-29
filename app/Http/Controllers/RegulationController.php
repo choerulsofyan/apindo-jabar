@@ -24,7 +24,7 @@ class RegulationController extends Controller
     {
         $perPage = 20;
         $data = Regulation::orderBy('title', 'asc')->paginate($perPage);
-        return view('regulations.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+        return view('admin.pages.regulations.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
 
@@ -35,7 +35,7 @@ class RegulationController extends Controller
     {
         $fileUrl = null;
 
-        return view('regulations.form', compact('fileUrl'));
+        return view('admin.pages.regulations.form', compact('fileUrl'));
     }
 
     /**
@@ -74,7 +74,7 @@ class RegulationController extends Controller
      */
     public function show(Regulation $regulation): View
     {
-        return view('regulations.show', compact('regulation'));
+        return view('admin.pages.regulations.show', compact('regulation'));
     }
 
     /**
@@ -88,7 +88,7 @@ class RegulationController extends Controller
                 : null)
             : null;
 
-        return view('regulations.form', compact('regulation', 'fileUrl'));
+        return view('admin.pages.regulations.form', compact('regulation', 'fileUrl'));
     }
 
     /**

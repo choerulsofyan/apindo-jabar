@@ -24,7 +24,7 @@ class OrganizationalPositionController extends Controller
     {
         $perPage = 20;
         $data = OrganizationalPosition::orderBy('name', 'asc')->paginate($perPage);
-        return view('organizational_positions.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+        return view('admin.pages.organizational_positions.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -32,7 +32,7 @@ class OrganizationalPositionController extends Controller
      */
     public function create(): View
     {
-        return view('organizational_positions.form');
+        return view('admin.pages.organizational_positions.form');
     }
 
     /**
@@ -58,7 +58,7 @@ class OrganizationalPositionController extends Controller
      */
     public function show(OrganizationalPosition $organizationalPosition)
     {
-        return view('organizational_positions.show', compact('organizationalPosition'));
+        return view('admin.pages.organizational_positions.show', compact('organizationalPosition'));
     }
 
     /**
@@ -66,7 +66,7 @@ class OrganizationalPositionController extends Controller
      */
     public function edit(OrganizationalPosition $organizationalPosition)
     {
-        return view('organizational_positions.form', compact('organizationalPosition'));
+        return view('admin.pages.organizational_positions.form', compact('organizationalPosition'));
     }
 
     /**

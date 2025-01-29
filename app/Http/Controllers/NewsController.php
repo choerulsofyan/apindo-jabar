@@ -26,7 +26,7 @@ class NewsController extends Controller
     {
         $perPage = 20;
         $data = News::orderBy('title', 'asc')->paginate($perPage);
-        return view('news.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+        return view('admin.pages.news.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -36,7 +36,7 @@ class NewsController extends Controller
     {
         $imageSrc = asset('assets/images/no-image-available.png');
 
-        return view('news.form', compact('imageSrc'));
+        return view('admin.pages.news.form', compact('imageSrc'));
     }
 
     /**
@@ -89,7 +89,7 @@ class NewsController extends Controller
      */
     public function show(News $news): View
     {
-        return view('news.show', compact('news'));
+        return view('admin.pages.news.show', compact('news'));
     }
 
     /**
@@ -107,7 +107,7 @@ class NewsController extends Controller
             }
         }
 
-        return view('news.form', compact('news', 'imageSrc'));
+        return view('admin.pages.news.form', compact('news', 'imageSrc'));
     }
 
     /**

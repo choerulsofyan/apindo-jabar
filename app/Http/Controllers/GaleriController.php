@@ -22,14 +22,14 @@ class GaleriController extends Controller
     public function index(Request $request): View
     {
         $data = Galeri::latest()->paginate(5);
-        return view('galeri.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
+        return view('admin.pages.galeri.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     public function create(): View
     {
         $imageSrc = asset('assets/images/no-image-available.png');
 
-        return view('galeri.form', compact('imageSrc'));
+        return view('admin.pages.galeri.form', compact('imageSrc'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -58,7 +58,7 @@ class GaleriController extends Controller
     {
         $imageSrc = asset('storage/images/galeri/' . $galeri->file);
 
-        return view('galeri.form', compact('galeri', 'imageSrc'));
+        return view('admin.pages.galeri.form', compact('galeri', 'imageSrc'));
     }
 
     public function update(Request $request, Galeri $galeri): RedirectResponse

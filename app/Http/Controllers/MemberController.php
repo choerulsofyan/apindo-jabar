@@ -27,7 +27,7 @@ class MemberController extends Controller
     {
         $perPage = 20;
         $data = Member::orderBy('company_name', 'asc')->paginate($perPage);
-        return view('members.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+        return view('admin.pages.members.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -37,7 +37,7 @@ class MemberController extends Controller
     {
         $users = User::pluck('name', 'id')->all();
 
-        return view('members.form', compact('users'));
+        return view('admin.pages.members.form', compact('users'));
     }
 
     /**
@@ -132,7 +132,7 @@ class MemberController extends Controller
      */
     public function show(Member $member): View
     {
-        return view('members.show', compact('member'));
+        return view('admin.pages.members.show', compact('member'));
     }
 
     /**
@@ -175,7 +175,7 @@ class MemberController extends Controller
             : asset('images/no-image-available.png');
 
         // Pass the user to the view along with the member
-        return view('members.form', compact('member', 'declaration_letter_url', 'pp_pkb_url', 'company_profile_url', 'tdp_url', 'imageSrc', 'user'));
+        return view('admin.pages.members.form', compact('member', 'declaration_letter_url', 'pp_pkb_url', 'company_profile_url', 'tdp_url', 'imageSrc', 'user'));
     }
 
 
