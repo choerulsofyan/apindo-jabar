@@ -62,4 +62,22 @@ class HomeController extends Controller
 
         return view('public.pages.news.detail', compact('news', 'relatedNews'));
     }
+
+    public function galeriDetail(Galeri $galeri): View
+    {
+        $galeri->formatted_date = Carbon::parse($galeri->tanggal)->isoFormat('D MMMM Y');
+
+        // Get related news (excluding the current news item)
+        $relatedGaleri = Galeri::where('id', '!=', $galeri->id)
+            ->latest()
+            ->take(3) // Get 3 related news items
+            ->get();
+
+        $relatedGaleri->each(function ($item) {
+            $item->formatted_date = Carbon::parse($item->tanggal)->isoFormat('D MMMM Y');
+            $item->short_content = str($item->deskripsi)->words(20, '...');
+        });
+
+        return view('public.pages.galeri.detail', compact('galeri', 'relatedGaleri'));
+    }
 }

@@ -13,7 +13,7 @@
                             </p>
                             <p class="card-text">
                                 {{ $image->short_description }}
-                                <a href="#">Read More</a>
+                                <a href="{{ route('public.galeri.detail', $image->id) }}">Read More</a>
                             </p>
                         </div>
                     </div>
