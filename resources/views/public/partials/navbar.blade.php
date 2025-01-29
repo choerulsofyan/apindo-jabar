@@ -37,19 +37,19 @@
                     <a class="nav-link fs-5 active" aria-current="page" href="{{ route('home') }}">BERANDA</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-5" href="#about-section">TENTANG KAMI</a>
+                    <a class="nav-link fs-5" href="{{ route('home') }}#about-section">TENTANG KAMI</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-5" href="#news-section">BERITA</a>
+                    <a class="nav-link fs-5" href="{{ route('home') }}#news-section">BERITA</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-5" href="#regulation-section">REGULASI</a>
+                    <a class="nav-link fs-5" href="{{ route('home') }}#regulation-section">REGULASI</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-5" href="#member-section">ANGGOTA</a>
+                    <a class="nav-link fs-5" href="{{ route('home') }}#member-section">ANGGOTA</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-5" href="#contact-section">KONTAK</a>
+                    <a class="nav-link fs-5" href="{{ route('home') }}#contact-section">KONTAK</a>
                 </li>
             </ul>
             <div class="d-flex gap-1 fs-5 text-white">

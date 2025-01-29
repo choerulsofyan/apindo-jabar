@@ -14,7 +14,7 @@
                                 <small class="text-muted">{{ $news->place }}, {{ $news->formatted_date }}</small>
                             </p>
                             <p class="card-text">{{ $news->short_content }}</p>
-                            <a href="{{ route('public.news.detail', $news->id) }}') }}"
+                            <a href="{{ route('public.news.detail', $news->id) }}"
                                 class="btn btn-primary stretched-link">Read More</a>
                         </div>
                     </div>
