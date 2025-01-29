@@ -28,6 +28,8 @@ use App\Http\Controllers\PesanController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/public/news/{news}', [HomeController::class, 'newsDetail'])->name('public.news.detail');
+
 
 Auth::routes();
 

@@ -44,4 +44,10 @@ class HomeController extends Controller
 
         return view('public.pages.index', compact('latestNews', 'latestImages'));
     }
+
+    public function newsDetail(News $news): View
+    {
+        $news->formatted_date = Carbon::parse($news->created_at)->isoFormat('D MMMM Y');
+        return view('public.pages.news.detail', compact('news'));
+    }
 }
