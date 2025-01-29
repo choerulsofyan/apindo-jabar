@@ -29,5 +29,35 @@
                 <a href="{{ route('home') }}" class="btn btn-secondary">Back to News</a>
             </div>
         </div>
+
+        {{-- Related News Section --}}
+        @if ($relatedNews->isNotEmpty())
+            <h3 class="mt-5">Related News</h3>
+            <div class="row">
+                @foreach ($relatedNews as $item)
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            @if ($item->photo)
+                                <img src="{{ Storage::url('/images/news/' . $item->photo) }}" class="card-img-top"
+                                    alt="{{ $item->title }}">
+                            @endif
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $item->title }}</h5>
+                                <p class="card-text">
+                                    <i class="bi bi-geo-alt-fill me-2"></i>
+                                    <small class="text-muted">{{ $item->place }}</small>
+                                </p>
+                                <p class="card-text">{{ $item->short_content }}</p>
+                                <a href="{{ route('public.news.detail', $item->id) }}" class="btn btn-primary">Read
+                                    More</a>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">{{ $item->formatted_date }}</small>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
     </div>
 @endsection

@@ -48,6 +48,18 @@ class HomeController extends Controller
     public function newsDetail(News $news): View
     {
         $news->formatted_date = Carbon::parse($news->created_at)->isoFormat('D MMMM Y');
-        return view('public.pages.news.detail', compact('news'));
+
+        // Get related news (excluding the current news item)
+        $relatedNews = News::where('id', '!=', $news->id)
+            ->latest()
+            ->take(3) // Get 3 related news items
+            ->get();
+
+        $relatedNews->each(function ($item) {
+            $item->formatted_date = Carbon::parse($item->created_at)->isoFormat('D MMMM Y');
+            $item->short_content = str($item->content)->words(20, '...');
+        });
+
+        return view('public.pages.news.detail', compact('news', 'relatedNews'));
     }
 }
