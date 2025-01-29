@@ -23,8 +23,34 @@ class CouncilController extends Controller
     public function index(Request $request): View
     {
         $perPage = 20;
-        $data = Council::orderBy('name', 'asc')->paginate($perPage);
-        return view('admin.pages.councils.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+
+        $query = Council::query();
+
+        // Search by name 
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            });
+        }
+
+        // Sort by name (default) or email
+        $sortBy = $request->input('sort_by', 'name'); // Default sort by name
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sort order
+
+        if (!in_array($sortBy, ['name'])) {
+            $sortBy = 'name'; // Default sort column if invalid value is provided
+        }
+
+        if (!in_array($sortOrder, ['asc', 'desc'])) {
+            $sortOrder = 'asc'; // Default sort order if invalid value is provided
+        }
+
+        $query->orderBy($sortBy, $sortOrder);
+
+        $data = $query->paginate($perPage);
+
+        return view('admin.pages.councils.index', compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
