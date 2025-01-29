@@ -18,7 +18,7 @@
 
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
 
-    @vite(['resources/sass/app.scss'])
+    @vite(['resources/sass/admin/app.scss'])
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -80,7 +80,7 @@
             }
         });
     </script>
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/admin/app.js'])
     @stack('scripts')
     <!--end::Script-->
 </body>

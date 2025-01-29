@@ -5,11 +5,11 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                "resources/sass/app.scss",
-                "resources/js/app.js",
+                "resources/sass/admin/app.scss",
+                "resources/js/admin/app.js",
                 "node_modules/admin-lte/dist/js/adminlte.min.js",
                 "node_modules/admin-lte/dist/css/adminlte.min.css",
-                "resources/sass/public.scss", // For public pages (add this line)
+                "resources/sass/public/app.scss",
             ],
             refresh: true,
         }),

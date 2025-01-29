@@ -8,7 +8,7 @@
     <title>@yield('title', config('app.name'))</title>
 
     {{-- Include your public CSS and JS files here --}}
-    @vite(['resources/sass/public.scss', 'resources/js/public.js'])
+    @vite(['resources/sass/public/app.scss', 'resources/js/public/app.js'])
 
     {{-- Add any other CSS or meta tags here --}}
 </head>

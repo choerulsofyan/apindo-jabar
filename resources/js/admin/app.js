@@ -1,4 +1,4 @@
-import "./bootstrap";
+import "../bootstrap";
 
 // Import jQuery (required by AdminLTE)
 import $ from "jquery";
