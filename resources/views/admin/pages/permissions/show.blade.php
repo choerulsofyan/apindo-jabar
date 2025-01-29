@@ -8,7 +8,7 @@
             </div>
 
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('permissions.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('mindo.permissions.index') }}"> Back</a>
             </div>
         </div>
     </div>

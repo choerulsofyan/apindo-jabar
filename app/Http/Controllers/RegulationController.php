@@ -64,7 +64,7 @@ class RegulationController extends Controller
 
         Regulation::create($regulationData);
 
-        return redirect()->route('regulations.index')
+        return redirect()->route('mindo.regulations.index')
             ->with('message', 'Regulation created successfully.')
             ->with('alert-type', 'success');
     }
@@ -122,7 +122,7 @@ class RegulationController extends Controller
 
         $regulation->update($regulationData);
 
-        return redirect()->route('regulations.index')
+        return redirect()->route('mindo.regulations.index')
             ->with('message', 'Regulation updated successfully.')
             ->with('alert-type', 'success');
     }
@@ -140,7 +140,7 @@ class RegulationController extends Controller
 
         $regulation->delete();
 
-        return redirect()->route('regulations.index')
+        return redirect()->route('mindo.regulations.index')
             ->with('message', 'Regulation deleted successfully.')
             ->with('alert-type', 'success');
     }

@@ -47,7 +47,7 @@ class OrganizationalPositionController extends Controller
         $input = $request->all();
         OrganizationalPosition::create($input);
 
-        return redirect()->route('organizational-positions.index')->with([
+        return redirect()->route('mindo.organizational-positions.index')->with([
             'message' => 'Organizational Position created successfully!',
             'alert-type' => 'success'
         ]);
@@ -80,7 +80,7 @@ class OrganizationalPositionController extends Controller
 
         $organizationalPosition->update($request->all());
 
-        return redirect()->route('organizational-positions.index')->with('message', 'Organizational Position updated successfully');
+        return redirect()->route('mindo.organizational-positions.index')->with('message', 'Organizational Position updated successfully');
     }
 
     /**
@@ -89,6 +89,6 @@ class OrganizationalPositionController extends Controller
     public function destroy(OrganizationalPosition $organizationalPosition)
     {
         $organizationalPosition->delete();
-        return redirect()->route('organizational-positions.index')->with('message', 'Organizational Position deleted successfully');
+        return redirect()->route('mindo.organizational-positions.index')->with('message', 'Organizational Position deleted successfully');
     }
 }

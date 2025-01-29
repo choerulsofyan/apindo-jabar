@@ -6,9 +6,9 @@
     @include('admin.partials.subheader', [
         'title' => 'Galeri',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Galeri', 'url' => route('galeri.index')],
-            ['name' => 'Daftar Galeri', 'url' => route('galeri.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Galeri', 'url' => route('mindo.galeri.index')],
+            ['name' => 'Daftar Galeri', 'url' => route('mindo.galeri.index')],
         ],
     ])
 @endsection
@@ -28,7 +28,7 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Galeri</h3>
-                    <a href="{{ route('galeri.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>
+                    <a href="{{ route('mindo.galeri.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>
                         Tambah
                         Baru</a>
                 </div>
@@ -66,12 +66,12 @@
                                         </a>
                                     </td>
                                     <td class="text-center">
-                                        <a class="btn btn-warning" href="{{ route('galeri.edit', $item->id) }}">
+                                        <a class="btn btn-warning" href="{{ route('mindo.galeri.edit', $item->id) }}">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                             data-bs-target="#deleteConfirmationModal" data-item-id="{{ $item->id }}"
-                                            data-delete-route="{{ route('galeri.destroy', $item->id) }}">
+                                            data-delete-route="{{ route('mindo.galeri.destroy', $item->id) }}">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </td>

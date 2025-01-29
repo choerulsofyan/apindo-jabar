@@ -6,13 +6,13 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Jabatan',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Jabatan', 'url' => route('organizational-positions.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Jabatan', 'url' => route('mindo.organizational-positions.index')],
             [
                 'name' => isset($organizationalPosition) ? 'Edit Jabatan' : 'Tambah Jabatan Baru',
                 'url' => isset($organizationalPosition)
-                    ? route('organizational-positions.edit', $organizationalPosition->id)
-                    : route('organizational-positions.create'),
+                    ? route('mindo.organizational-positions.edit', $organizationalPosition->id)
+                    : route('mindo.organizational-positions.create'),
             ],
         ],
     ])
@@ -60,7 +60,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary me-1">Simpan</button>
-                    <a href="{{ route('organizational-positions.index') }}" class="btn btn-danger">Batal</a>
+                    <a href="{{ route('mindo.organizational-positions.index') }}" class="btn btn-danger">Batal</a>
                 </div>
             </div>
             {!! Form::close() !!}

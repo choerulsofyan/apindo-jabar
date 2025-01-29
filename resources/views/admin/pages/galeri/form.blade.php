@@ -5,11 +5,11 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Galeri',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Galeri', 'url' => route('galeri.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Galeri', 'url' => route('mindo.galeri.index')],
             [
                 'name' => isset($galeri) ? 'Edit Galeri' : 'Tambah Galeri',
-                'url' => isset($galeri) ? route('galeri.edit', $galeri->id) : route('galeri.create'),
+                'url' => isset($galeri) ? route('mindo.galeri.edit', $galeri->id) : route('mindo.galeri.create'),
             ],
         ],
     ])
@@ -18,8 +18,8 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ isset($galeri) ? route('galeri.update', $galeri->id) : route('galeri.store') }}" method="POST"
-                enctype="multipart/form-data">
+            <form action="{{ isset($galeri) ? route('mindo.galeri.update', $galeri->id) : route('mindo.galeri.store') }}"
+                method="POST" enctype="multipart/form-data">
                 @csrf
                 @if (isset($galeri))
                     @method('PATCH')
@@ -71,7 +71,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary me-2">Save</button>
-                        <a href="{{ route('galeri.index') }}" class="btn btn-secondary">Cancel</a>
+                        <a href="{{ route('mindo.galeri.index') }}" class="btn btn-secondary">Cancel</a>
                     </div>
                 </div>
             </form>

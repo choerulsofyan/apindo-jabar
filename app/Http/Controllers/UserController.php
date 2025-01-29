@@ -50,7 +50,7 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')->with([
+        return redirect()->route('mindo.users.index')->with([
             'message' => 'User created successfully!',
             'alert-type' => 'success'
         ]);
@@ -104,7 +104,7 @@ class UserController extends Controller
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')->with([
+        return redirect()->route('mindo.users.index')->with([
             'message' => 'User updated successfully!',
             'alert-type' => 'success'
         ]);
@@ -116,7 +116,7 @@ class UserController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         User::find($id)->delete();
-        return redirect()->route('users.index')->with([
+        return redirect()->route('mindo.users.index')->with([
             'message' => 'User deleted successfully!',
             'alert-type' => 'success'
         ]);

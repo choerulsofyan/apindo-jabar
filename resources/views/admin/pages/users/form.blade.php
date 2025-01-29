@@ -6,11 +6,11 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen User',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen User', 'url' => route('users.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen User', 'url' => route('mindo.users.index')],
             [
                 'name' => isset($user) ? 'Edit User' : 'Tambah User Baru',
-                'url' => isset($user) ? route('users.edit', $user->id) : route('users.create'),
+                'url' => isset($user) ? route('mindo.users.edit', $user->id) : route('mindo.users.create'),
             ],
         ],
     ])
@@ -105,7 +105,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary me-1">Simpan</button>
-                    <a href="{{ route('users.index') }}" class="btn btn-danger">Batal</a>
+                    <a href="{{ route('mindo.users.index') }}" class="btn btn-danger">Batal</a>
                 </div>
             </div>
             {!! Form::close() !!}

@@ -6,8 +6,8 @@
     @include('admin.partials.subheader', [
         'title' => 'Activity Logs',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Activity Logs', 'url' => route('activity-logs.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Activity Logs', 'url' => route('mindo.activity-logs.index')],
         ],
     ])
 @endsection
@@ -67,7 +67,8 @@
                                     {{ $activity->created_at->diffForHumans() }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('activity-logs.show', $activity->id) }}" class="btn btn-sm btn-info">
+                                    <a href="{{ route('mindo.activity-logs.show', $activity->id) }}"
+                                        class="btn btn-sm btn-info">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

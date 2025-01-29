@@ -6,9 +6,9 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Regulasi',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Regulasi', 'url' => route('regulations.index')],
-            ['name' => 'Daftar Regulasi', 'url' => route('regulations.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Regulasi', 'url' => route('mindo.regulations.index')],
+            ['name' => 'Daftar Regulasi', 'url' => route('mindo.regulations.index')],
         ],
     ])
 @endsection
@@ -28,7 +28,7 @@
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Regulasi</h3>
                     @can('REGULASI_ADD')
-                        <a href="{{ route('regulations.create') }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('mindo.regulations.create') }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-plus"></i>
                             Buat Baru
                         </a>
@@ -63,12 +63,14 @@
                                     </td>
                                     <td class="text-center">
                                         @can('REGULASI_LIST')
-                                            <a class="btn btn-info btn-sm" href="{{ route('regulations.show', $item->id) }}">
+                                            <a class="btn btn-info btn-sm"
+                                                href="{{ route('mindo.regulations.show', $item->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('REGULASI_EDIT')
-                                            <a class="btn btn-warning btn-sm" href="{{ route('regulations.edit', $item->id) }}">
+                                            <a class="btn btn-warning btn-sm"
+                                                href="{{ route('mindo.regulations.edit', $item->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -76,7 +78,7 @@
                                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#deleteConfirmationModal" data-item-id="{{ $item->id }}"
                                                 data-item-name="{{ $item->title }}"
-                                                data-delete-route="{{ route('regulations.destroy', $item->id) }}">
+                                                data-delete-route="{{ route('mindo.regulations.destroy', $item->id) }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         @endcan

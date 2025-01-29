@@ -53,7 +53,7 @@ class RoleController extends Controller
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permissions'));
 
-        return redirect()->route('roles.index')->with('message', 'Role created successfully');
+        return redirect()->route('mindo.roles.index')->with('message', 'Role created successfully');
     }
 
     /**
@@ -96,7 +96,7 @@ class RoleController extends Controller
         $role->save();
         $role->syncPermissions($request->input('permissions'));
 
-        return redirect()->route('roles.index')->with('message', 'Role updated successfully');
+        return redirect()->route('mindo.roles.index')->with('message', 'Role updated successfully');
     }
 
     /**
@@ -106,6 +106,6 @@ class RoleController extends Controller
     {
         $test = DB::table("roles")->where('id', $id)->first();
         DB::table("roles")->where('id', $id)->delete();
-        return redirect()->route('roles.index')->with('message', 'Role deleted successfully');
+        return redirect()->route('mindo.roles.index')->with('message', 'Role deleted successfully');
     }
 }

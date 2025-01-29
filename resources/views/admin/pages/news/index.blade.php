@@ -6,9 +6,9 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Berita',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Berita', 'url' => route('news.index')],
-            ['name' => 'Daftar Berita', 'url' => route('news.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Berita', 'url' => route('mindo.news.index')],
+            ['name' => 'Daftar Berita', 'url' => route('mindo.news.index')],
         ],
     ])
 @endsection
@@ -29,7 +29,7 @@
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Berita</h3>
                     @can('BERITA_ADD')
-                        <a href="{{ route('news.create') }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('mindo.news.create') }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-plus"></i>
                             Buat Baru
                         </a>
@@ -56,12 +56,12 @@
                                     <td>{{ $item->place }}</td>
                                     <td class="text-center">
                                         @can('BERITA_LIST')
-                                            <a class="btn btn-info" href="{{ route('news.show', $item->id) }}">
+                                            <a class="btn btn-info" href="{{ route('mindo.news.show', $item->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('BERITA_EDIT')
-                                            <a class="btn btn-warning" href="{{ route('news.edit', $item->id) }}">
+                                            <a class="btn btn-warning" href="{{ route('mindo.news.edit', $item->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -69,7 +69,7 @@
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#deleteConfirmationModal" data-item-id="{{ $item->id }}"
                                                 data-item-name="{{ $item->title }}"
-                                                data-delete-route="{{ route('news.destroy', $item->id) }}">
+                                                data-delete-route="{{ route('mindo.news.destroy', $item->id) }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         @endcan

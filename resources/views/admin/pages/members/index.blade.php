@@ -6,9 +6,9 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Anggota',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Anggota', 'url' => route('members.index')],
-            ['name' => 'Daftar Anggota', 'url' => route('members.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Anggota', 'url' => route('mindo.members.index')],
+            ['name' => 'Daftar Anggota', 'url' => route('mindo.members.index')],
         ],
     ])
 @endsection
@@ -28,7 +28,7 @@
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Anggota</h3>
                     @can('KEANGGOTAAN_ADD')
-                        <a href="{{ route('members.create') }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('mindo.members.create') }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-plus"></i>
                             Buat Baru
                         </a>
@@ -54,12 +54,12 @@
                                     <td>{{ $member->email }}</td>
                                     <td class="text-center">
                                         @can('KEANGGOTAAN_LIST')
-                                            <a class="btn btn-info" href="{{ route('members.show', $member->id) }}">
+                                            <a class="btn btn-info" href="{{ route('mindo.members.show', $member->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('KEANGGOTAAN_EDIT')
-                                            <a class="btn btn-warning" href="{{ route('members.edit', $member->id) }}">
+                                            <a class="btn btn-warning" href="{{ route('mindo.members.edit', $member->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -67,7 +67,7 @@
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#deleteConfirmationModal" data-item-id="{{ $member->id }}"
                                                 data-item-name="{{ $member->company_name }}"
-                                                data-delete-route="{{ route('members.destroy', $member->id) }}">
+                                                data-delete-route="{{ route('mindo.members.destroy', $member->id) }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         @endcan

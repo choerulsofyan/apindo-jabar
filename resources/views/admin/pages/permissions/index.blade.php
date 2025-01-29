@@ -6,9 +6,9 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Hak Akses',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Hak Akses', 'url' => route('permissions.index')],
-            ['name' => 'Daftar Hak Akses', 'url' => route('permissions.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Hak Akses', 'url' => route('mindo.permissions.index')],
+            ['name' => 'Daftar Hak Akses', 'url' => route('mindo.permissions.index')],
         ],
     ])
 @endsection
@@ -29,7 +29,7 @@
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Hak Akses</h3>
                     @can('HAK_AKSES_ADD')
-                        <a href="{{ route('permissions.create') }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('mindo.permissions.create') }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-plus"></i>
                             Buat Baru
                         </a>
@@ -52,12 +52,14 @@
                                     <td>{{ $permission->name }}</td>
                                     <td class="text-center">
                                         @can('HAK_AKSES_LIST')
-                                            <a class="btn btn-info" href="{{ route('permissions.show', $permission->id) }}">
+                                            <a class="btn btn-info"
+                                                href="{{ route('mindo.permissions.show', $permission->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('HAK_AKSES_EDIT')
-                                            <a class="btn btn-warning" href="{{ route('permissions.edit', $permission->id) }}">
+                                            <a class="btn btn-warning"
+                                                href="{{ route('mindo.permissions.edit', $permission->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -65,7 +67,7 @@
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#deleteConfirmationModal" data-item-id="{{ $permission->id }}"
                                                 data-item-name="{{ $permission->name }}"
-                                                data-delete-route="{{ route('permissions.destroy', $permission->id) }}">
+                                                data-delete-route="{{ route('mindo.permissions.destroy', $permission->id) }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         @endcan

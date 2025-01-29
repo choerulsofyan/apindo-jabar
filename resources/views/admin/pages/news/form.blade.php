@@ -6,11 +6,11 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Berita',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Berita', 'url' => route('news.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Berita', 'url' => route('mindo.news.index')],
             [
                 'name' => isset($news) ? 'Edit Berita' : 'Tambah Berita Baru',
-                'url' => isset($news) ? route('news.edit', $news->id) : route('news.create'),
+                'url' => isset($news) ? route('mindo.news.edit', $news->id) : route('mindo.news.create'),
             ],
         ],
     ])
@@ -19,8 +19,8 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ isset($news) ? route('news.update', $news->id) : route('news.store') }}" method="POST"
-                enctype="multipart/form-data">
+            <form action="{{ isset($news) ? route('mindo.news.update', $news->id) : route('mindo.news.store') }}"
+                method="POST" enctype="multipart/form-data">
                 @csrf
                 @if (isset($news))
                     @method('PATCH')
@@ -78,7 +78,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary me-2">Save</button>
-                        <a href="{{ route('news.index') }}" class="btn btn-secondary">Cancel</a>
+                        <a href="{{ route('mindo.news.index') }}" class="btn btn-secondary">Cancel</a>
                     </div>
                 </div>
             </form>

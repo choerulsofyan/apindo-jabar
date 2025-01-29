@@ -6,13 +6,13 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Regulasi',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Regulasi', 'url' => route('regulations.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Regulasi', 'url' => route('mindo.regulations.index')],
             [
                 'name' => isset($regulation) ? 'Edit Regulasi' : 'Tambah Regulasi Baru',
                 'url' => isset($regulation)
-                    ? route('regulations.edit', $regulation->id)
-                    : route('regulations.create'),
+                    ? route('mindo.regulations.edit', $regulation->id)
+                    : route('mindo.regulations.create'),
             ],
         ],
     ])
@@ -22,7 +22,7 @@
     <div class="row">
         <div class="col-md-12">
             <form
-                action="{{ isset($regulation) ? route('regulations.update', $regulation->id) : route('regulations.store') }}"
+                action="{{ isset($regulation) ? route('mindo.regulations.update', $regulation->id) : route('mindo.regulations.store') }}"
                 method="POST" enctype="multipart/form-data">
                 @csrf
                 @if (isset($regulation))
@@ -78,7 +78,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary me-2">Save</button>
-                        <a href="{{ route('regulations.index') }}" class="btn btn-secondary">Cancel</a>
+                        <a href="{{ route('mindo.regulations.index') }}" class="btn btn-secondary">Cancel</a>
                     </div>
                 </div>
             </form>

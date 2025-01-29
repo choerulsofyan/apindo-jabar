@@ -6,9 +6,9 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Grup User',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Grup User', 'url' => route('roles.index')],
-            ['name' => 'Daftar Grup User', 'url' => route('roles.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Grup User', 'url' => route('mindo.roles.index')],
+            ['name' => 'Daftar Grup User', 'url' => route('mindo.roles.index')],
         ],
     ])
 @endsection
@@ -29,7 +29,7 @@
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Grup User</h3>
                     @can('GRUP_USER_ADD')
-                        <a href="{{ route('roles.create') }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('mindo.roles.create') }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-plus"></i>
                             Buat Baru
                         </a>
@@ -52,12 +52,12 @@
                                     <td>{{ $role->name }}</td>
                                     <td class="text-center">
                                         @can('GRUP_USER_LIST')
-                                            <a class="btn btn-info" href="{{ route('roles.show', $role->id) }}">
+                                            <a class="btn btn-info" href="{{ route('mindo.roles.show', $role->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('GRUP_USER_EDIT')
-                                            <a class="btn btn-warning" href="{{ route('roles.edit', $role->id) }}">
+                                            <a class="btn btn-warning" href="{{ route('mindo.roles.edit', $role->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -65,7 +65,7 @@
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#deleteConfirmationModal" data-item-id="{{ $role->id }}"
                                                 data-item-name="{{ $role->name }}"
-                                                data-delete-route="{{ route('roles.destroy', $role->id) }}">
+                                                data-delete-route="{{ route('mindo.roles.destroy', $role->id) }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         @endcan

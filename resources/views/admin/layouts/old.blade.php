@@ -43,13 +43,13 @@
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('mindo.register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
-                            <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
-                            <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
-                            <li><a class="nav-link" href="{{ route('members.index') }}">Manage Member</a></li>
+                            <li><a class="nav-link" href="{{ route('mindo.users.index') }}">Manage Users</a></li>
+                            <li><a class="nav-link" href="{{ route('mindo.roles.index') }}">Manage Role</a></li>
+                            <li><a class="nav-link" href="{{ route('mindo.members.index') }}">Manage Member</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

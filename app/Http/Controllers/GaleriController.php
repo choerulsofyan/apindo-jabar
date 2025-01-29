@@ -48,7 +48,7 @@ class GaleriController extends Controller
         $galeri->file = $image_name;
         $galeri->save();
 
-        return redirect()->route('galeri.index')->with([
+        return redirect()->route('mindo.galeri.index')->with([
             'message' => 'Galeri created successfully.',
             'alert-type' => 'success'
         ]);
@@ -79,7 +79,7 @@ class GaleriController extends Controller
         $galeri->deskripsi = $request->deskripsi;
         $galeri->save();
 
-        return redirect()->route('galeri.index')->with([
+        return redirect()->route('mindo.galeri.index')->with([
             'message' => 'Galeri updated successfully.',
             'alert-type' => 'success'
         ]);
@@ -90,7 +90,7 @@ class GaleriController extends Controller
         Storage::delete('public/images/galeri/' . $galeri->file);
         $galeri->delete();
 
-        return redirect()->route('galeri.index')->with([
+        return redirect()->route('mindo.galeri.index')->with([
             'message' => 'Galeri deleted successfully.',
             'alert-type' => 'success'
         ]);

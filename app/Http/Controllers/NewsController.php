@@ -81,7 +81,7 @@ class NewsController extends Controller
 
         News::create($newsData);
 
-        return redirect()->route('news.index')->with('success', 'News created successfully.');
+        return redirect()->route('mindo.news.index')->with('success', 'News created successfully.');
     }
 
     /**
@@ -152,7 +152,7 @@ class NewsController extends Controller
 
         $news->update($newsData);
 
-        return redirect()->route('news.index')->with('success', 'News updated successfully');
+        return redirect()->route('mindo.news.index')->with('success', 'News updated successfully');
     }
 
     /**
@@ -166,6 +166,6 @@ class NewsController extends Controller
         }
 
         $news->delete();
-        return redirect()->route('news.index')->with('success', 'News deleted successfully');
+        return redirect()->route('mindo.news.index')->with('success', 'News deleted successfully');
     }
 }

@@ -6,9 +6,9 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Anggota',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Anggota', 'url' => route('members.index')],
-            ['name' => 'Daftar Anggota', 'url' => route('members.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Anggota', 'url' => route('mindo.members.index')],
+            ['name' => 'Daftar Anggota', 'url' => route('mindo.members.index')],
         ],
     ])
 @endsection
@@ -136,7 +136,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('members.index') }}" class="btn btn-secondary">Back</a>
+                    <a href="{{ route('mindo.members.index') }}" class="btn btn-secondary">Back</a>
                 </div>
             </div>
         </div>

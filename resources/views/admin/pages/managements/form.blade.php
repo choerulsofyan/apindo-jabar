@@ -6,11 +6,13 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Kepengurusan',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Kepengurusan', 'url' => route('managements.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Kepengurusan', 'url' => route('mindo.managements.index')],
             [
                 'name' => isset($council) ? 'Edit Kepengurusan' : 'Tambah Kepengurusan Baru',
-                'url' => isset($council) ? route('managements.edit', $council->id) : route('managements.create'),
+                'url' => isset($council)
+                    ? route('mindo.managements.edit', $council->id)
+                    : route('mindo.managements.create'),
             ],
         ],
     ])
@@ -20,7 +22,7 @@
     <div class="row">
         <div class="col-md-12">
             <form
-                action="{{ isset($management) ? route('managements.update', $management->id) : route('managements.store') }}"
+                action="{{ isset($management) ? route('mindo.managements.update', $management->id) : route('mindo.managements.store') }}"
                 method="POST" enctype="multipart/form-data">
                 @csrf
                 @if (isset($management))
@@ -152,7 +154,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary me-2">Save</button>
-                        <a href="{{ route('managements.index') }}" class="btn btn-secondary">Cancel</a>
+                        <a href="{{ route('mindo.managements.index') }}" class="btn btn-secondary">Cancel</a>
                     </div>
                 </div>
             </form>

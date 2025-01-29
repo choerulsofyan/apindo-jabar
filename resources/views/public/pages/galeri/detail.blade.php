@@ -35,7 +35,7 @@
                             @endif
                             <div class="card-body">
                                 <p class="card-text">{{ $item->short_content }}</p>
-                                <a href="{{ route('public.galeri.detail', $item->id) }}" class="btn btn-primary">Read
+                                <a href="{{ route('galeri.detail', $item->id) }}" class="btn btn-primary">Read
                                     More</a>
                             </div>
                             <div class="card-footer">

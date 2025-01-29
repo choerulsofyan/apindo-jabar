@@ -7,7 +7,7 @@
             </div>
 
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('organizational-positions.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('mindo.organizational-positions.index') }}"> Back</a>
             </div>
         </div>
     </div>

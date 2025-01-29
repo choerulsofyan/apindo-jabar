@@ -6,11 +6,11 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Grup User',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Grup User', 'url' => route('roles.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Grup User', 'url' => route('mindo.roles.index')],
             [
                 'name' => isset($role) ? 'Edit Grup User' : 'Tambah Grup User Baru',
-                'url' => isset($role) ? route('roles.edit', $role->id) : route('roles.create'),
+                'url' => isset($role) ? route('mindo.roles.edit', $role->id) : route('mindo.roles.create'),
             ],
         ],
     ])
@@ -87,7 +87,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary me-1">Simpan</button>
-                    <a href="{{ route('roles.index') }}" class="btn btn-danger">Batal</a>
+                    <a href="{{ route('mindo.roles.index') }}" class="btn btn-danger">Batal</a>
                 </div>
             </div>
             {!! Form::close() !!}

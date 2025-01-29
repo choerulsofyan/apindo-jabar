@@ -10,14 +10,15 @@
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
                     <a href="../generate/theme.html"
-                        class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}">
+                        class="nav-link {{ Request::routeIs('mindo/dashboard') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
 
                 @canany(['USER_LIST', 'GRUP_USER_LIST', 'HAK_AKSES_LIST'])
-                    <li class="nav-item {{ Request::is('users*', 'roles*', 'permissions*') ? 'menu-open' : '' }}">
+                    <li
+                        class="nav-item {{ Request::is('mindo/users*', 'mindo/roles*', 'mindo/permissions*') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fa-solid fa-users"></i>
                             <p>
@@ -28,8 +29,8 @@
                         <ul class="nav nav-treeview">
                             @can('USER_LIST')
                                 <li class="nav-item">
-                                    <a href="{{ route('users.index') }}"
-                                        class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
+                                    <a href="{{ route('mindo.users.index') }}"
+                                        class="nav-link {{ Request::is('mindo/users*') ? 'active' : '' }}">
                                         <i class="nav-icon fa-solid fa-user"></i>
                                         <p>User</p>
                                     </a>
@@ -37,8 +38,8 @@
                             @endcan
                             @can('GRUP_USER_LIST')
                                 <li class="nav-item">
-                                    <a href="{{ route('roles.index') }}"
-                                        class="nav-link {{ Request::is('roles*') ? 'active' : '' }}">
+                                    <a href="{{ route('mindo.roles.index') }}"
+                                        class="nav-link {{ Request::is('mindo/roles*') ? 'active' : '' }}">
                                         <i class="nav-icon fa-solid fa-people-group"></i>
                                         <p>Grup User</p>
                                     </a>
@@ -46,8 +47,8 @@
                             @endcan
                             @can('HAK_AKSES_LIST')
                                 <li class="nav-item">
-                                    <a href="{{ route('permissions.index') }}"
-                                        class="nav-link {{ Request::is('permissions*') ? 'active' : '' }}">
+                                    <a href="{{ route('mindo.permissions.index') }}"
+                                        class="nav-link {{ Request::is('mindo/permissions*') ? 'active' : '' }}">
                                         <i class="nav-icon fa-solid fa-user-shield"></i>
                                         <p>Hak Akses</p>
                                     </a>
@@ -59,7 +60,8 @@
 
                 @can('BERITA_LIST')
                     <li class="nav-item">
-                        <a href="{{ route('news.index') }}" class="nav-link {{ Request::is('news*') ? 'active' : '' }}">
+                        <a href="{{ route('mindo.news.index') }}"
+                            class="nav-link {{ Request::is('mindo/news*') ? 'active' : '' }}">
                             <i class="nav-icon fa-regular fa-newspaper"></i>
                             <p>Berita</p>
                         </a>
@@ -68,8 +70,8 @@
 
                 @can('KEANGGOTAAN_LIST')
                     <li class="nav-item">
-                        <a href="{{ route('members.index') }}"
-                            class="nav-link {{ Request::is('members*') ? 'active' : '' }}">
+                        <a href="{{ route('mindo.members.index') }}"
+                            class="nav-link {{ Request::is('mindo/members*') ? 'active' : '' }}">
                             <i class="nav-icon fa-regular fa-user"></i>
                             <p>Keanggotaan</p>
                         </a>
@@ -78,8 +80,8 @@
 
                 @can('REGULASI_LIST')
                     <li class="nav-item">
-                        <a href="{{ route('regulations.index') }}"
-                            class="nav-link {{ Request::is('regulations*') ? 'active' : '' }}">
+                        <a href="{{ route('mindo.regulations.index') }}"
+                            class="nav-link {{ Request::is('mindo/regulations*') ? 'active' : '' }}">
                             <i class="nav-icon fa-solid fa-file-contract"></i>
                             <p>Regulation</p>
                         </a>
@@ -87,8 +89,8 @@
                 @endcan
                 @can('LOG_LIST')
                     <li class="nav-item">
-                        <a href="{{ route('activity-logs.index') }}"
-                            class="nav-link {{ Request::is('activity-logs*') ? 'active' : '' }}">
+                        <a href="{{ route('mindo.activity-logs.index') }}"
+                            class="nav-link {{ Request::is('mindo/activity-logs*') ? 'active' : '' }}">
                             <i class="nav-icon fa-solid fa-clock-rotate-left"></i>
                             <p>Logs</p>
                         </a>
@@ -96,7 +98,7 @@
                 @endcan
                 @canany(['BIDANG_LIST', 'DEWAN_LIST', 'JABATAN_LIST', 'KEPENGURUSAN_LIST'])
                     <li
-                        class="nav-item {{ Request::is('managements*', 'sectors*', 'organizational-positions*', 'councils*') ? 'menu-open' : '' }}">
+                        class="nav-item {{ Request::is('mindo/managements*', 'mindo/sectors*', 'mindo/organizational-positions*', 'mindo/councils*') ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fa-solid fa-users"></i>
                             <p>
@@ -107,8 +109,8 @@
                         <ul class="nav nav-treeview">
                             @can('BIDANG_LIST')
                                 <li class="nav-item">
-                                    <a href="{{ route('sectors.index') }}"
-                                        class="nav-link {{ Request::is('sectors*') ? 'active' : '' }}">
+                                    <a href="{{ route('mindo.sectors.index') }}"
+                                        class="nav-link {{ Request::is('mindo/sectors*') ? 'active' : '' }}">
                                         <i class="nav-icon fa-solid fa-sitemap"></i>
                                         <p>Bidang</p>
                                     </a>
@@ -116,8 +118,8 @@
                             @endcan
                             @can('DEWAN_LIST')
                                 <li class="nav-item">
-                                    <a href="{{ route('councils.index') }}"
-                                        class="nav-link {{ Request::is('councils*') ? 'active' : '' }}">
+                                    <a href="{{ route('mindo.councils.index') }}"
+                                        class="nav-link {{ Request::is('mindo/councils*') ? 'active' : '' }}">
                                         <i class="nav-icon fa-solid fa-users-rectangle"></i>
                                         <p>Dewan</p>
                                     </a>
@@ -125,8 +127,8 @@
                             @endcan
                             @can('JABATAN_LIST')
                                 <li class="nav-item">
-                                    <a href="{{ route('organizational-positions.index') }}"
-                                        class="nav-link {{ Request::is('organizational-positions*') ? 'active' : '' }}">
+                                    <a href="{{ route('mindo.organizational-positions.index') }}"
+                                        class="nav-link {{ Request::is('mindo/organizational-positions*') ? 'active' : '' }}">
                                         <i class="nav-icon fa-solid fa-user-tie"></i>
                                         <p>Jabatan</p>
                                     </a>
@@ -134,8 +136,8 @@
                             @endcan
                             @can('KEPENGURUSAN_LIST')
                                 <li class="nav-item">
-                                    <a href="{{ route('managements.index') }}"
-                                        class="nav-link {{ Request::is('managements*') ? 'active' : '' }}">
+                                    <a href="{{ route('mindo.managements.index') }}"
+                                        class="nav-link {{ Request::is('mindo/managements*') ? 'active' : '' }}">
                                         <i class="nav-icon fa-solid fa-people-roof"></i>
                                         <p>Kepengurusan</p>
                                     </a>
@@ -147,7 +149,8 @@
 
                 @can('GALERI_LIST')
                     <li class="nav-item">
-                        <a href="{{ route('galeri.index') }}" class="nav-link {{ Request::is('galeri*') ? 'active' : '' }}">
+                        <a href="{{ route('mindo.galeri.index') }}"
+                            class="nav-link {{ Request::is('mindo/galeri*') ? 'active' : '' }}">
                             <i class="nav-icon fa fa-image"></i>
                             <p>Galeri</p>
                         </a>
@@ -156,7 +159,8 @@
 
                 @can('PESAN_LIST')
                     <li class="nav-item">
-                        <a href="{{ route('pesan.index') }}" class="nav-link {{ Request::is('pesan*') ? 'active' : '' }}">
+                        <a href="{{ route('mindo.pesan.index') }}"
+                            class="nav-link {{ Request::is('mindo/pesan*') ? 'active' : '' }}">
                             <i class="nav-icon fa-solid fa-file-contract"></i>
                             <p>Pesan</p>
                         </a>

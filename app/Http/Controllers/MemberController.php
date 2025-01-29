@@ -122,7 +122,7 @@ class MemberController extends Controller
 
         Member::create($memberData);
 
-        return redirect()->route('members.index')
+        return redirect()->route('mindo.members.index')
             ->with('message', 'Member created successfully.')
             ->with('alert-type', 'success');
     }
@@ -266,7 +266,7 @@ class MemberController extends Controller
 
         $member->update($memberData);
 
-        return redirect()->route('members.index')
+        return redirect()->route('mindo.members.index')
             ->with('message', 'Member updated successfully.')
             ->with('alert-type', 'success');
     }
@@ -286,7 +286,7 @@ class MemberController extends Controller
 
         $member->delete();
 
-        return redirect()->route('members.index')
+        return redirect()->route('mindo.members.index')
             ->with('message', 'Member deleted successfully.')
             ->with('alert-type', 'success');
     }

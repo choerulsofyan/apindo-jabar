@@ -5,7 +5,7 @@
 @section('subheader')
     @include('admin.partials.subheader', [
         'title' => 'Dashboard', // Dynamic title
-        'breadcrumbs' => [['name' => 'Home', 'url' => route('home')], ['name' => 'Dashboard', 'url' => '#']],
+        'breadcrumbs' => [['name' => 'Home', 'url' => route('mindo.home')], ['name' => 'Dashboard', 'url' => '#']],
     ])
 @endsection
 

@@ -6,9 +6,9 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Jabatan',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Jabatan', 'url' => route('organizational-positions.index')],
-            ['name' => 'Daftar Jabatan', 'url' => route('organizational-positions.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Jabatan', 'url' => route('mindo.organizational-positions.index')],
+            ['name' => 'Daftar Jabatan', 'url' => route('mindo.organizational-positions.index')],
         ],
     ])
 @endsection
@@ -29,7 +29,7 @@
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Jabatan</h3>
                     @can('JABATAN_ADD')
-                        <a href="{{ route('organizational-positions.create') }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('mindo.organizational-positions.create') }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-plus"></i>
                             Buat Baru
                         </a>
@@ -53,13 +53,13 @@
                                     <td class="text-center">
                                         @can('JABATAN_LIST')
                                             <a class="btn btn-info"
-                                                href="{{ route('organizational-positions.show', $organizational_position->id) }}">
+                                                href="{{ route('mindo.organizational-positions.show', $organizational_position->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('JABATAN_EDIT')
                                             <a class="btn btn-warning"
-                                                href="{{ route('organizational-positions.edit', $organizational_position->id) }}">
+                                                href="{{ route('mindo.organizational-positions.edit', $organizational_position->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -68,7 +68,7 @@
                                                 data-bs-target="#deleteConfirmationModal"
                                                 data-item-id="{{ $organizational_position->id }}"
                                                 data-item-name="{{ $organizational_position->name }}"
-                                                data-delete-route="{{ route('organizational-positions.destroy', $organizational_position->id) }}">
+                                                data-delete-route="{{ route('mindo.organizational-positions.destroy', $organizational_position->id) }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         @endcan

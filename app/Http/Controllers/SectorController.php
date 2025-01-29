@@ -47,7 +47,7 @@ class SectorController extends Controller
         $input = $request->all();
         Sector::create($input);
 
-        return redirect()->route('sectors.index')->with([
+        return redirect()->route('mindo.sectors.index')->with([
             'message' => 'Sector created successfully!',
             'alert-type' => 'success'
         ]);
@@ -80,7 +80,7 @@ class SectorController extends Controller
 
         $sector->update($request->all());
 
-        return redirect()->route('sectors.index')->with('message', 'Sector updated successfully');
+        return redirect()->route('mindo.sectors.index')->with('message', 'Sector updated successfully');
     }
 
     /**
@@ -89,6 +89,6 @@ class SectorController extends Controller
     public function destroy(Sector $sector)
     {
         $sector->delete();
-        return redirect()->route('sectors.index')->with('message', 'Sector deleted successfully');
+        return redirect()->route('mindo.sectors.index')->with('message', 'Sector deleted successfully');
     }
 }

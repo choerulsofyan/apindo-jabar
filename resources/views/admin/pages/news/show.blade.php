@@ -8,7 +8,7 @@
             </div>
 
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('news.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('mindo.news.index') }}"> Back</a>
             </div>
         </div>
     </div>

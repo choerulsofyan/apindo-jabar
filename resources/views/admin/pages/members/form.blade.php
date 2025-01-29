@@ -6,11 +6,13 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Anggota',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Anggota', 'url' => route('members.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Anggota', 'url' => route('mindo.members.index')],
             [
                 'name' => isset($regulation) ? 'Edit Anggota' : 'Tambah Anggota Baru',
-                'url' => isset($regulation) ? route('members.edit', $regulation->id) : route('members.create'),
+                'url' => isset($regulation)
+                    ? route('mindo.members.edit', $regulation->id)
+                    : route('mindo.members.create'),
             ],
         ],
     ])
@@ -19,8 +21,8 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form action="{{ isset($member) ? route('members.update', $member->id) : route('members.store') }}" method="POST"
-                enctype="multipart/form-data">
+            <form action="{{ isset($member) ? route('mindo.members.update', $member->id) : route('mindo.members.store') }}"
+                method="POST" enctype="multipart/form-data">
                 @csrf
                 @if (isset($member))
                     @method('PATCH')
@@ -544,7 +546,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary me-2">Save</button>
-                        <a href="{{ route('members.index') }}" class="btn btn-secondary">Cancel</a>
+                        <a href="{{ route('mindo.members.index') }}" class="btn btn-secondary">Cancel</a>
                     </div>
                 </div>
             </form>

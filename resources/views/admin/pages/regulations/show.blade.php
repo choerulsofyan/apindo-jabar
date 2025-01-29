@@ -6,13 +6,13 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Regulasi',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Regulasi', 'url' => route('regulations.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Regulasi', 'url' => route('mindo.regulations.index')],
             [
                 'name' => isset($regulation) ? 'Edit Regulasi' : 'Tambah Regulasi Baru',
                 'url' => isset($regulation)
-                    ? route('regulations.edit', $regulation->id)
-                    : route('regulations.create'),
+                    ? route('mindo.regulations.edit', $regulation->id)
+                    : route('mindo.regulations.create'),
             ],
         ],
     ])
@@ -36,7 +36,7 @@
                     @endif
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('regulations.index') }}" class="btn btn-secondary">Back</a>
+                    <a href="{{ route('mindo.regulations.index') }}" class="btn btn-secondary">Back</a>
                 </div>
             </div>
         </div>

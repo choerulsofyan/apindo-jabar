@@ -6,11 +6,13 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Dewan',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Dewan', 'url' => route('councils.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Dewan', 'url' => route('mindo.councils.index')],
             [
                 'name' => isset($council) ? 'Edit Dewan' : 'Tambah Dewan Baru',
-                'url' => isset($council) ? route('councils.edit', $council->id) : route('councils.create'),
+                'url' => isset($council)
+                    ? route('mindo.councils.edit', $council->id)
+                    : route('mindo.councils.create'),
             ],
         ],
     ])
@@ -56,7 +58,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary me-1">Simpan</button>
-                    <a href="{{ route('councils.index') }}" class="btn btn-danger">Batal</a>
+                    <a href="{{ route('mindo.councils.index') }}" class="btn btn-danger">Batal</a>
                 </div>
             </div>
             {!! Form::close() !!}

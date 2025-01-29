@@ -6,11 +6,11 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Bidang',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Bidang', 'url' => route('sectors.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Bidang', 'url' => route('mindo.sectors.index')],
             [
                 'name' => isset($sector) ? 'Edit Bidang' : 'Tambah Bidang Baru',
-                'url' => isset($sector) ? route('sectors.edit', $sector->id) : route('sectors.create'),
+                'url' => isset($sector) ? route('mindo.sectors.edit', $sector->id) : route('mindo.sectors.create'),
             ],
         ],
     ])
@@ -56,7 +56,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary me-1">Simpan</button>
-                    <a href="{{ route('sectors.index') }}" class="btn btn-danger">Batal</a>
+                    <a href="{{ route('mindo.sectors.index') }}" class="btn btn-danger">Batal</a>
                 </div>
             </div>
             {!! Form::close() !!}

@@ -47,7 +47,7 @@ class CouncilController extends Controller
         $input = $request->all();
         Council::create($input);
 
-        return redirect()->route('councils.index')->with([
+        return redirect()->route('mindo.councils.index')->with([
             'message' => 'Council created successfully!',
             'alert-type' => 'success'
         ]);
@@ -79,7 +79,7 @@ class CouncilController extends Controller
 
         $council->update($request->all());
 
-        return redirect()->route('councils.index')->with('message', 'Council updated successfully');
+        return redirect()->route('mindo.councils.index')->with('message', 'Council updated successfully');
     }
 
     /**
@@ -88,6 +88,6 @@ class CouncilController extends Controller
     public function destroy(Council $council): RedirectResponse
     {
         $council->delete();
-        return redirect()->route('councils.index')->with('message', 'Council deleted successfully');
+        return redirect()->route('mindo.councils.index')->with('message', 'Council deleted successfully');
     }
 }

@@ -6,9 +6,9 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Bidang',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Bidang', 'url' => route('sectors.index')],
-            ['name' => 'Daftar Bidang', 'url' => route('sectors.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Bidang', 'url' => route('mindo.sectors.index')],
+            ['name' => 'Daftar Bidang', 'url' => route('mindo.sectors.index')],
         ],
     ])
 @endsection
@@ -29,7 +29,7 @@
                 <div class="card-header d-flex justify-content-between">
                     <h3 class="card-title">Daftar Bidang</h3>
                     @can('BIDANG_ADD')
-                        <a href="{{ route('sectors.create') }}" class="btn btn-sm btn-primary">
+                        <a href="{{ route('mindo.sectors.create') }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-plus"></i>
                             Buat Baru
                         </a>
@@ -52,12 +52,12 @@
                                     <td>{{ $sector->name }}</td>
                                     <td class="text-center">
                                         @can('BIDANG_LIST')
-                                            <a class="btn btn-info" href="{{ route('sectors.show', $sector->id) }}">
+                                            <a class="btn btn-info" href="{{ route('mindo.sectors.show', $sector->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('BIDANG_EDIT')
-                                            <a class="btn btn-warning" href="{{ route('sectors.edit', $sector->id) }}">
+                                            <a class="btn btn-warning" href="{{ route('mindo.sectors.edit', $sector->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
@@ -65,7 +65,7 @@
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#deleteConfirmationModal" data-item-id="{{ $sector->id }}"
                                                 data-item-name="{{ $sector->name }}"
-                                                data-delete-route="{{ route('sectors.destroy', $sector->id) }}">
+                                                data-delete-route="{{ route('mindo.sectors.destroy', $sector->id) }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         @endcan

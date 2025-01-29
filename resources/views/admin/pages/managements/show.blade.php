@@ -6,8 +6,8 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Kepengurusan',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Kepengurusan', 'url' => route('managements.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Kepengurusan', 'url' => route('mindo.managements.index')],
             ['name' => 'Detail', 'url' => '#'],
         ],
     ])
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('managements.index') }}" class="btn btn-secondary">Back</a>
+                    <a href="{{ route('mindo.managements.index') }}" class="btn btn-secondary">Back</a>
                 </div>
             </div>
         </div>

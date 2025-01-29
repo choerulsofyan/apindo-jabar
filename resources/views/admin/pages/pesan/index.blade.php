@@ -6,9 +6,9 @@
     @include('admin.partials.subheader', [
         'title' => 'Pesan',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Pesan', 'url' => route('pesan.index')],
-            ['name' => 'Daftar Pesan', 'url' => route('pesan.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Pesan', 'url' => route('mindo.pesan.index')],
+            ['name' => 'Daftar Pesan', 'url' => route('mindo.pesan.index')],
         ],
     ])
 @endsection

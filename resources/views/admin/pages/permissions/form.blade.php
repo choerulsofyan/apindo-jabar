@@ -6,13 +6,13 @@
     @include('admin.partials.subheader', [
         'title' => 'Manajemen Hak Akses',
         'breadcrumbs' => [
-            ['name' => 'Dashboard', 'url' => route('home')],
-            ['name' => 'Manajemen Hak Akses', 'url' => route('permissions.index')],
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Hak Akses', 'url' => route('mindo.permissions.index')],
             [
                 'name' => isset($permission) ? 'Edit Hak Akses' : 'Tambah Hak Akses Baru',
                 'url' => isset($permission)
-                    ? route('permissions.edit', $permission->id)
-                    : route('permissions.create'),
+                    ? route('mindo.permissions.edit', $permission->id)
+                    : route('mindo.permissions.create'),
             ],
         ],
     ])
@@ -57,7 +57,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary me-1">Simpan</button>
-                    <a href="{{ route('permissions.index') }}" class="btn btn-danger">Batal</a>
+                    <a href="{{ route('mindo.permissions.index') }}" class="btn btn-danger">Batal</a>
                 </div>
             </div>
             {!! Form::close() !!}
