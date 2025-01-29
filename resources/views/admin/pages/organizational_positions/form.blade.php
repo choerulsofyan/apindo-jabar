@@ -30,8 +30,8 @@
         <div class="col-md-12">
             {!! Form::open([
                 'route' => isset($organizationalPosition)
-                    ? ['organizational-positions.update', $organizationalPosition->id]
-                    : 'organizational-positions.store',
+                    ? ['mindo.organizational-positions.update', $organizationalPosition->id]
+                    : 'mindo.organizational-positions.store',
                 'method' => isset($organizationalPosition) ? 'PATCH' : 'POST',
                 'class' => '',
                 'novalidate' => true,

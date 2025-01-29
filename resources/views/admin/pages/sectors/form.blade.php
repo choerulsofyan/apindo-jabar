@@ -27,7 +27,7 @@
     <div class="row">
         <div class="col-md-12">
             {!! Form::open([
-                'route' => isset($sector) ? ['sectors.update', $sector->id] : 'sectors.store',
+                'route' => isset($sector) ? ['mindo.sectors.update', $sector->id] : 'mindo.sectors.store',
                 'method' => isset($sector) ? 'PATCH' : 'POST',
                 'class' => '',
                 'novalidate' => true,

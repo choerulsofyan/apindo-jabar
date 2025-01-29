@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-md-12">
             {!! Form::open([
-                'route' => isset($permission) ? ['permissions.update', $permission->id] : 'permissions.store',
+                'route' => isset($permission) ? ['mindo.permissions.update', $permission->id] : 'mindo.permissions.store',
                 'method' => isset($permission) ? 'PATCH' : 'POST',
                 'class' => '',
                 'novalidate' => true,

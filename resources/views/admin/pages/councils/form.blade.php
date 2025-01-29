@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-md-12">
             {!! Form::open([
-                'route' => isset($council) ? ['councils.update', $council->id] : 'councils.store',
+                'route' => isset($council) ? ['mindo.councils.update', $council->id] : 'mindo.councils.store',
                 'method' => isset($council) ? 'PATCH' : 'POST',
                 'class' => '',
                 'novalidate' => true,

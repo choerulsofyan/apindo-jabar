@@ -27,7 +27,7 @@
     <div class="row">
         <div class="col-md-12">
             {!! Form::open([
-                'route' => isset($user) ? ['users.update', $user->id] : 'users.store',
+                'route' => isset($user) ? ['mindo.users.update', $user->id] : 'mindo.users.store',
                 'method' => isset($user) ? 'PATCH' : 'POST',
                 'class' => '',
                 'novalidate' => true,

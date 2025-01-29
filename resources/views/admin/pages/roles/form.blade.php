@@ -38,7 +38,7 @@
     <div class="row">
         <div class="col-md-12">
             {!! Form::open([
-                'route' => isset($role) ? ['roles.update', $role->id] : 'roles.store',
+                'route' => isset($role) ? ['mindo.roles.update', $role->id] : 'mindo.roles.store',
                 'method' => isset($role) ? 'PATCH' : 'POST',
                 'class' => '',
                 'novalidate' => true,
