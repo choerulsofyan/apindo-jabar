@@ -1,64 +1,28 @@
-<section class="image-gallery py-5">
+<section id="gallery-section" class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center fw-bolder mb-4 text-primary">GALERI</h2>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-            {{-- Gallery Item 1 --}}
-            <div class="col">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal1">
-                    <img src="{{ asset('assets/images/sample.jpg') }}" class="img-thumbnail" alt="Image 1">
-                </a>
-            </div>
-
-            {{-- Gallery Item 2 --}}
-            <div class="col">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal2">
-                    <img src="{{ asset('assets/images/sample.jpg') }}" class="img-thumbnail" alt="Image 2">
-                </a>
-            </div>
-
-            {{-- Gallery Item 3 --}}
-            <div class="col">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal3">
-                    <img src="{{ asset('assets/images/sample.jpg') }}" class="img-thumbnail" alt="Image 3">
-                </a>
-            </div>
-
-            {{-- Gallery Item 4 --}}
-            <div class="col">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal4">
-                    <img src="{{ asset('assets/images/sample.jpg') }}" class="img-thumbnail" alt="Image 4">
-                </a>
-            </div>
-
-            {{-- Gallery Item 5 --}}
-            <div class="col">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal5">
-                    <img src="{{ asset('assets/images/sample.jpg') }}" class="img-thumbnail" alt="Image 5">
-                </a>
-            </div>
-
-            {{-- Gallery Item 6 --}}
-            <div class="col">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal6">
-                    <img src="{{ asset('assets/images/sample.jpg') }}" class="img-thumbnail" alt="Image 6">
-                </a>
-            </div>
-
-            {{-- Gallery Item 7 --}}
-            <div class="col">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal7">
-                    <img src="{{ asset('assets/images/sample.jpg') }}" class="img-thumbnail" alt="Image 7">
-                </a>
-            </div>
-
-            {{-- Gallery Item 8 --}}
-            <div class="col">
-                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal8">
-                    <img src="{{ asset('assets/images/sample.jpg') }}" class="img-thumbnail" alt="Image 8">
-                </a>
-            </div>
-
-
+        <h2 class="text-center fw-bolder mb-4 text-primary">GALLERY</h2>
+        <div class="row">
+            @forelse ($latestImages as $image)
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <img src="{{ Storage::url('images/galeri/' . $image->file) }}" class="card-img-top"
+                            alt="Gallery Image">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <small class="text-muted">{{ $image->formatted_date }}</small>
+                            </p>
+                            <p class="card-text">
+                                {{ $image->short_description }}
+                                <a href="#">Read More</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col">
+                    <p class="text-center">No images found.</p>
+                </div>
+            @endforelse
         </div>
     </div>
 </section>

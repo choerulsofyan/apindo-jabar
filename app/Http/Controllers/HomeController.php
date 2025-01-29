@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Galeri;
+use App\Models\News;
+use Illuminate\View\View;
+use Carbon\Carbon;
+
 
 class HomeController extends Controller
 {
@@ -13,7 +19,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -21,8 +27,21 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(): View
     {
-        return view('home');
+        $latestNews = News::latest()->take(4)->get();
+
+        $latestNews->each(function ($news) {
+            $news->formatted_date = Carbon::parse($news->created_at)->isoFormat('D MMMM Y');
+            $news->short_content = str($news->content)->words(20, '...');
+        });
+
+        $latestImages = Galeri::latest()->take(8)->get();
+        $latestImages->each(function ($image) {
+            $image->formatted_date = Carbon::parse($image->tanggal)->isoFormat('D MMMM Y');
+            $image->short_description = str($image->deskripsi)->limit(100, '...'); // Customize as needed
+        });
+
+        return view('public.pages.index', compact('latestNews', 'latestImages'));
     }
 }

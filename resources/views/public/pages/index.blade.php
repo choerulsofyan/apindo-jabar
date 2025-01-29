@@ -5,7 +5,7 @@
 @section('content')
     @include('public.partials.hero')
     @include('public.partials.about')
-    @include('public.partials.news')
-    @include('public.partials.gallery')
+    @include('public.partials.news', ['latestNews' => $latestNews])
+    @include('public.partials.gallery', ['latestImages' => $latestImages])
     @include('public.partials.contact')
 @endsection

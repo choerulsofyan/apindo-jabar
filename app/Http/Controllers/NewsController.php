@@ -74,7 +74,7 @@ class NewsController extends Controller
             $newsData = [
                 'title' => $request->title,
                 'content' => $request->content,
-                'photo' => 'images/news/' . $filename,
+                'photo' => $filename,
                 'place' => $request->place,
             ];
         }
@@ -100,8 +100,8 @@ class NewsController extends Controller
         $imageSrc = asset('assets/images/no-image-available.png'); // Default placeholder
 
         if ($news->photo) {
-            if (Storage::disk('public')->exists($news->photo)) {
-                $imageSrc = Storage::url($news->photo);
+            if (Storage::disk('public')->exists('images/news/' . $news->photo)) {
+                $imageSrc = Storage::url('images/news/' . $news->photo);
             } else {
                 $imageSrc = asset('assets/images/image-not-found.png');
             }
@@ -130,8 +130,8 @@ class NewsController extends Controller
 
         if ($request->hasFile('photo')) {
             // Delete old image if it exists
-            if ($news->photo && Storage::disk('public')->exists($news->photo)) {
-                Storage::disk('public')->delete($news->photo);
+            if ($news->photo && Storage::disk('public')->exists('images/news/' . $news->photo)) {
+                Storage::disk('public')->delete('images/news/' . $news->photo);
             }
 
             $image = $request->file('photo');
@@ -147,7 +147,7 @@ class NewsController extends Controller
 
             // Save the new image
             $img->toJpeg(75)->save(Storage::disk('public')->path('images/news/' . $filename));
-            $newsData['photo'] = 'images/news/' . $filename;
+            $newsData['photo'] = $filename;
         }
 
         $news->update($newsData);
@@ -161,8 +161,8 @@ class NewsController extends Controller
     public function destroy(News $news): RedirectResponse
     {
         // Delete the image if it exists
-        if ($news->photo && Storage::disk('public')->exists($news->photo)) {
-            Storage::disk('public')->delete($news->photo);
+        if ($news->photo && Storage::disk('public')->exists('images/news/' . $news->photo)) {
+            Storage::disk('public')->delete('images/news/' . $news->photo);
         }
 
         $news->delete();

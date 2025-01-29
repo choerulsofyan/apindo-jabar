@@ -52,13 +52,17 @@
                                     <td id="deskripsi">
                                         {{ Str::limit($item->deskripsi, 50) }}
                                         @if (strlen($item->deskripsi) > 50)
-                                            <span id="moreText" style="display:none;">{{ substr($item->deskripsi, 50) }}</span>
-                                            <a href="javascript:void(0);" id="toggleText" class="text-primary">Lihat lebih</a>
+                                            <span id="moreText"
+                                                style="display:none;">{{ substr($item->deskripsi, 50) }}</span>
+                                            <a href="javascript:void(0);" id="toggleText" class="text-primary">Lihat
+                                                lebih</a>
                                         @endif
-                                    </td>                                                                     
+                                    </td>
                                     <td>
-                                        <a href="{{ URL::asset('storage/galeri/'.$item->file) }}" class="image-link" target="_blank">
-                                            <img src="{{ URL::asset('storage/galeri/'.$item->file) }}" style="width:100px; height:100px;" alt="{{ $item->file }}">
+                                        <a href="{{ URL::asset('storage/images/galeri/' . $item->file) }}" class="image-link"
+                                            target="_blank">
+                                            <img src="{{ URL::asset('storage/images/galeri/' . $item->file) }}"
+                                                style="width:100px; height:100px;" alt="{{ $item->file }}">
                                         </a>
                                     </td>
                                     <td class="text-center">
@@ -120,20 +124,19 @@
 @endsection
 
 @push('scripts')
-<script>
-    document.getElementById('toggleText').addEventListener('click', function() {
-        // Menampilkan teks yang tersembunyi
-        var moreText = document.getElementById('moreText');
-        var toggleText = document.getElementById('toggleText');
-        
-        if (moreText.style.display === "none") {
-            moreText.style.display = "inline";
-            toggleText.textContent = "Lihat lebih sedikit";  // Mengubah teks tautan
-        } else {
-            moreText.style.display = "none";
-            toggleText.textContent = "Lihat lebih";  // Mengubah teks tautan kembali
-        }
-    });
-</script>
-@endpush
+    <script>
+        document.getElementById('toggleText').addEventListener('click', function() {
+            // Menampilkan teks yang tersembunyi
+            var moreText = document.getElementById('moreText');
+            var toggleText = document.getElementById('toggleText');
 
+            if (moreText.style.display === "none") {
+                moreText.style.display = "inline";
+                toggleText.textContent = "Lihat lebih sedikit"; // Mengubah teks tautan
+            } else {
+                moreText.style.display = "none";
+                toggleText.textContent = "Lihat lebih"; // Mengubah teks tautan kembali
+            }
+        });
+    </script>
+@endpush
