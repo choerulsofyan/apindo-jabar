@@ -8,4 +8,5 @@
     @include('public.partials.news', ['latestNews' => $latestNews])
     @include('public.partials.gallery', ['latestImages' => $latestImages])
     @include('public.partials.contact')
+    @include('public.partials.faq')
 @endsection
