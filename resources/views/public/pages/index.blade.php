@@ -3,7 +3,7 @@
 @section('title', 'APINDO - Home')
 
 @section('content')
-    @include('public.partials.hero')
+    @include('public.partials.hero', ['newsSlides' => $newsSlides])
     @include('public.partials.about')
     @include('public.partials.news', ['latestNews' => $latestNews])
     @include('public.partials.gallery', ['latestImages' => $latestImages])

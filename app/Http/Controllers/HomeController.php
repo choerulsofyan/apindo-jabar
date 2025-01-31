@@ -8,7 +8,7 @@ use App\Models\Galeri;
 use App\Models\News;
 use Illuminate\View\View;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -42,7 +42,15 @@ class HomeController extends Controller
             $image->short_description = str($image->deskripsi)->limit(100, '...'); // Customize as needed
         });
 
-        return view('public.pages.index', compact('latestNews', 'latestImages'));
+        $newsSlides = News::whereNotNull('photo')
+            // ->latest()
+            ->take(10)
+            ->get()
+            ->filter(function ($news) {
+                return Storage::disk('public')->exists('images/news/' . $news->photo);
+            });
+
+        return view('public.pages.index', compact('latestNews', 'latestImages', 'newsSlides'));
     }
 
     public function newsDetail(News $news): View

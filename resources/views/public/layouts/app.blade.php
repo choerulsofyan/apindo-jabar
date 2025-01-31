@@ -24,6 +24,7 @@
     @include('public.partials.footer')
     {{-- </div> --}}
 
+    @stack('styles')
     @stack('scripts')
 </body>
 

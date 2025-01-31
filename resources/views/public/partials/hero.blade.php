@@ -1,44 +1,107 @@
-<div id="myCarousel" class="carousel slide"
-    style="height:436px; background-image: url('{{ asset('assets/images/hero-pattern.png') }}');" data-bs-ride="carousel"
-    data-bs-pause="hover">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true"
-            aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+<div id="heroCarousel" class="swiper">
+    <div class="swiper-wrapper">
+        {{-- Static Slide 1 --}}
+        <div class="swiper-slide" style="background-image: url('{{ asset('assets/images/hero-pattern.png') }}');">
+            <div class="d-flex justify-content-center align-items-center h-100 position-relative">
+                <div class="text-left text-white p-4 position-absolute start-50 translate-middle-x" style="z-index: 10;">
+                    <h1 class="mb-3 display-4">Selamat datang di website APINDO Jabar</h1>
+                    <p class="mb-0 lead">KITA BISA, HARUS BISA, PASTI BISA</p>
+                </div>
+                <div class="overlay"></div>
+            </div>
+        </div>
+
+        {{-- Dynamic Slides from News --}}
+        @foreach ($newsSlides as $news)
+            <div class="swiper-slide"
+                style="background-image: url('{{ Storage::url('images/news/' . $news->photo) }}');">
+                <div class="d-flex justify-content-center align-items-center h-100 position-relative">
+                    <div class="text-left text-white p-4 position-absolute start-50 translate-middle-x"
+                        style="z-index: 10;">
+                        <h1 class="mb-3 display-4">{{ $news->title }}</h1>
+                        <p class="mb-0 lead">{{ $news->short_content }}</p>
+                    </div>
+                    {{-- <div class="overlay"></div> --}}
+                </div>
+            </div>
+        @endforeach
+
+        {{-- Static Slide 2 --}}
+        <div class="swiper-slide" style="background-image: url('{{ asset('assets/images/hero-pattern.png') }}');">
+            <div class="d-flex justify-content-center align-items-center h-100 position-relative">
+                <div class="text-left text-white p-4 position-absolute start-50 translate-middle-x"
+                    style="z-index: 10;">
+                    <h1 class="mb-3 display-4">Bergabunglah menjadi anggota untuk mendapatkan info regulasi dan bisnis
+                    </h1>
+                </div>
+                <div class="overlay"></div>
+            </div>
+        </div>
     </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <div class="d-flex justify-content-center align-items-center h-100">
-                <div class="text-left text-white p-4">
-                    <h1 class="mb-3 display-4">Discover Your Next Adventure</h1>
-                    <p class="mb-0 lead">Explore breathtaking destinations with us.</p>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="d-flex justify-content-center align-items-center h-100">
-                <div class="text-left text-white p-4">
-                    <h1 class="mb-3 display-4">Unleash Your Potential</h1>
-                    <p class="mb-0 lead">Learn new skills and achieve your goals.</p>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="d-flex justify-content-center align-items-center h-100">
-                <div class="text-left text-white p-4">
-                    <h1 class="mb-3 display-4">Experience the Difference</h1>
-                    <p class="mb-0 lead">Quality products and exceptional service.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+
+    {{-- Add Pagination --}}
+    <div class="swiper-pagination"></div>
+
+    {{-- Add Navigation Arrows --}}
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
 </div>
+
+@push('styles')
+    <style>
+        .swiper {
+            width: 100%;
+            height: 436px;
+            /* border: solid 4px red; */
+        }
+
+        .swiper-slide {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(2, 126, 182, 0.7);
+        }
+    </style>
+@endpush
+
+@push('scripts')
+    @vite(['resources/js/public/swiper.js'])
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselItems = document.querySelectorAll('#heroCarousel .carousel-item');
+            const imageUrl = "{{ asset('assets/images/hero-pattern.png') }}";
+
+            carouselItems.forEach(item => {
+                item.style.backgroundImage =
+                    `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('${imageUrl}')`;
+                item.style.height = '436px';
+                item.style.backgroundSize = 'cover';
+                item.style.backgroundPosition = 'center';
+            });
+
+            var swiper = new Swiper('#heroCarousel', {
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        });
+    </script>
+@endpush

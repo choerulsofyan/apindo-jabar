@@ -21,6 +21,24 @@
                         dunia
                         usaha dalam arti yang luas.
                     </p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="btn btn-outline-primary">
+                            <i class="bi-fingerprint me-2 "></i>
+                            Sejarah
+                        </a>
+                        <a href="#" class="btn btn-outline-primary">
+                            <i class="bi bi-send me-2"></i>
+                            Visi & Misi
+                        </a>
+                        <a href="#" class="btn btn-outline-primary">
+                            <i class="bi bi-file-text me-2"></i>
+                            Bidang-bidang
+                        </a>
+                        <a href="#" class="btn btn-outline-primary">
+                            <i class="bi bi-building me-2"></i>
+                            DPK APINDO Jabar
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
