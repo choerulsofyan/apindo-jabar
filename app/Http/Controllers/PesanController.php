@@ -37,7 +37,19 @@ class PesanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pesan = new Pesan();
+        $pesan->name = $request->name;
+        $pesan->email = $request->email;
+        $pesan->phone = "-";
+        $pesan->judul = $request->subject;
+        $pesan->pesan = $request->message;
+        $pesan->tanggal = date('Y-m-d H:i:s');
+        $pesan->save();
+
+        return redirect()->back()->with([
+            'message' => 'Pesan berhasil dikirim.',
+            'alert-type' => 'success'
+        ]);
     }
 
     /**
