@@ -18,7 +18,7 @@
 
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
 
-    @vite(['resources/sass/admin/app.scss'])
+    @vite(['resources/sass/admin/admin-app.scss'])
 </head>
 <!--end::Head-->
 <!--begin::Body-->

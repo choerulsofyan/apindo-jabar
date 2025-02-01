@@ -116,4 +116,4 @@
 </div>
 
 {{-- Spacer to prevent content from being hidden behind fixed header --}}
-<div style="margin-top: 122px;"></div>
+<div style="margin-top: 115px;"></div>

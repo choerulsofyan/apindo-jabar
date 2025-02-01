@@ -33,7 +33,15 @@ class HomeController extends Controller
 
         $latestNews->each(function ($news) {
             $news->formatted_date = Carbon::parse($news->created_at)->isoFormat('D MMMM Y');
-            $news->short_content = str($news->content)->words(20, '...');
+            $news->title = str($news->title)->words(10, '...');
+            $news->short_content = str($news->content)->words(25, '...');
+
+            // Check for image existence and use asset() for default image
+            if (!$news->photo || !Storage::disk('public')->exists('/images/news/' . $news->photo)) {
+                $news->photo = asset('assets/images/logo.jpg'); // Use asset() helper
+            } else {
+                $news->photo = Storage::url('/images/news/' . $news->photo); // Keep existing logic for uploaded images
+            }
         });
 
         $latestImages = Galeri::latest()->take(8)->get();

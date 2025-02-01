@@ -13,6 +13,7 @@
         "laravel-vite-plugin": "^1.0.0",
         "postcss-import": "^16.1.0",
         "sass": "^1.56.1",
+        "sass-embedded": "^1.83.4",
         "vite": "^5.0.0"
     },
     "dependencies": {

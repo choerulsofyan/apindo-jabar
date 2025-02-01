@@ -1,6 +1,6 @@
 <section id="gallery-section" class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center fw-bolder mb-4 text-primary">GALLERY</h2>
+        <h2 class="text-center fw-bolder mb-4 text-primary">GALERI</h2>
         <div class="row">
             @forelse ($latestImages as $image)
                 <div class="col-md-3 mb-4">
