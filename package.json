@@ -11,6 +11,7 @@
         "axios": "^1.6.4",
         "bootstrap": "^5.3.3",
         "laravel-vite-plugin": "^1.0.0",
+        "lightbox2": "^2.11.5",
         "postcss-import": "^16.1.0",
         "sass": "^1.56.1",
         "sass-embedded": "^1.83.4",

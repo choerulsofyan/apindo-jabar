@@ -24,6 +24,7 @@ export default defineConfig({
             // "~admin-lte": path.resolve(__dirname, "node_modules/admin-lte"),
             // "~quill": path.resolve(__dirname, "node_modules/quill"),
             "~swiper": path.resolve(__dirname, "node_modules/swiper"),
+            "~lightbox2": path.resolve(__dirname, "node_modules/lightbox2"), // Add alias for lightbox2
         },
     },
 });

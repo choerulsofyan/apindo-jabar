@@ -6,4 +6,13 @@ window.$ = window.jQuery = $;
 
 import Swiper from "swiper/bundle";
 window.Swiper = Swiper;
-// ...your existing code...
+
+import lightbox from "lightbox2";
+
+document.addEventListener("DOMContentLoaded", function () {
+    lightbox.option({
+        resizeDuration: 200,
+        wrapAround: true,
+        showImageNumberLabel: false,
+    });
+});

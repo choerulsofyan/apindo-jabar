@@ -44,7 +44,7 @@ class HomeController extends Controller
             }
         });
 
-        $latestImages = Galeri::latest()->take(8)->get();
+        $latestImages = Galeri::latest()->take(10)->get();
         $latestImages->each(function ($image) {
             $image->formatted_date = Carbon::parse($image->tanggal)->isoFormat('D MMMM Y');
             $image->short_description = str($image->deskripsi)->limit(100, '...'); // Customize as needed
