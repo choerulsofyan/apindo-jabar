@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+{{-- <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"> --}}
+<html lang="id">
 
 <head>
     <meta charset="UTF-8">
@@ -26,6 +27,16 @@
 
     @stack('styles')
     @stack('scripts')
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'id',
+                layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
+            }, 'google_translate_element');
+        }
+    </script>
 </body>
 
 </html>

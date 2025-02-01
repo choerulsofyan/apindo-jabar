@@ -9,7 +9,8 @@
                     <small>+62-812-2360-9501 (Whatsapp Only)</small>
                 </div>
                 <div class="text-end">
-                    <div class="dropdown">
+                    <div id="google_translate_element"></div>
+                    {{-- <div class="dropdown">
                         <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button"
                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-globe me-1"></i> ID
@@ -18,8 +19,9 @@
                             <li><a class="dropdown-item" href="#">ID</a></li>
                             <li><a class="dropdown-item" href="#">EN</a></li>
                             <li><a class="dropdown-item" href="#">JP</a></li>
+                            <li><a class="dropdown-item" href="#">FR</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
