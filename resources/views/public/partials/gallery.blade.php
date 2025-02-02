@@ -19,6 +19,14 @@
                     <p class="text-center">No images found.</p>
                 </div>
             @endforelse
+            <div class="text-center mt-5">
+                <h5>
+                    <a href="{{ route('home') }}" class="text-decoration-none">
+                        Lihat Semua Galeri
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </h5>
+            </div>
         </div>
     </div>
 </section>

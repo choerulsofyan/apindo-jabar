@@ -68,12 +68,17 @@ class HomeController extends Controller
         // Get related news (excluding the current news item)
         $relatedNews = News::where('id', '!=', $news->id)
             ->latest()
-            ->take(3) // Get 3 related news items
+            ->take(5) // Get 3 related news items
             ->get();
 
         $relatedNews->each(function ($item) {
             $item->formatted_date = Carbon::parse($item->created_at)->isoFormat('D MMMM Y');
             $item->short_content = str($item->content)->words(20, '...');
+
+            // Check for image existence and use asset() for default image
+            if (!$item->photo || !Storage::disk('public')->exists('images/news/' . $item->photo)) {
+                $item->photo = asset('assets/images/logo_blue.png'); // Use asset() helper
+            }
         });
 
         return view('public.pages.news.detail', compact('news', 'relatedNews'));

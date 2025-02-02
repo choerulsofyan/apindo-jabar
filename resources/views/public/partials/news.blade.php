@@ -29,7 +29,7 @@
                                 <hr>
                                 <h5 class="card-title fw-bold">{{ $news->title }}</h5>
                                 <p class="card-text flex-grow-1">{{ $news->short_content }}</p>
-                                <a href="{{ route('home', $news->id) }}"
+                                <a href="{{ route('news.detail', $news->id) }}"
                                     class="btn btn-outline-primary stretched-link mt-auto">
                                     Baca Selengkapnya
                                 </a>

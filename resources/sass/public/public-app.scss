@@ -130,3 +130,57 @@ footer a {
     width: auto;
     height: auto;
 }
+
+// resources/sass/public.scss
+
+// ... (Import Bootstrap and any variable overrides) ...
+
+.news-detail {
+    .news-title {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #19385e;
+    }
+
+    .news-info {
+        font-size: 0.9rem;
+        color: #6c757d;
+
+        i {
+            margin-right: 0.3rem;
+        }
+    }
+
+    .news-content {
+        p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: #212529;
+        }
+    }
+}
+
+.related-news {
+    .list-group-item {
+        &:last-child {
+            border-bottom: none; // Remove border from the last item
+        }
+    }
+
+    .related-news-img {
+        width: 100px; // Adjust as needed
+        height: 80px;
+        object-fit: cover;
+    }
+
+    .related-news-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+    }
+
+    .related-news-info {
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+}
