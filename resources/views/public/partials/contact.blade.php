@@ -1,7 +1,8 @@
 <section id="contact-section" class="py-5">
     <div class="container">
         <h2 class="text-center fw-bolder mb-4 text-primary">KONTAK KAMI</h2>
-        <form>
+        <form action="{{ route('mindo.pesan.store') }}" method="POST">
+            @csrf
             <div class="row">
                 <div class="col-md-6 mb-3">
                     {{-- <label for="name" class="form-label">Full Name</label> --}}
