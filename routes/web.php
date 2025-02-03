@@ -27,33 +27,37 @@ use App\Http\Controllers\PesanController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Public routes don't have 'mindo' prefix
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/news/{news}', [HomeController::class, 'newsDetail'])->name('news.detail');
+Route::get('/gallery/{galeri}', [HomeController::class, 'galeriDetail'])->name('galeri.detail');
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Admin routes (prefixed with 'mindo')
+Route::middleware(['auth'])->prefix('mindo')->name('mindo.')->group(function () {
+    // Dashboard
+    Route::get('/', function () {
+        return view('admin.pages.dashboard.index');
+    })->name('home');
 
-Route::group(['middleware' => ['auth']], function () {
+    // Resource controllers
+    Route::resources([
+        'roles'                   => RoleController::class,
+        'users'                   => UserController::class,
+        'permissions'             => PermissionController::class,
+        'members'                 => MemberController::class,
+        'news'                    => NewsController::class,
+        'organizational-positions' => OrganizationalPositionController::class,
+        'sectors'                 => SectorController::class,
+        'regulations'             => RegulationController::class,
+        'councils'                => CouncilController::class,
+        'managements'            => ManagementController::class,
+        'galeri'                 => GaleriController::class,
+        'pesan'                => PesanController::class, // Assuming you meant 'messages' here
+    ]);
 
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
-
-    Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('permissions', PermissionController::class);
-    Route::resource('members', MemberController::class);
-    Route::resource('news', NewsController::class);
-    Route::resource('news', NewsController::class);
-    Route::resource('organizational-positions', OrganizationalPositionController::class);
-    Route::resource('sectors', SectorController::class);
-    Route::resource('regulations', RegulationController::class);
-    Route::resource('councils', CouncilController::class);
-    Route::resource('managements', ManagementController::class);
+    // Activity logs
     Route::get('activity-logs', [ActivityLogController::class, 'index'])->name('activity-logs.index');
     Route::get('activity-logs/{activity}', [ActivityLogController::class, 'show'])->name('activity-logs.show');
-    Route::resource('galeri', GaleriController::class);
-    Route::resource('pesan', PesanController::class);
 });

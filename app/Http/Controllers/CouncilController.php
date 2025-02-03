@@ -23,8 +23,34 @@ class CouncilController extends Controller
     public function index(Request $request): View
     {
         $perPage = 20;
-        $data = Council::orderBy('name', 'asc')->paginate($perPage);
-        return view('councils.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+
+        $query = Council::query();
+
+        // Search by name 
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            });
+        }
+
+        // Sort by name (default) or email
+        $sortBy = $request->input('sort_by', 'name'); // Default sort by name
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sort order
+
+        if (!in_array($sortBy, ['name'])) {
+            $sortBy = 'name'; // Default sort column if invalid value is provided
+        }
+
+        if (!in_array($sortOrder, ['asc', 'desc'])) {
+            $sortOrder = 'asc'; // Default sort order if invalid value is provided
+        }
+
+        $query->orderBy($sortBy, $sortOrder);
+
+        $data = $query->paginate($perPage);
+
+        return view('admin.pages.councils.index', compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -32,7 +58,7 @@ class CouncilController extends Controller
      */
     public function create(): View
     {
-        return view('councils.form');
+        return view('admin.pages.councils.form');
     }
 
     /**
@@ -47,7 +73,7 @@ class CouncilController extends Controller
         $input = $request->all();
         Council::create($input);
 
-        return redirect()->route('councils.index')->with([
+        return redirect()->route('mindo.councils.index')->with([
             'message' => 'Council created successfully!',
             'alert-type' => 'success'
         ]);
@@ -58,14 +84,14 @@ class CouncilController extends Controller
      */
     public function show(Council $council): View
     {
-        return view('councils.show', compact('council'));
+        return view('admin.pages.councils.show', compact('council'));
     }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Council $council): View
     {
-        return view('councils.form', compact('council'));
+        return view('admin.pages.councils.form', compact('council'));
     }
 
     /**
@@ -79,7 +105,7 @@ class CouncilController extends Controller
 
         $council->update($request->all());
 
-        return redirect()->route('councils.index')->with('message', 'Council updated successfully');
+        return redirect()->route('mindo.councils.index')->with('message', 'Council updated successfully');
     }
 
     /**
@@ -88,6 +114,6 @@ class CouncilController extends Controller
     public function destroy(Council $council): RedirectResponse
     {
         $council->delete();
-        return redirect()->route('councils.index')->with('message', 'Council deleted successfully');
+        return redirect()->route('mindo.councils.index')->with('message', 'Council deleted successfully');
     }
 }

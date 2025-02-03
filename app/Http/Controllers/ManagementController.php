@@ -30,7 +30,7 @@ class ManagementController extends Controller
     {
         $perPage = 20;
         $data = Management::orderBy('name', 'asc')->paginate($perPage);
-        return view('managements.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+        return view('admin.pages.managements.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -43,7 +43,7 @@ class ManagementController extends Controller
         $sectors = Sector::pluck('name', 'id')->all();
         $councils = Council::pluck('name', 'id')->all();
 
-        return view('managements.form', compact('imageSrc', 'organizationalPositions', 'sectors', 'councils'));
+        return view('admin.pages.managements.form', compact('imageSrc', 'organizationalPositions', 'sectors', 'councils'));
     }
 
     /**
@@ -82,7 +82,7 @@ class ManagementController extends Controller
 
         Management::create($managementData);
 
-        return redirect()->route('managements.index')
+        return redirect()->route('mindo.managements.index')
             ->with('message', 'Management created successfully.')
             ->with('alert-type', 'success');
     }
@@ -92,7 +92,7 @@ class ManagementController extends Controller
      */
     public function show(Management $management): View
     {
-        return view('managements.show', compact('management'));
+        return view('admin.pages.managements.show', compact('management'));
     }
 
 
@@ -111,7 +111,7 @@ class ManagementController extends Controller
         $sectors = Sector::pluck('name', 'id')->all();
         $councils = Council::pluck('name', 'id')->all();
 
-        return view('managements.form', compact('management', 'imageSrc', 'organizationalPositions', 'sectors', 'councils'));
+        return view('admin.pages.managements.form', compact('management', 'imageSrc', 'organizationalPositions', 'sectors', 'councils'));
     }
 
     /**
@@ -155,7 +155,7 @@ class ManagementController extends Controller
 
         $management->update($managementData);
 
-        return redirect()->route('managements.index')
+        return redirect()->route('mindo.managements.index')
             ->with('message', 'Management updated successfully.')
             ->with('alert-type', 'success');
     }
@@ -171,7 +171,7 @@ class ManagementController extends Controller
 
         $management->delete();
 
-        return redirect()->route('managements.index')
+        return redirect()->route('mindo.managements.index')
             ->with('message', 'Management deleted successfully.')
             ->with('alert-type', 'success');
     }

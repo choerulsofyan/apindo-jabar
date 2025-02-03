@@ -21,7 +21,7 @@ class PesanController extends Controller
     public function index()
     {
         $data = Pesan::latest()->paginate(20);
-        return view('pesan.index', compact('data'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('admin.pages.pesan.index', compact('data'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**

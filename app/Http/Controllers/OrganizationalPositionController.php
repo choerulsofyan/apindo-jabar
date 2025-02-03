@@ -24,7 +24,7 @@ class OrganizationalPositionController extends Controller
     {
         $perPage = 20;
         $data = OrganizationalPosition::orderBy('name', 'asc')->paginate($perPage);
-        return view('organizational_positions.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+        return view('admin.pages.organizational_positions.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -32,7 +32,7 @@ class OrganizationalPositionController extends Controller
      */
     public function create(): View
     {
-        return view('organizational_positions.form');
+        return view('admin.pages.organizational_positions.form');
     }
 
     /**
@@ -47,7 +47,7 @@ class OrganizationalPositionController extends Controller
         $input = $request->all();
         OrganizationalPosition::create($input);
 
-        return redirect()->route('organizational-positions.index')->with([
+        return redirect()->route('mindo.organizational-positions.index')->with([
             'message' => 'Organizational Position created successfully!',
             'alert-type' => 'success'
         ]);
@@ -58,7 +58,7 @@ class OrganizationalPositionController extends Controller
      */
     public function show(OrganizationalPosition $organizationalPosition)
     {
-        return view('organizational_positions.show', compact('organizationalPosition'));
+        return view('admin.pages.organizational_positions.show', compact('organizationalPosition'));
     }
 
     /**
@@ -66,7 +66,7 @@ class OrganizationalPositionController extends Controller
      */
     public function edit(OrganizationalPosition $organizationalPosition)
     {
-        return view('organizational_positions.form', compact('organizationalPosition'));
+        return view('admin.pages.organizational_positions.form', compact('organizationalPosition'));
     }
 
     /**
@@ -80,7 +80,7 @@ class OrganizationalPositionController extends Controller
 
         $organizationalPosition->update($request->all());
 
-        return redirect()->route('organizational-positions.index')->with('message', 'Organizational Position updated successfully');
+        return redirect()->route('mindo.organizational-positions.index')->with('message', 'Organizational Position updated successfully');
     }
 
     /**
@@ -89,6 +89,6 @@ class OrganizationalPositionController extends Controller
     public function destroy(OrganizationalPosition $organizationalPosition)
     {
         $organizationalPosition->delete();
-        return redirect()->route('organizational-positions.index')->with('message', 'Organizational Position deleted successfully');
+        return redirect()->route('mindo.organizational-positions.index')->with('message', 'Organizational Position deleted successfully');
     }
 }

@@ -40,6 +40,7 @@ return new class extends Migration
             $table->string('tdp')->nullable(); // Path to PDF
             $table->string('contact_person');
             $table->string('mobile_number');
+            $table->boolean('is_exraordinary_member')->default(false);
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relation to User
             $table->timestamps();
         });

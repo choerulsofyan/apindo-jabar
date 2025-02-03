@@ -15,12 +15,12 @@ class ActivityLogController extends Controller
             ->latest()
             ->paginate($perPage);
 
-        return view('activity_logs.index', compact('activities'))
+        return view('admin.pages.activity_logs.index', compact('activities'))
             ->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     public function show(Activity $activity): View
     {
-        return view('activity_logs.show', compact('activity'));
+        return view('admin.pages.activity_logs.show', compact('activity'));
     }
 }

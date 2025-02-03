@@ -20,8 +20,35 @@ class UserController extends Controller
     public function index(Request $request): View
     {
         $perPage = 20;
-        $data = User::orderBy('name', 'asc')->paginate($perPage);
-        return view('users.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+
+        $query = User::query();
+
+        // Search by name or email
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('email', 'like', '%' . $search . '%');
+            });
+        }
+
+        // Sort by name (default) or email
+        $sortBy = $request->input('sort_by', 'name'); // Default sort by name
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sort order
+
+        if (!in_array($sortBy, ['name', 'email'])) {
+            $sortBy = 'name'; // Default sort column if invalid value is provided
+        }
+
+        if (!in_array($sortOrder, ['asc', 'desc'])) {
+            $sortOrder = 'asc'; // Default sort order if invalid value is provided
+        }
+
+        $query->orderBy($sortBy, $sortOrder);
+
+        $data = $query->paginate($perPage);
+
+        return view('admin.pages.users.index', compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -30,7 +57,7 @@ class UserController extends Controller
     public function create(): View
     {
         $roles = Role::pluck('name', 'name')->all();
-        return view('users.form', compact('roles'));
+        return view('admin.pages.users.form', compact('roles'));
     }
 
     /**
@@ -50,7 +77,7 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')->with([
+        return redirect()->route('mindo.users.index')->with([
             'message' => 'User created successfully!',
             'alert-type' => 'success'
         ]);
@@ -62,7 +89,7 @@ class UserController extends Controller
     public function show(string $id): View
     {
         $user = User::find($id);
-        return view('users.show', compact('user'));
+        return view('admin.pages.users.show', compact('user'));
     }
 
     /**
@@ -74,7 +101,7 @@ class UserController extends Controller
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('users.form', compact('user', 'roles', 'userRole'));
+        return view('admin.pages.users.form', compact('user', 'roles', 'userRole'));
     }
 
     /**
@@ -104,7 +131,7 @@ class UserController extends Controller
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')->with([
+        return redirect()->route('mindo.users.index')->with([
             'message' => 'User updated successfully!',
             'alert-type' => 'success'
         ]);
@@ -116,7 +143,7 @@ class UserController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         User::find($id)->delete();
-        return redirect()->route('users.index')->with([
+        return redirect()->route('mindo.users.index')->with([
             'message' => 'User deleted successfully!',
             'alert-type' => 'success'
         ]);

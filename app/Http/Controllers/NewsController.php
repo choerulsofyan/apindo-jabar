@@ -26,7 +26,7 @@ class NewsController extends Controller
     {
         $perPage = 20;
         $data = News::orderBy('title', 'asc')->paginate($perPage);
-        return view('news.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+        return view('admin.pages.news.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -36,7 +36,7 @@ class NewsController extends Controller
     {
         $imageSrc = asset('assets/images/no-image-available.png');
 
-        return view('news.form', compact('imageSrc'));
+        return view('admin.pages.news.form', compact('imageSrc'));
     }
 
     /**
@@ -74,14 +74,14 @@ class NewsController extends Controller
             $newsData = [
                 'title' => $request->title,
                 'content' => $request->content,
-                'photo' => 'images/news/' . $filename,
+                'photo' => $filename,
                 'place' => $request->place,
             ];
         }
 
         News::create($newsData);
 
-        return redirect()->route('news.index')->with('success', 'News created successfully.');
+        return redirect()->route('mindo.news.index')->with('success', 'News created successfully.');
     }
 
     /**
@@ -89,7 +89,7 @@ class NewsController extends Controller
      */
     public function show(News $news): View
     {
-        return view('news.show', compact('news'));
+        return view('admin.pages.news.show', compact('news'));
     }
 
     /**
@@ -100,14 +100,14 @@ class NewsController extends Controller
         $imageSrc = asset('assets/images/no-image-available.png'); // Default placeholder
 
         if ($news->photo) {
-            if (Storage::disk('public')->exists($news->photo)) {
-                $imageSrc = Storage::url($news->photo);
+            if (Storage::disk('public')->exists('images/news/' . $news->photo)) {
+                $imageSrc = Storage::url('images/news/' . $news->photo);
             } else {
                 $imageSrc = asset('assets/images/image-not-found.png');
             }
         }
 
-        return view('news.form', compact('news', 'imageSrc'));
+        return view('admin.pages.news.form', compact('news', 'imageSrc'));
     }
 
     /**
@@ -130,8 +130,8 @@ class NewsController extends Controller
 
         if ($request->hasFile('photo')) {
             // Delete old image if it exists
-            if ($news->photo && Storage::disk('public')->exists($news->photo)) {
-                Storage::disk('public')->delete($news->photo);
+            if ($news->photo && Storage::disk('public')->exists('images/news/' . $news->photo)) {
+                Storage::disk('public')->delete('images/news/' . $news->photo);
             }
 
             $image = $request->file('photo');
@@ -147,12 +147,12 @@ class NewsController extends Controller
 
             // Save the new image
             $img->toJpeg(75)->save(Storage::disk('public')->path('images/news/' . $filename));
-            $newsData['photo'] = 'images/news/' . $filename;
+            $newsData['photo'] = $filename;
         }
 
         $news->update($newsData);
 
-        return redirect()->route('news.index')->with('success', 'News updated successfully');
+        return redirect()->route('mindo.news.index')->with('success', 'News updated successfully');
     }
 
     /**
@@ -161,11 +161,11 @@ class NewsController extends Controller
     public function destroy(News $news): RedirectResponse
     {
         // Delete the image if it exists
-        if ($news->photo && Storage::disk('public')->exists($news->photo)) {
-            Storage::disk('public')->delete($news->photo);
+        if ($news->photo && Storage::disk('public')->exists('images/news/' . $news->photo)) {
+            Storage::disk('public')->delete('images/news/' . $news->photo);
         }
 
         $news->delete();
-        return redirect()->route('news.index')->with('success', 'News deleted successfully');
+        return redirect()->route('mindo.news.index')->with('success', 'News deleted successfully');
     }
 }

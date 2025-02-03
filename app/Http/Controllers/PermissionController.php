@@ -26,7 +26,7 @@ class PermissionController extends Controller
     {
         $perPage = 20;
         $data = Permission::orderBy('name', 'asc')->paginate($perPage);
-        return view('permissions.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+        return view('admin.pages.permissions.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -34,7 +34,7 @@ class PermissionController extends Controller
      */
     public function create(): View
     {
-        return view('permissions.form');
+        return view('admin.pages.permissions.form');
     }
 
     /**
@@ -49,7 +49,7 @@ class PermissionController extends Controller
         $input = $request->all();
         $permission = Permission::create($input);
 
-        return redirect()->route('permissions.index')->with([
+        return redirect()->route('mindo.permissions.index')->with([
             'message' => 'Permission created successfully!',
             'alert-type' => 'success'
         ]);
@@ -61,7 +61,7 @@ class PermissionController extends Controller
     public function show(string $id): View
     {
         $permission = Permission::find($id);
-        return view('permissions.show', compact('permission'));
+        return view('admin.pages.permissions.show', compact('permission'));
     }
 
     /**
@@ -71,7 +71,7 @@ class PermissionController extends Controller
     {
         $permission = Permission::find($id);
 
-        return view('permissions.form', compact('permission'));
+        return view('admin.pages.permissions.form', compact('permission'));
     }
 
     /**
@@ -87,7 +87,7 @@ class PermissionController extends Controller
         $permission = Permission::find($id);
         $permission->update($input);
 
-        return redirect()->route('permissions.index')->with([
+        return redirect()->route('mindo.permissions.index')->with([
             'message' => 'Permission updated successfully!',
             'alert-type' => 'success'
         ]);
@@ -99,7 +99,7 @@ class PermissionController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         Permission::find($id)->delete();
-        return redirect()->route('permissions.index')->with([
+        return redirect()->route('mindo.permissions.index')->with([
             'message' => 'Permission deleted successfully!',
             'alert-type' => 'success'
         ]);

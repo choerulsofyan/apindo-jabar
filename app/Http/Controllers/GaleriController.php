@@ -22,14 +22,14 @@ class GaleriController extends Controller
     public function index(Request $request): View
     {
         $data = Galeri::latest()->paginate(5);
-        return view('galeri.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
+        return view('admin.pages.galeri.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     public function create(): View
     {
         $imageSrc = asset('assets/images/no-image-available.png');
 
-        return view('galeri.form', compact('imageSrc'));
+        return view('admin.pages.galeri.form', compact('imageSrc'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -40,7 +40,7 @@ class GaleriController extends Controller
 
         $image = $request->file('photo');
         $image_name = time() . '.' . $image->extension();
-        $image->storeAs('public/galeri/', $image_name);
+        $image->storeAs('public/images/galeri/', $image_name);
 
         $galeri = new Galeri();
         $galeri->tanggal = $request->tanggal;
@@ -48,7 +48,7 @@ class GaleriController extends Controller
         $galeri->file = $image_name;
         $galeri->save();
 
-        return redirect()->route('galeri.index')->with([
+        return redirect()->route('mindo.galeri.index')->with([
             'message' => 'Galeri created successfully.',
             'alert-type' => 'success'
         ]);
@@ -56,9 +56,9 @@ class GaleriController extends Controller
 
     public function edit(Galeri $galeri): View
     {
-        $imageSrc = asset('storage/galeri/' . $galeri->file);
+        $imageSrc = asset('storage/images/galeri/' . $galeri->file);
 
-        return view('galeri.form', compact('galeri', 'imageSrc'));
+        return view('admin.pages.galeri.form', compact('galeri', 'imageSrc'));
     }
 
     public function update(Request $request, Galeri $galeri): RedirectResponse
@@ -70,8 +70,8 @@ class GaleriController extends Controller
 
             $image = $request->file('photo');
             $image_name = time() . '.' . $image->extension();
-            $image->storeAs('public/galeri/', $image_name);
-            Storage::delete('public/galeri/' . $galeri->file);
+            $image->storeAs('public/images/galeri/', $image_name);
+            Storage::delete('public/images/galeri/' . $galeri->file);
             $galeri->file = $image_name;
         }
 
@@ -79,7 +79,7 @@ class GaleriController extends Controller
         $galeri->deskripsi = $request->deskripsi;
         $galeri->save();
 
-        return redirect()->route('galeri.index')->with([
+        return redirect()->route('mindo.galeri.index')->with([
             'message' => 'Galeri updated successfully.',
             'alert-type' => 'success'
         ]);
@@ -87,10 +87,10 @@ class GaleriController extends Controller
 
     public function destroy(Galeri $galeri): RedirectResponse
     {
-        Storage::delete('public/galeri/' . $galeri->file);
+        Storage::delete('public/images/galeri/' . $galeri->file);
         $galeri->delete();
 
-        return redirect()->route('galeri.index')->with([
+        return redirect()->route('mindo.galeri.index')->with([
             'message' => 'Galeri deleted successfully.',
             'alert-type' => 'success'
         ]);
