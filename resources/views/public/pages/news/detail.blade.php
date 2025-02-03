@@ -7,8 +7,8 @@
         <div class="row">
             <div class="col-lg-8">
                 {{-- Main Content --}}
-                <article class="news-detail">
-                    <h1 class="news-title mb-3 pe-2">{{ $news->title }}</h1>
+                <article class="news-detail pe-4">
+                    <h1 class="news-title mb-3">{{ $news->title }}</h1>
                     <p class="news-info">
                         <i class="bi bi-geo-alt-fill me-2 text-primary"></i>
                         <span class="text-muted">{{ $news->place }},</span>
@@ -17,20 +17,22 @@
                     </p>
                     @if ($news->photo)
                         @if (Storage::disk('public')->exists('images/news/' . $news->photo))
-                            <img src="{{ Storage::url('images/news/' . $news->photo) }}" class="img-fluid mb-4"
+                            <img src="{{ Storage::url('images/news/' . $news->photo) }}" class="img-fluid w-100 mb-4"
                                 alt="{{ $news->title }}">
                         @else
-                            <img src="{{ asset('assets/images/placeholder.png') }}" class="img-fluid mb-4"
+                            <img src="{{ asset('assets/images/logo_blue.png') }}" class="img-fluid mb-4"
                                 alt="Placeholder Image">
                         @endif
                     @else
-                        <img src="{{ asset('assets/images/placeholder.png') }}" class="img-fluid mb-4"
+                        <img src="{{ asset('assets/images/logo_blue.png') }}" class="img-fluid mb-4"
                             alt="Placeholder Image">
                     @endif
 
                     <div class="news-content">
-                        <strong>{{ $news->place }}</strong> -
-                        {!! $news->content !!}
+                        <p>
+                            <strong>{{ $news->place }}</strong> -
+                            {!! $news->content !!}
+                        </p>
                     </div>
                 </article>
             </div>
@@ -39,7 +41,7 @@
                 {{-- Related News --}}
                 @if ($relatedNews->isNotEmpty())
                     <div class="related-news">
-                        <h4 class="mb-3">Berita Lainnya</h4>
+                        <h4 class="mb-3 fw-bold">Berita Lainnya</h4>
                         <ul class="list-group">
                             @foreach ($relatedNews as $item)
                                 <li class="list-group-item border-top-0 border-start-0 border-end-0 pb-3 mb-3">
@@ -57,7 +59,9 @@
                                                 class="related-news-img me-3">
                                         @endif
                                         <div class="flex-grow-1">
-                                            <h5 class="related-news-title">{{ $item->title }}</h5>
+                                            <a href="{{ route('news.detail', $item->id) }}" class="text-decoration-none">
+                                                <h5 class="related-news-title">{{ $item->title }}</h5>
+                                            </a>
                                             <p class="related-news-info">
                                                 <small class="text-muted">{{ $item->place }}</small>
                                                 <small class="text-muted">| {{ $item->formatted_date }}</small>

@@ -73,6 +73,7 @@ class HomeController extends Controller
 
         $relatedNews->each(function ($item) {
             $item->formatted_date = Carbon::parse($item->created_at)->isoFormat('D MMMM Y');
+            $item->title = str($item->title)->words(10, '...');
             $item->short_content = str($item->content)->words(20, '...');
 
             // Check for image existence and use asset() for default image
