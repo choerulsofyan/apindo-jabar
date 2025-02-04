@@ -1,5 +1,5 @@
 {{-- Wrap both elements in a fixed-top container --}}
-<div class="fixed-top shadow-lg" style="z-index: 1030;">
+<div class="fixed-top" style="z-index: 1030;">
     {{-- Top Bar --}}
     <div class="top-bar py-1" style="background-color: #f5f5f5;">
         <div class="container">

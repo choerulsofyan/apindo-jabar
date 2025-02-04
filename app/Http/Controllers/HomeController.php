@@ -102,4 +102,24 @@ class HomeController extends Controller
 
         return view('public.pages.galeri.detail', compact('galeri', 'relatedGaleri'));
     }
+
+    public function history(): View
+    {
+        return view('public.pages.history');
+    }
+
+    public function visionMission(): View
+    {
+        return view('public.pages.vision-mission');
+    }
+
+    public function sectors(): View
+    {
+        return view('public.pages.sectors');
+    }
+
+    public function dpkApindoJabar(): View
+    {
+        return view('public.pages.dpk-apindo-jabar');
+    }
 }

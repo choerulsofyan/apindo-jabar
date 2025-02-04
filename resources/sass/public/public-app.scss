@@ -185,3 +185,113 @@ footer a {
         color: #6c757d;
     }
 }
+
+.public-page {
+    // Assuming you have a class on the <body> tag to identify public pages
+
+    .navbar.fixed-top + .sidebar {
+        // .navbar.fixed-top is a sibling of .sidebar
+        padding-top: 84px; // Adjust this value to match your fixed navbar height
+    }
+
+    .navbar + main {
+        // .navbar is a sibling of main
+        padding-top: 84px;
+    }
+}
+
+// resources/sass/public.scss
+// ... other imports and styles
+
+.vision-mission-page {
+    .card {
+        box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+        border: none;
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .card-text,
+        li {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #353c60; // Or any other suitable color
+        }
+
+        ul {
+            padding-left: 0;
+
+            li {
+                i {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+}
+
+// ... other imports and styles
+
+.sectors-page {
+    .accordion-item {
+        border: none;
+        margin-bottom: 1rem;
+
+        .accordion-header {
+            padding: 0;
+
+            .accordion-button {
+                background-color: #f5f5f5;
+                border: none;
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: $font-color-primary;
+                padding: 1rem 1.25rem;
+
+                &::after {
+                    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23{$font-color-primary}'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+                    transform: scale(0.75);
+                }
+
+                &:not(.collapsed) {
+                    color: $white;
+                    background-color: $primary;
+
+                    &::after {
+                        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23{$white}'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+                    }
+                }
+
+                &:focus {
+                    z-index: 3;
+                    border-color: transparent;
+                    outline: 0;
+                    box-shadow: none;
+                }
+
+                .me-2 {
+                    color: $primary;
+                }
+            }
+        }
+
+        .accordion-body {
+            padding: 0;
+
+            ul {
+                padding-left: 0;
+                list-style-type: none;
+
+                li {
+                    i {
+                        color: $primary;
+                        font-size: 1.2rem;
+                        margin-right: 0.5rem;
+                    }
+                }
+            }
+        }
+    }
+}
