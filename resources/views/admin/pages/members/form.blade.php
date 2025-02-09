@@ -32,8 +32,36 @@
                         <h3 class="card-title">{{ isset($member) ? 'Edit Member' : 'Add Member' }}</h3>
                     </div>
                     <div class="card-body">
+                        {{-- Tipe Anggota --}}
                         <div class="row mb-3">
-                            <label for="company_name" class="col-sm-2 col-form-label">Company Name</label>
+                            <label for="is_extraordinary_member" class="col-sm-2 text-md-end col-form-label">
+                                Tipe Anggota
+                            </label>
+                            <div class="col-sm-10">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="is_extraordinary_member"
+                                        id="member_type_biasa" value="0" checked>
+                                    <label class="form-check-label" for="member_type_biasa">
+                                        Anggota Biasa
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="is_extraordinary_member"
+                                        id="member_type_luar_biasa" value="1">
+                                    <label class="form-check-label" for="member_type_luar_biasa">
+                                        Anggota Luar Biasa
+                                    </label>
+                                </div>
+                                @error('is_extraordinary_member')
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        {{-- Nama Perusahaan --}}
+                        <div class="row mb-3">
+                            <label for="company_name" class="col-sm-2 text-md-end col-form-label">
+                                Nama Perusahaan
+                            </label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control @error('company_name') is-invalid @enderror"
                                     id="company_name" name="company_name"
@@ -43,9 +71,14 @@
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- Alamat Perusahaan --}}
                         <div class="row mb-3">
-                            <label for="company_address" class="col-sm-2 col-form-label">Company Address</label>
+                            <label for="company_address" class="col-sm-2 text-md-end col-form-label">
+                                Alamat Perusahaan <br />
+                                <small class="text-muted">
+                                    (Akan tercetak di sertifikat anggota dan sebagai korespondensi)
+                                </small>
+                            </label>
                             <div class="col-sm-10">
                                 <textarea class="form-control @error('company_address') is-invalid @enderror" id="company_address"
                                     name="company_address" rows="3" required>{{ old('company_address', $member->company_address ?? '') }}</textarea>
@@ -54,9 +87,11 @@
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- Kota/Kabupaten --}}
                         <div class="row mb-3">
-                            <label for="city" class="col-sm-2 col-form-label">City</label>
+                            <label for="city" class="col-sm-2 text-md-end col-form-label">
+                                Kota/Kabupaten
+                            </label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control @error('city') is-invalid @enderror"
                                     id="city" name="city" value="{{ old('city', $member->city ?? '') }}" required>
@@ -65,9 +100,11 @@
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- Kode Pos --}}
                         <div class="row mb-3">
-                            <label for="postal_code" class="col-sm-2 col-form-label">Postal Code</label>
+                            <label for="postal_code" class="col-sm-2 text-md-end col-form-label">
+                                Kode Pos
+                            </label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control @error('postal_code') is-invalid @enderror"
                                     id="postal_code" name="postal_code"
@@ -77,9 +114,11 @@
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- No. Telepon --}}
                         <div class="row mb-3">
-                            <label for="phone_number" class="col-sm-2 col-form-label">Phone Number</label>
+                            <label for="phone_number" class="col-sm-2 text-md-end col-form-label">
+                                No. Telepon
+                            </label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control @error('phone_number') is-invalid @enderror"
                                     id="phone_number" name="phone_number"
@@ -89,9 +128,11 @@
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- Fax --}}
                         <div class="row mb-3">
-                            <label for="fax" class="col-sm-2 col-form-label">Fax</label>
+                            <label for="fax" class="col-sm-2 text-md-end col-form-label">
+                                Fax
+                            </label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control @error('fax') is-invalid @enderror" id="fax"
                                     name="fax" value="{{ old('fax', $member->fax ?? '') }}">
@@ -100,9 +141,11 @@
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- Website --}}
                         <div class="row mb-3">
-                            <label for="website" class="col-sm-2 col-form-label">Website</label>
+                            <label for="website" class="col-sm-2 text-md-end col-form-label">
+                                Website
+                            </label>
                             <div class="col-sm-10">
                                 <input type="url" class="form-control @error('website') is-invalid @enderror"
                                     id="website" name="website" value="{{ old('website', $member->website ?? '') }}">
@@ -111,33 +154,42 @@
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- Email CP/Email Perusahaan --}}
                         <div class="row mb-3">
-                            <label for="email" class="col-sm-2 col-form-label">Email</label>
+                            <label for="company_email" class="col-sm-2 text-md-end col-form-label">
+                                Email CP/Email Perusahaan
+                            </label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                    id="email" name="email" value="{{ old('email', $member->email ?? '') }}"
-                                    required>
-                                @error('email')
+                                <input type="email" class="form-control @error('company_email') is-invalid @enderror"
+                                    id="company_email" name="company_email"
+                                    value="{{ old('company_email', $member->company_email ?? '') }}" required>
+                                @error('company_email')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- KLBI --}}
                         <div class="row mb-3">
-                            <label for="klbi" class="col-sm-2 col-form-label">KLBI</label>
+                            <label for="klbi" class="col-sm-2 text-md-end col-form-label">
+                                KLBI
+                            </label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control @error('klbi') is-invalid @enderror"
-                                    id="klbi" name="klbi" value="{{ old('klbi', $member->klbi ?? '') }}" required>
+                                    id="klbi" name="klbi" value="{{ old('klbi', $member->klbi ?? '') }}"
+                                    required>
+                                <div class="form-text">
+                                    *) Klasifikasi Baku Lapangan Usaha Kerja
+                                </div>
                                 @error('klbi')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- Kegiatan Usaha Lainnya --}}
                         <div class="row mb-3">
-                            <label for="other_business_activities" class="col-sm-2 col-form-label">Other Business
-                                Activities</label>
+                            <label for="other_business_activities" class="col-sm-2 text-md-end col-form-label">
+                                Kegiatan Usaha Lainnya
+                            </label>
                             <div class="col-sm-10">
                                 <textarea class="form-control @error('other_business_activities') is-invalid @enderror" id="other_business_activities"
                                     name="other_business_activities" rows="3">{{ old('other_business_activities', $member->other_business_activities ?? '') }}</textarea>
@@ -146,251 +198,316 @@
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- Status Perusahaan --}}
                         <div class="row mb-3">
-                            <label for="company_status" class="col-sm-2 col-form-label">Company Status</label>
+                            <label for="company_status" class="col-sm-2 text-md-end col-form-label">Status
+                                Perusahaan</label>
                             <div class="col-sm-10">
-                                @php
-                                    $companyStatusOptions = ['BUMN', 'BUMD', 'Private National', 'Foreign Private'];
-                                    $selectedCompanyStatus = old('company_status', $member->company_status ?? '');
-                                @endphp
-                                @foreach ($companyStatusOptions as $option)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="company_status"
-                                            id="company_status_{{ $option }}" value="{{ $option }}"
-                                            @if ($selectedCompanyStatus == $option) checked @endif>
-                                        <label class="form-check-label" for="company_status_{{ $option }}">
-                                            {{ $option }}
-                                        </label>
-                                    </div>
-                                @endforeach
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="company_status"
+                                        id="company_status_bumn" value="BUMN"
+                                        {{ old('company_status', $member->company_status ?? '') == 'BUMN' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="company_status_bumn">
+                                        BUMN
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="company_status"
+                                        id="company_status_bumd" value="BUMD"
+                                        {{ old('company_status', $member->company_status ?? '') == 'BUMD' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="company_status_bumd">
+                                        BUMD
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="company_status"
+                                        id="company_status_swasta_nasional" value="Swasta Nasional"
+                                        {{ old('company_status', $member->company_status ?? '') == 'Swasta Nasional' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="company_status_swasta_nasional">
+                                        Swasta Nasional
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="company_status"
+                                        id="company_status_swasta_asing" value="Swasta Asing"
+                                        {{ old('company_status', $member->company_status ?? '') == 'Swasta Asing' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="company_status_swasta_asing">
+                                        Swasta Asing
+                                    </label>
+                                </div>
                                 @error('company_status')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- Fasilitas Investasi --}}
                         <div class="row mb-3">
-                            <label for="investment_facilities" class="col-sm-2 col-form-label">Investment
-                                Facilities</label>
+                            <label for="investment_facilities" class="col-sm-2 text-md-end col-form-label">
+                                Fasilitas Investasi
+                            </label>
                             <div class="col-sm-10">
-                                @php
-                                    $investmentOptions = ['PMA', 'PMDN', 'Joint Venture'];
-                                    $selectedInvestments = old(
-                                        'investment_facilities',
-                                        $member->investment_facilities ?? '',
-                                    );
-                                    $selectedInvestmentsArray = $selectedInvestments
-                                        ? explode(', ', $selectedInvestments)
-                                        : [];
-                                @endphp
-                                @foreach ($investmentOptions as $option)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="investment_facilities[]"
-                                            id="investment_facilities_{{ $option }}" value="{{ $option }}"
-                                            @if (in_array($option, $selectedInvestmentsArray)) checked @endif>
-                                        <label class="form-check-label" for="investment_facilities_{{ $option }}">
-                                            {{ $option }}
-                                        </label>
-                                    </div>
-                                @endforeach
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="investment_facilities[]"
+                                        id="investment_facilities_PMA" value="PMA"
+                                        {{ in_array('PMA', old('investment_facilities', [])) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="investment_facilities_PMA">
+                                        PMA
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="investment_facilities[]"
+                                        id="investment_facilities_PMDN" value="PMDN"
+                                        {{ in_array('PMDN', old('investment_facilities', [])) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="investment_facilities_PMDN">
+                                        PMDN
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="investment_facilities[]"
+                                        id="investment_facilities_Joint_Venture" value="Joint Venture"
+                                        {{ in_array('Joint Venture', old('investment_facilities', [])) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="investment_facilities_Joint_Venture">
+                                        Joint Venture
+                                    </label>
+                                </div>
                                 @error('investment_facilities')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
-
+                        {{-- Jumlah Tenaga Kerja --}}
                         <div class="row mb-3">
-                            <label for="number_of_employees" class="col-sm-2 col-form-label">Number of Employees</label>
+                            <label for="number_of_employees" class="col-sm-2 text-md-end col-form-label">
+                                Jumlah Tenaga Kerja
+                            </label>
                             <div class="col-sm-10">
-                                <input type="number"
-                                    class="form-control @error('number_of_employees') is-invalid @enderror"
-                                    id="number_of_employees" name="number_of_employees"
-                                    value="{{ old('number_of_employees', $member->number_of_employees ?? '') }}" required>
-                                @error('number_of_employees')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <div class="input-group mb-3">
+                                    <input type="number"
+                                        class="form-control @error('number_of_employees') is-invalid @enderror"
+                                        id="number_of_employees" name="number_of_employees"
+                                        value="{{ old('number_of_employees', $member->number_of_employees ?? '') }}"
+                                        required>
+                                    <span class="input-group-text" id="basic-addon2">orang</span>
+                                    @error('number_of_employees')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
-
+                        {{-- Peraturan Kerja --}}
                         <div class="row mb-3">
-                            <label for="work_regulations" class="col-sm-2 col-form-label">Work Regulations</label>
+                            <label for="work_regulations" class="col-sm-2 text-md-end col-form-label">
+                                Peraturan Kerja
+                            </label>
                             <div class="col-sm-10">
-                                @php
-                                    $workRegulationOptions = [
-                                        'Company Regulations (PP)',
-                                        'Collective Labor Agreement (PKB)',
-                                        'Others',
-                                    ];
-                                    $selectedWorkRegulation = old('work_regulations', $member->work_regulations ?? '');
-                                @endphp
-                                @foreach ($workRegulationOptions as $option)
-                                    <div class="form-check">
-                                        <input class="form-check-input work-regulations-radio" type="radio"
-                                            name="work_regulations" id="work_regulations_{{ $option }}"
-                                            value="{{ $option }}" @if ($selectedWorkRegulation == $option) checked @endif>
-                                        <label class="form-check-label" for="work_regulations_{{ $option }}">
-                                            {{ $option }}
-                                        </label>
-                                    </div>
-                                @endforeach
-                                <input type="text"
-                                    class="form-control mt-2 @error('work_regulation_others') is-invalid @enderror"
-                                    id="work_regulation_others" name="work_regulation_others"
-                                    value="{{ old('work_regulation_others', $member->work_regulation_others ?? '') }}"
-                                    @if ($selectedWorkRegulation != 'Others') disabled @endif>
+                                <div class="form-check">
+                                    <input class="form-check-input work-regulations-radio" type="radio"
+                                        name="work_regulations" id="work_regulations_pp"
+                                        value="Peraturan Perusahaan (PP)"
+                                        {{ old('work_regulations', $member->work_regulations ?? '') == 'Peraturan Perusahaan (PP)' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="work_regulations_pp">
+                                        Peraturan Perusahaan (PP)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input work-regulations-radio" type="radio"
+                                        name="work_regulations" id="work_regulations_pkb"
+                                        value="Perjanjian Kerja Bersama (PKB)"
+                                        {{ old('work_regulations', $member->work_regulations ?? '') == 'Perjanjian Kerja Bersama (PKB)' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="work_regulations_pkb">
+                                        Perjanjian Kerja Bersama (PKB)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input work-regulations-radio" type="radio"
+                                        name="work_regulations" id="work_regulations_others" value="Lainnya"
+                                        {{ old('work_regulations', $member->work_regulations ?? '') == 'Lainnya' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="work_regulations_others">
+                                        Lainnya, Sebutkan
+                                    </label>
+                                    <input type="text"
+                                        class="form-control mt-1 @error('work_regulation_others') is-invalid @enderror"
+                                        id="work_regulation_others" name="work_regulation_others"
+                                        value="{{ old('work_regulation_others', $member->work_regulation_others ?? '') }}"
+                                        @if (old('work_regulations', $member->work_regulations ?? '') != 'Lainnya') disabled @endif>
+                                </div>
+
+
+
                                 @error('work_regulations')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                                 @error('work_regulation_others')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- BPJS Kesehatan --}}
                         <div class="row mb-3">
-                            <label for="bpjs" class="col-sm-2 col-form-label">BPJS</label>
+                            <label for="bpjs" class="col-sm-2 text-md-end col-form-label">BPJS</label>
                             <div class="col-sm-10">
-                                @php
-                                    $bpjsOptions = ['BPJS Health', 'BPJS Employment'];
-                                    $selectedBpjs = old('bpjs', $member->bpjs ?? '');
-                                    $selectedBpjsArray = $selectedBpjs ? explode(', ', $selectedBpjs) : [];
-                                @endphp
-                                @foreach ($bpjsOptions as $option)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="bpjs[]"
-                                            id="bpjs_{{ $option }}" value="{{ $option }}"
-                                            @if (in_array($option, $selectedBpjsArray)) checked @endif>
-                                        <label class="form-check-label" for="bpjs_{{ $option }}">
-                                            {{ $option }}
-                                        </label>
-                                    </div>
-                                @endforeach
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="bpjs[]" id="bpjs_kesehatan"
+                                        value="BPJS Kesehatan"
+                                        {{ in_array('BPJS Kesehatan', old('bpjs', [])) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="bpjs_kesehatan">
+                                        BPJS Kesehatan
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="bpjs[]"
+                                        id="bpjs_ketenagakerjaan" value="BPJS Ketenagakerjaan"
+                                        {{ in_array('BPJS Ketenagakerjaan', old('bpjs', [])) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="bpjs_ketenagakerjaan">
+                                        BPJS Ketenagakerjaan
+                                    </label>
+                                </div>
                                 @error('bpjs')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- Serikat Pekerja --}}
                         <div class="row mb-3">
-                            <label for="labor_union" class="col-sm-2 col-form-label">Labor Union</label>
+                            <label for="is_labor_union_exists" class="col-sm-2 text-md-end col-form-label">
+                                Serikat Pekerja
+                            </label>
                             <div class="col-sm-10">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="labor_union"
-                                        id="labor_union_Exists" value="Exists"
-                                        {{ old('labor_union', $member->labor_union ?? '') == 'Exists' ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="is_labor_union_exists"
+                                        id="labor_union_Exists" value="Ada"
+                                        {{ old('is_labor_union_exists', $member->is_labor_union_exists ?? '') == 1 ? 'checked' : '' }}>
                                     <label class="form-check-label" for="labor_union_Exists">
-                                        Exists
+                                        Ada
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="labor_union"
-                                        id="labor_union_Does Not Exist" value="Does Not Exist"
-                                        {{ old('labor_union', $member->labor_union ?? '') == 'Does Not Exist' ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="is_labor_union_exists"
+                                        id="labor_union_Does Not Exist" value="Belum Ada"
+                                        {{ old('is_labor_union_exists', $member->is_labor_union_exists ?? '') == 0 ? 'checked' : '' }}>
                                     <label class="form-check-label" for="labor_union_Does Not Exist">
-                                        Does Not Exist
+                                        Belum Ada
                                     </label>
                                 </div>
-                                @error('labor_union')
+                                @error('is_labor_union_exists')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- Periode Iuran --}}
                         <div class="row mb-3">
-                            <label for="contribution_period" class="col-sm-2 col-form-label">Contribution Period</label>
+                            <label for="monthly_contribution_period" class="col-sm-2 text-md-end col-form-label">
+                                Periode Iuran
+                            </label>
                             <div class="col-sm-10">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="contribution_period"
-                                        id="contribution_period_1" value="1 Month"
-                                        {{ old('contribution_period', $member->contribution_period ?? '') == '1 Month' ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="monthly_contribution_period"
+                                        id="contribution_period_1" value="1"
+                                        {{ old('monthly_contribution_period', $member->monthly_contribution_period ?? '') == '1 Bulan' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="contribution_period_1">
-                                        1 Month
+                                        1 Bulan
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="contribution_period"
-                                        id="contribution_period_3" value="3 Months"
-                                        {{ old('contribution_period', $member->contribution_period ?? '') == '3 Months' ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="monthly_contribution_period"
+                                        id="contribution_period_3" value="3"
+                                        {{ old('monthly_contribution_period', $member->monthly_contribution_period ?? '') == '3 Bulan' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="contribution_period_3">
-                                        3 Months
+                                        3 Bulan
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="contribution_period"
-                                        id="contribution_period_6" value="6 Months"
-                                        {{ old('contribution_period', $member->contribution_period ?? '') == '6 Months' ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="monthly_contribution_period"
+                                        id="contribution_period_6" value="6"
+                                        {{ old('monthly_contribution_period', $member->monthly_contribution_period ?? '') == '6 Bulan' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="contribution_period_6">
-                                        6 Months
+                                        6 Bulan
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="contribution_period"
-                                        id="contribution_period_12" value="12 Months"
-                                        {{ old('contribution_period', $member->contribution_period ?? '') == '12 Months' ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="radio" name="monthly_contribution_period"
+                                        id="contribution_period_12" value="12"
+                                        {{ old('monthly_contribution_period', $member->monthly_contribution_period ?? '') == '12 Bulan' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="contribution_period_12">
-                                        12 Months
+                                        12 Bulan
                                     </label>
                                 </div>
-                                @error('contribution_period')
+                                <div class="form-text">
+                                    *) Cut-off periode iuran dilakukan setiap bulan Desember. Invoice untuk periode
+                                    6 bulan akan dikirimkan pada bulan Januari dan Juli, dan invoice untuk
+                                    periode 12 bulan akan dikirimkan pada bulan Januari.
+                                </div>
+                                @error('monthly_contribution_period')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- Sumber Informasi Mengenai Apindo --}}
                         <div class="row mb-3">
-                            <label for="how_they_learned_about_apindo" class="col-sm-2 col-form-label">How They Learned
-                                About APINDO</label>
+                            <label for="how_they_learned_about_apindo" class="col-sm-2 text-md-end col-form-label">
+                                Sumber Informasi Mengenai Apindo
+                            </label>
                             <div class="col-sm-10">
-                                @php
-                                    $learningSourceOptions = ['APINDO Website', 'APINDO Board Member', 'Others'];
-                                    $selectedLearningSource = old(
-                                        'how_they_learned_about_apindo',
-                                        $member->how_they_learned_about_apindo ?? '',
-                                    );
-                                    $isBoardMemberSelected = $selectedLearningSource == 'APINDO Board Member';
-                                    $isOthersSelected = $selectedLearningSource == 'Others';
-                                @endphp
-                                @foreach ($learningSourceOptions as $option)
-                                    <div class="form-check">
-                                        <input class="form-check-input how-they-learned-radio" type="radio"
-                                            name="how_they_learned_about_apindo"
-                                            id="how_they_learned_about_apindo_{{ $option }}"
-                                            value="{{ $option }}" @if ($selectedLearningSource == $option) checked @endif>
-                                        <label class="form-check-label"
-                                            for="how_they_learned_about_apindo_{{ $option }}">
-                                            {{ $option }}
-                                        </label>
-                                    </div>
-                                @endforeach
-                                <input type="text"
-                                    class="form-control mt-2 @error('how_they_learned_about_apindo_board_member') is-invalid @enderror"
-                                    id="how_they_learned_about_apindo_board_member"
-                                    name="how_they_learned_about_apindo_board_member"
-                                    value="{{ old('how_they_learned_about_apindo_board_member', $member->how_they_learned_about_apindo_board_member ?? '') }}"
-                                    placeholder="Specific APINDO Board Member Name"
-                                    @if (!$isBoardMemberSelected) disabled @endif>
-                                <input type="text"
-                                    class="form-control mt-2 @error('how_they_learned_about_apindo_others') is-invalid @enderror"
-                                    id="how_they_learned_about_apindo_others" name="how_they_learned_about_apindo_others"
-                                    value="{{ old('how_they_learned_about_apindo_others', $member->how_they_learned_about_apindo_others ?? '') }}"
-                                    placeholder="Specific Other Source" @if (!$isOthersSelected) disabled @endif>
+                                <div class="form-check">
+                                    <input class="form-check-input how-they-learned-radio" type="radio"
+                                        name="how_they_learned_about_apindo" id="how_they_learned_website"
+                                        value="Website APINDO"
+                                        {{ old('how_they_learned_about_apindo') == 'Website APINDO' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="how_they_learned_website">
+                                        Website APINDO
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input how-they-learned-radio" type="radio"
+                                        name="how_they_learned_about_apindo" id="how_they_learned_board"
+                                        value="Pengurus APINDO"
+                                        {{ old('how_they_learned_about_apindo') == 'Pengurus APINDO' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="how_they_learned_board">
+                                        Pengurus APINDO, Sebutkan
+                                    </label>
+                                    <input type="text"
+                                        class="form-control mt-1 @error('how_they_learned_about_apindo_board_member') is-invalid @enderror"
+                                        id="how_they_learned_about_apindo_board_member"
+                                        name="how_they_learned_about_apindo_board_member"
+                                        value="{{ old('how_they_learned_about_apindo_board_member') }}"
+                                        placeholder="Nama Pengurus APINDO"
+                                        @if (old('how_they_learned_about_apindo') != 'Pengurus APINDO') disabled @endif>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input how-they-learned-radio" type="radio"
+                                        name="how_they_learned_about_apindo" id="how_they_learned_others" value="Lainnya"
+                                        {{ old('how_they_learned_about_apindo') == 'Lainnya' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="how_they_learned_others">
+                                        Lainnya, Sebutkan
+                                    </label>
+                                    <input type="text"
+                                        class="form-control mt-1 @error('how_they_learned_about_apindo_others') is-invalid @enderror"
+                                        id="how_they_learned_about_apindo_others"
+                                        name="how_they_learned_about_apindo_others"
+                                        value="{{ old('how_they_learned_about_apindo_others') }}"
+                                        placeholder="Sumber Lainnya" @if (old('how_they_learned_about_apindo') != 'Lainnya') disabled @endif>
+                                </div>
+
                                 @error('how_they_learned_about_apindo')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                                 @error('how_they_learned_about_apindo_board_member')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                                 @error('how_they_learned_about_apindo_others')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- Lampiran Pendukung Pendaftaran --}}
+                        <legend class="fs-4 pb-1 mt-4 mb-4 border-bottom">
+                            Lampiran Pendukung Pendaftaran
+                        </legend>
+                        {{-- Surat Pernyataan --}}
                         <div class="row mb-3">
-                            <label for="declaration_letter" class="col-sm-2 col-form-label">Declaration Letter
-                                (PDF)</label>
+                            <label for="declaration_letter" class="col-sm-2 text-md-end col-form-label">
+                                Surat Pernyataan
+                            </label>
                             <div class="col-sm-10">
                                 @if (isset($member) && $member->declaration_letter)
                                     @if ($declaration_letter_url)
@@ -405,14 +522,28 @@
                                 <input type="file" accept="application/pdf"
                                     class="form-control @error('declaration_letter') is-invalid @enderror"
                                     id="declaration_letter" name="declaration_letter">
+                                <div class="form-text">
+                                    Ukuran Maksimal File: 5MB
+                                </div>
                                 @error('declaration_letter')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+
+                                {{-- Download template surat pernyataan --}}
+                                <a href="{{ asset('assets/templates/template_surat_pendaftaran.xlsx') }}"
+                                    target="_blank">
+                                    Download Template Surat Pernyataan
+                                </a>
                             </div>
                         </div>
-
+                        {{-- PP & PKB --}}
                         <div class="row mb-3">
-                            <label for="pp_pkb" class="col-sm-2 col-form-label">PP & PKB (PDF)</label>
+                            <label for="pp_pkb" class="col-sm-2 text-md-end col-form-label">
+                                PP & PKB <br />
+                                <small class="text-muted">
+                                    (Peraturan Perusahaan & Perjanjian Kerja Bersama)
+                                </small>
+                            </label>
                             <div class="col-sm-10">
                                 @if (isset($member) && $member->pp_pkb)
                                     @if ($pp_pkb_url)
@@ -427,14 +558,19 @@
                                 <input type="file" accept="application/pdf"
                                     class="form-control @error('pp_pkb') is-invalid @enderror" id="pp_pkb"
                                     name="pp_pkb">
+                                <div class="form-text">
+                                    Ukuran Maksimal File: 5MB
+                                </div>
                                 @error('pp_pkb')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- Profil Perusahaan --}}
                         <div class="row mb-3">
-                            <label for="company_profile" class="col-sm-2 col-form-label">Company Profile (PDF)</label>
+                            <label for="company_profile" class="col-sm-2 text-md-end col-form-label">
+                                Profil Perusahaan
+                            </label>
                             <div class="col-sm-10">
                                 @if (isset($member) && $member->company_profile)
                                     @if ($company_profile_url)
@@ -449,14 +585,22 @@
                                 <input type="file" accept="application/pdf"
                                     class="form-control @error('company_profile') is-invalid @enderror"
                                     id="company_profile" name="company_profile">
+                                <div class="form-text">
+                                    Ukuran Maksimal File: 5MB
+                                </div>
                                 @error('company_profile')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- TDP --}}
                         <div class="row mb-3">
-                            <label for="tdp" class="col-sm-2 col-form-label">TDP (PDF)</label>
+                            <label for="tdp" class="col-sm-2 text-md-end col-form-label">
+                                TDP <br />
+                                <small class="text-muted">
+                                    (Tanda Daftar Perusahaan)
+                                </small>
+                            </label>
                             <div class="col-sm-10">
                                 @if (isset($member) && $member->tdp)
                                     @if ($tdp_url)
@@ -471,14 +615,20 @@
                                 <input type="file" accept="application/pdf"
                                     class="form-control @error('tdp') is-invalid @enderror" id="tdp"
                                     name="tdp">
+                                <div class="form-text">
+                                    Ukuran Maksimal File: 5MB
+                                </div>
                                 @error('tdp')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-
+                        <legend class="fs-4 pb-1 mt-4 mb-4 border-bottom">
+                            Profil & Akun PIC (Person in Charge)
+                        </legend>
+                        {{-- Contact Person --}}
                         <div class="row mb-3">
-                            <label for="contact_person" class="col-sm-2 col-form-label">Contact Person</label>
+                            <label for="contact_person" class="col-sm-2 text-md-end col-form-label">Contact Person</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control @error('contact_person') is-invalid @enderror"
                                     id="contact_person" name="contact_person"
@@ -488,9 +638,11 @@
                                 @enderror
                             </div>
                         </div>
-
+                        {{-- No. Handphone --}}
                         <div class="row mb-3">
-                            <label for="mobile_number" class="col-sm-2 col-form-label">Mobile Number</label>
+                            <label for="mobile_number" class="col-sm-2 text-md-end col-form-label">
+                                No. Handphone
+                            </label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control @error('mobile_number') is-invalid @enderror"
                                     id="mobile_number" name="mobile_number"
@@ -503,54 +655,43 @@
 
                         <input type="hidden" name="create_new_user" value="1">
 
-                        {{-- New User Fields --}}
-                        <div id="new_user_fields">
-                            <div class="row mb-3">
-                                <label for="new_user_name" class="col-sm-2 col-form-label">User Name</label>
-                                <div class="col-sm-10">
-                                    <input type="text"
-                                        class="form-control @error('new_user_name') is-invalid @enderror"
-                                        id="new_user_name" name="new_user_name"
-                                        value="{{ old('new_user_name', $user->name ?? '') }}">
-                                    @error('new_user_name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                        {{-- Email --}}
+                        <div class="row mb-3">
+                            <label for="new_user_email" class="col-sm-2 text-md-end col-form-label">
+                                Email
+                            </label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control @error('new_user_email') is-invalid @enderror"
+                                    id="new_user_email" name="new_user_email"
+                                    value="{{ old('new_user_email', $user->email ?? '') }}">
+                                @error('new_user_email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
-
-                            <div class="row mb-3">
-                                <label for="new_user_email" class="col-sm-2 col-form-label">User Email</label>
-                                <div class="col-sm-10">
-                                    <input type="email"
-                                        class="form-control @error('new_user_email') is-invalid @enderror"
-                                        id="new_user_email" name="new_user_email"
-                                        value="{{ old('new_user_email', $user->email ?? '') }}">
-                                    @error('new_user_email')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="new_user_password" class="col-sm-2 col-form-label">Password</label>
-                                <div class="col-sm-10">
-                                    <input type="password"
-                                        class="form-control @error('new_user_password') is-invalid @enderror"
-                                        id="new_user_password" name="new_user_password">
-                                    @error('new_user_password')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                        </div>
+                        {{-- Password --}}
+                        <div class="row mb-3">
+                            <label for="new_user_password" class="col-sm-2 text-md-end col-form-label">
+                                Password
+                            </label>
+                            <div class="col-sm-10">
+                                <input type="password"
+                                    class="form-control @error('new_user_password') is-invalid @enderror"
+                                    id="new_user_password" name="new_user_password">
+                                @error('new_user_password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary me-2">Save</button>
-                        <a href="{{ route('mindo.members.index') }}" class="btn btn-secondary">Cancel</a>
-                    </div>
                 </div>
-            </form>
+                <div class="card-footer d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary me-2">Save</button>
+                    <a href="{{ route('mindo.members.index') }}" class="btn btn-secondary">Cancel</a>
+                </div>
         </div>
+        </form>
+    </div>
     </div>
 @endsection
 

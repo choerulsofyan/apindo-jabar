@@ -1,13 +1,13 @@
 <footer class="footer mt-auto py-4">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 d-flex flex-column gap-3">
+            <div class="col-md-4 d-flex flex-column gap-3 mb-3">
                 <a href="#">
                     <img src="{{ asset('assets/images/logo_blue.png') }}" alt="APINDO Jabar" height="80">
                 </a>
                 <p class="text-left mt-2">&copy; Copyright <strong> APINDO Jabar </strong>. All rights reserved</p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <h5 class="fw-bolder">HUBUNGI KAMI</h5>
                 <ul class="list-unstyled d-flex flex-column gap-2">
                     <li>
@@ -26,7 +26,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 mb-3">
                 <h5 class="fw-bolder">SITEMAP</h5>
                 <ul class="list-unstyled d-flex flex-column gap-2">
                     <li><a href="#" class="text-decoration-none">Beranda</a></li>
@@ -37,7 +37,7 @@
                     <li><a href="#" class="text-decoration-none">Kontak</a></li>
                 </ul>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 mb-3">
                 <h5 class="fw-bolder">KEANGGOTAAN</h5>
                 <ul class="list-unstyled d-flex flex-column gap-2">
                     <li><a href="{{ route('login') }}" class="text-decoration-none">Login</a></li>

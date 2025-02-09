@@ -4,7 +4,7 @@
         <div class="swiper-slide" style="background-image: url('{{ asset('assets/images/hero-pattern.png') }}');">
             <div class="d-flex justify-content-center align-items-center h-100 position-relative">
                 <div class="text-left text-white p-4 position-absolute start-50 translate-middle-x" style="z-index: 10;">
-                    <h1 class="mb-3 display-4">Selamat datang di website APINDO Jabar</h1>
+                    <h1 class="mb-3 display-4 fw-bold text-white">Selamat datang di website APINDO Jabar</h1>
                     <p class="mb-0 lead">KITA BISA, HARUS BISA, PASTI BISA</p>
                 </div>
                 <div class="overlay"></div>
@@ -18,10 +18,10 @@
                 <div class="d-flex justify-content-center align-items-center h-100 position-relative">
                     <div class="text-left text-white p-4 position-absolute start-50 translate-middle-x"
                         style="z-index: 10;">
-                        <h1 class="mb-3 display-4">{{ $news->title }}</h1>
+                        <h1 class="mb-3 display-4 fw-bold text-white">{{ $news->title }}</h1>
                         <p class="mb-0 lead">{{ $news->short_content }}</p>
                     </div>
-                    {{-- <div class="overlay"></div> --}}
+                    <div class="overlay-black"></div>
                 </div>
             </div>
         @endforeach
@@ -68,6 +68,15 @@
             width: 100%;
             height: 100%;
             background-color: rgba(2, 126, 182, 0.7);
+        }
+
+        .overlay-black {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
         }
     </style>
 @endpush

@@ -32,9 +32,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/news/{news}', [HomeController::class, 'newsDetail'])->name('news.detail');
 Route::get('/gallery/{galeri}', [HomeController::class, 'galeriDetail'])->name('galeri.detail');
 Route::get('/history', [HomeController::class, 'history'])->name('history');
-Route::get('/vision-mission', [HomeController::class, 'visionMission'])->name('vission-mission');
+Route::get('/vision-mission', [HomeController::class, 'visionMission'])->name('vision-mission');
 Route::get('/sectors', [HomeController::class, 'sectors'])->name('sectors');
 Route::get('/dpk-apindo-jabar', [HomeController::class, 'dpkApindoJabar'])->name('dpkApindoJabar');
+Route::get('/regulations', [HomeController::class, 'regulations'])->name('regulations');
 
 Auth::routes();
 

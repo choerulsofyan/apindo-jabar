@@ -3,23 +3,26 @@
         <h5 class="fw-bolder">TENTANG KAMI</h5>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="#sejarah" class="nav-link active" aria-current="page">
-                    SEJARAH
+                <a href="{{ route('history') }}" class="nav-link {{ Request::routeIs('history') ? 'active' : '' }}"
+                    aria-current="page">
+                    Sejarah
                 </a>
             </li>
             <li>
-                <a href="#visi-misi" class="nav-link link-dark">
-                    VISI & MISI
+                <a href="{{ route('vision-mission') }}"
+                    class="nav-link {{ Request::routeIs('vision-mission') ? 'active' : '' }}">
+                    Visi & Misi
                 </a>
             </li>
             <li>
-                <a href="#bidang" class="nav-link link-dark">
-                    BIDANG
+                <a href="{{ route('sectors') }}" class="nav-link {{ Request::routeIs('sectors') ? 'active' : '' }}">
+                    Bidang
                 </a>
             </li>
             <li>
-                <a href="#dpk" class="nav-link link-dark">
-                    DPK APINDO JABAR
+                <a href="{{ route('dpkApindoJabar') }}"
+                    class="nav-link {{ Request::routeIs('dpkApindoJabar') ? 'active' : '' }}">
+                    DPK APINDO Jabar
                 </a>
             </li>
         </ul>

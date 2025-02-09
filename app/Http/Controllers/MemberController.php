@@ -46,6 +46,7 @@ class MemberController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
+            'is_extraordinary_member' => 'boolean',
             'company_name' => 'required',
             'company_address' => 'required',
             'city' => 'required',
@@ -62,8 +63,8 @@ class MemberController extends Controller
             'work_regulations' => 'required',
             'work_regulation_others' => 'nullable',
             'bpjs' => 'nullable',
-            'labor_union' => 'required|in:Exists,Does Not Exist',
-            'contribution_period' => 'required|in:1 Month,3 Months,6 Months,12 Months',
+            'is_labor_union_exists' => 'required|boolean',
+            'monthly_contribution_period' => 'required|integer',
             'how_they_learned_about_apindo' => 'required',
             'how_they_learned_about_apindo_board_member' => 'nullable',
             'how_they_learned_about_apindo_others' => 'nullable',
@@ -201,8 +202,8 @@ class MemberController extends Controller
             'work_regulations' => 'required',
             'work_regulation_others' => 'nullable',
             'bpjs' => 'nullable',
-            'labor_union' => 'required|in:Exists,Does Not Exist',
-            'contribution_period' => 'required|in:1 Month,3 Months,6 Months,12 Months',
+            'is_labor_union_exists' => 'required|boolean',
+            'monthly_contribution_period' => 'required|integer',
             'how_they_learned_about_apindo' => 'required',
             'how_they_learned_about_apindo_board_member' => 'nullable',
             'how_they_learned_about_apindo_others' => 'nullable',

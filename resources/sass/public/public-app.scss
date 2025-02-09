@@ -295,3 +295,43 @@ footer a {
         }
     }
 }
+
+// resources/sass/public.scss
+// ... other imports and styles
+
+.dpk-apindo-jabar-page {
+    .card {
+        .card-header {
+            background-color: #f5f5f5; // Light gray background
+            font-weight: 600;
+            color: #19385e; // Your primary color
+        }
+
+        dl {
+            dt {
+                font-weight: 600; // Make labels bolder
+            }
+        }
+    }
+}
+
+// resources/sass/public.scss
+// ... other imports and styles ...
+
+.regulations-page {
+    .table {
+        th {
+            font-weight: 600;
+            background-color: #f5f5f5; // Light gray header background
+            color: #19385e; // Your primary color
+        }
+
+        td {
+            vertical-align: middle;
+        }
+
+        .btn-outline-primary {
+            // Customize the download button if needed
+        }
+    }
+}

@@ -47,11 +47,12 @@
                             id="tentangKamiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             TENTANG KAMI
                         </a>
-                        <ul class="dropdown-menu border-0" aria-labelledby="tentangKamiDropdown">
-                            <li><a class="dropdown-item" href="#">Sejarah</a></li>
-                            <li><a class="dropdown-item" href="#">Visi & Misi</a></li>
-                            <li><a class="dropdown-item" href="#">Bidang</a></li>
-                            <li><a class="dropdown-item" href="#">DPK APINDO Jabar</a></li>
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="tentangKamiDropdown">
+                            <li><a class="dropdown-item" href="{{ route('history') }}">Sejarah</a></li>
+                            <li><a class="dropdown-item" href="{{ route('vision-mission') }}">Visi & Misi</a></li>
+                            <li><a class="dropdown-item" href="{{ route('sectors') }}">Bidang</a></li>
+                            <li><a class="dropdown-item" href="{{ route('dpkApindoJabar') }}">DPK APINDO Jabar</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -59,7 +60,7 @@
                             id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             KEANGGOTAAN
                         </a>
-                        <ul class="dropdown-menu border-0" aria-labelledby="mediaDropdown">
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="mediaDropdown">
                             <li><a class="dropdown-item" href="#">Pendaftaran Anggota</a></li>
                         </ul>
                     </li>
@@ -68,13 +69,13 @@
                             id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             MEDIA
                         </a>
-                        <ul class="dropdown-menu border-0" aria-labelledby="mediaDropdown">
-                            <li><a class="dropdown-item" href="#">Berita</a></li>
-                            <li><a class="dropdown-item" href="#">Galeri</a></li>
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="mediaDropdown">
+                            <li><a class="dropdown-item" href="{{ route('home') }}#news-section">Berita</a></li>
+                            <li><a class="dropdown-item" href="{{ route('home') }}#gallery-section">Galeri</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fs-5" href="{{ route('home') }}#regulation-section">REGULASI</a>
+                        <a class="nav-link fs-5" href="{{ route('regulations') }}">REGULASI</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fs-5" href="{{ route('home') }}#contact-section">KONTAK</a>
