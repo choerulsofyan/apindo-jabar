@@ -4,7 +4,7 @@
     <div class="top-bar py-1" style="background-color: #f5f5f5;">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
-                <div class="text-start">
+                <div class="text-start d-none d-sm-block">
                     <i class="bi bi-telephone-fill text-primary me-2"></i>
                     <small>+62-812-2360-9501 (Whatsapp Only)</small>
                 </div>
