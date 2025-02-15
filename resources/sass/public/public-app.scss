@@ -335,3 +335,45 @@ footer a {
         }
     }
 }
+
+#gallery-section {
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: linear-gradient(
+            180deg,
+            rgba(var(--bs-light-rgb), 1) 8%,
+            rgba(var(--bs-light-rgb), 0) 80%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(var(--bs-light-rgb), 1) 0%,
+            rgba(var(--bs-light-rgb), 0) 15%
+        ),
+        url("../../../public/assets/images/bg-light-gradient.png");
+}
+
+// #testimoni-section {
+//     background-position: center bottom;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     background-image: linear-gradient(
+//             180deg,
+//             rgba(var(--bs-light-rgb), 1) 8%,
+//             rgba(var(--bs-light-rgb), 0) 80%
+//         ),
+//         url("../../../public/assets/images/bg-gradient-x.png");
+// }
+
+// #faq-section {
+//     background-position: center top;
+//     background-repeat: no-repeat;
+//     background-size: 100% 100%;
+//     background-image: linear-gradient(
+//             180deg,
+//             rgba(var(--bs-light-rgb), 0) 12%,
+//             rgba(var(--bs-light-rgb), 1) 54%
+//         ),
+//         url("../../../public/assets/images/bg-gradient-x2.png");
+//     background-color: var(--bs-light);
+// }
