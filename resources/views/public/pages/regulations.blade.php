@@ -5,7 +5,7 @@
 @section('content')
     <section class="regulations-page py-5">
         <div class="container">
-            <h1 class="text-center mb-4 fw-bolder">Regulations</h1>
+            <h1 class="text-center mb-4 fw-bolder">Regulasi</h1>
 
             <div class="row mb-3 pt-3">
                 <div class="col-md-6">
@@ -23,7 +23,7 @@
 
             @if ($regulations->isEmpty())
                 <div class="alert alert-info">
-                    No regulations found.
+                    Regulasi tidak ditemukan.
                 </div>
             @else
                 <div class="table-responsive">
