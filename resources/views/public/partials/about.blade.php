@@ -1,7 +1,7 @@
 <section id="about-section" class="py-5">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-md-6 mb-5 pe-5">
+            <div class="col-lg-6 col-md-6 mb-5 mt-5 pe-5">
                 <div class="ratio ratio-16x9">
                     <iframe class="" src="https://www.youtube.com/embed/w_dbSeBom0Y?si=yKcfrlrVZvZAbuXS"
                         title="YouTube video player" frameborder="0"
@@ -21,19 +21,19 @@
                         usaha dalam arti yang luas.
                     </p>
                     <div class="d-flex gap-3">
-                        <a href="#" class="btn btn-outline-primary">
+                        <a href="{{ route('history') }}" class="btn btn-outline-primary">
                             <i class="bi-fingerprint me-2 "></i>
                             Sejarah
                         </a>
-                        <a href="#" class="btn btn-outline-primary">
+                        <a href="{{ route('vision-mission') }}" class="btn btn-outline-primary">
                             <i class="bi bi-send me-2"></i>
                             Visi & Misi
                         </a>
-                        <a href="#" class="btn btn-outline-primary">
+                        <a href="{{ route('sectors') }}" class="btn btn-outline-primary">
                             <i class="bi bi-file-text me-2"></i>
                             Bidang-bidang
                         </a>
-                        <a href="#" class="btn btn-outline-primary">
+                        <a href="{{ route('dpkApindoJabar') }}" class="btn btn-outline-primary">
                             <i class="bi bi-building me-2"></i>
                             DPK APINDO Jabar
                         </a>
