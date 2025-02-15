@@ -39,7 +39,7 @@ class HomeController extends Controller
 
             // Check for image existence and use asset() for default image
             if (!$news->photo || !Storage::disk('public')->exists('/images/news/' . $news->photo)) {
-                $news->photo = asset('assets/images/logo.jpg'); // Use asset() helper
+                $news->photo = asset('assets/images/image-placeholder.png'); // Use asset() helper
             } else {
                 $news->photo = Storage::url('/images/news/' . $news->photo); // Keep existing logic for uploaded images
             }
@@ -59,6 +59,8 @@ class HomeController extends Controller
                 return Storage::disk('public')->exists('images/news/' . $news->photo);
             });
 
+        // dd($newsSlides);
+
         $newsSlides->each(function ($news) {
             $news->formatted_date = Carbon::parse($news->created_at)->isoFormat('D MMMM Y');
             $news->title = str($news->title)->words(10, '...');
@@ -66,7 +68,7 @@ class HomeController extends Controller
 
             // Check for image existence and use asset() for default image
             // if (!$news->photo || !Storage::disk('public')->exists('/images/news/' . $news->photo)) {
-            //     $news->photo = asset('assets/images/logo.jpg'); // Use asset() helper
+            //     $news->photo = asset('assets/images/image-placeholder.png'); // Use asset() helper
             // } else {
             //     $news->photo = Storage::url('/images/news/' . $news->photo); // Keep existing logic for uploaded images
             // }
