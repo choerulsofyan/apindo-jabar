@@ -16,10 +16,10 @@
                 </div>
             @empty
                 <div class="col">
-                    <p class="text-center">No images found.</p>
+                    <p class="text-center">Tidak ada galeri.</p>
                 </div>
             @endforelse
-            <div class="text-center mt-5">
+            <div class="text-start mt-5">
                 <h5>
                     <a href="{{ route('home') }}" class="text-decoration-none">
                         Lihat Semua Galeri
