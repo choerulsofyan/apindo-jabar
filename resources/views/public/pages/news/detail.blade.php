@@ -20,11 +20,11 @@
                             <img src="{{ Storage::url('images/news/' . $news->photo) }}" class="img-fluid w-100 mb-4"
                                 alt="{{ $news->title }}">
                         @else
-                            <img src="{{ asset('assets/images/logo_blue.png') }}" class="img-fluid mb-4"
+                            <img src="{{ asset('assets/images/image-placeholder.png') }}" class="img-fluid mb-4"
                                 alt="Placeholder Image">
                         @endif
                     @else
-                        <img src="{{ asset('assets/images/logo_blue.png') }}" class="img-fluid mb-4"
+                        <img src="{{ asset('assets/images/image-placeholder.png') }}" class="img-fluid mb-4"
                             alt="Placeholder Image">
                     @endif
 
@@ -51,12 +51,12 @@
                                                 <img src="{{ Storage::url('images/news/' . $item->photo) }}"
                                                     alt="{{ $item->title }}" class="related-news-img me-3">
                                             @else
-                                                <img src="{{ asset('assets/images/logo_blue.png') }}"
+                                                <img src="{{ asset('assets/images/image-placeholder.png') }}"
                                                     alt="Placeholder Image" class="related-news-img me-3">
                                             @endif
                                         @else
-                                            <img src="{{ asset('assets/images/logo_blue.png') }}" alt="Placeholder Image"
-                                                class="related-news-img me-3">
+                                            <img src="{{ asset('assets/images/image-placeholder.png') }}"
+                                                alt="Placeholder Image" class="related-news-img me-3">
                                         @endif
                                         <div class="flex-grow-1">
                                             <a href="{{ route('news.detail', $item->id) }}" class="text-decoration-none">
