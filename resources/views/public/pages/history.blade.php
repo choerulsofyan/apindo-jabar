@@ -1,6 +1,7 @@
 @extends('public.layouts.app')
 
-@section('title', 'Sejarah APINDO')
+@section('title', 'Sejarah - APINDO Jawa Barat')
+@section('meta_description', Str::limit(strip_tags('Sejarah APINDO Jawa Barat'), 155))
 
 @section('content')
     <div class="container pt-3">
@@ -12,7 +13,7 @@
                 <section id="sejarah"
                     class="history-page py-5 d-flex flex-column justify-content-center align-items-center mx-auto">
                     {{-- <h1 class="text-center mb-4 fw-bold">Tentang Kami</h1> --}}
-                    <img src="{{ asset('assets/images/logo_blue.png') }}" alt="APINDO Logo" class="img-fluid mb-5 w-50">
+                    <img src="{{ asset('assets/images/logo_blue.png') }}" alt="APINDO Jawa Barat" class="img-fluid mb-5 w-50">
                     <div class="content" style="line-height: 30px;font-size: 1rem;font-weight: 400;text-align: justify;">
                         <p>
                             Asosiasi Pengusaha Indonesia (APINDO) awalnya berdiri dengan nama Badan Permusyawaratan Urusan

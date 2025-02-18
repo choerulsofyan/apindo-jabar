@@ -16,7 +16,7 @@
                                         alt="{{ $news->title }}">
                                 @else
                                     <img src="{{ asset('assets/images/logo.jpg') }}" class="card-img-top news-image"
-                                        alt="News Thumbnail">
+                                        alt="{{ $news->title }}">
                                 @endif
                             </div>
                             <div class="card-body d-flex flex-column">

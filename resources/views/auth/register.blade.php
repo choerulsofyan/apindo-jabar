@@ -8,7 +8,8 @@
             <div class="col-md-4 mb-4">
                 <div class="card bg-primary text-white p-1">
                     <div class="card-body">
-                        <img src="{{ asset('assets/images/logo_white.png') }}" alt="logo" class="img-fluid w-75 mb-5" />
+                        <img src="{{ asset('assets/images/logo_white.png') }}" alt="APINDO Jawa Barat"
+                            class="img-fluid w-75 mb-5" />
                         <h4 class="fw-bold text-white">JENIS KEANGGOTAAN APINDO</h4>
                         <h5 class="mt-4 text-white fw-bold">Anggota Biasa</h5>
                         <p>

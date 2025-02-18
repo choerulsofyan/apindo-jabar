@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-4 d-flex flex-column gap-3 mb-3">
                 <a href="#">
-                    <img src="{{ asset('assets/images/logo_blue.png') }}" alt="APINDO Jabar" height="80">
+                    <img src="{{ asset('assets/images/logo_blue.png') }}" alt="APINDO Jawa Barat" height="80">
                 </a>
                 <p class="text-left mt-2">&copy; Copyright <strong> APINDO Jabar </strong>. All rights reserved</p>
             </div>

@@ -1,6 +1,7 @@
 @extends('public.layouts.app')
 
-@section('title', 'Kepengurusan')
+@section('title', 'Kepengurusan - APINDO Jawa Barat')
+@section('meta_description', Str::limit(strip_tags('Kepengurusan APINDO Jawa Barat'), 155))
 
 @section('content')
     {{-- <section class="regulations-page py-5">

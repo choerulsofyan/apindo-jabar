@@ -1,6 +1,7 @@
 @extends('public.layouts.app')
 
-@section('title', 'DPK APINDO JAWA BARAT')
+@section('title', 'DPK - APINDO Jawa Barat')
+@section('meta_description', Str::limit(strip_tags('DPK APINDO Jawa Barat'), 155))
 
 @section('content')
     <section class="dpk-apindo-jabar-page py-5">

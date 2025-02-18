@@ -31,7 +31,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand my-1" href="{{ route('home') }}">
-                <img src="{{ asset('assets/images/logo_white.png') }}" alt="APINDO Logo" height="50">
+                <img src="{{ asset('assets/images/logo_white.png') }}" alt="APINDO Jawa Barat" height="50">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

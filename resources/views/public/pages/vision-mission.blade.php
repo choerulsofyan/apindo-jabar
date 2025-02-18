@@ -1,6 +1,7 @@
 @extends('public.layouts.app')
 
-@section('title', 'Visi & Misi Apindo')
+@section('title', 'Visi & Misi - APINDO Jawa Barat')
+@section('meta_description', Str::limit(strip_tags('Visi & Misi APINDO Jawa Barat'), 155))
 
 @section('content')
     <section class="vision-mission-page py-5">

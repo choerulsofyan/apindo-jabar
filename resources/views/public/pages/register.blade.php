@@ -1,6 +1,7 @@
 @extends('public.layouts.app')
 
-@section('title', 'Pendaftaran Anggota')
+@section('title', 'Pendaftaran Anggota - APINDO Jawa Barat')
+@section('meta_description', Str::limit(strip_tags('Pendaftaran anggota baru APINDO Jawa Barat'), 155))
 
 @section('content')
     <div class="container my-5">
