@@ -51,8 +51,10 @@
                             <li><a class="dropdown-item" href="{{ route('history') }}">Sejarah</a></li>
                             <li><a class="dropdown-item" href="{{ route('vision-mission') }}">Visi & Misi</a></li>
                             <li><a class="dropdown-item" href="{{ route('sectors') }}">Bidang</a></li>
-                            <li><a class="dropdown-item" href="{{ route('dpkApindoJabar') }}">DPK APINDO Jabar</a>
-                            </li>
+                            @can('MEMBER_MENU_VIEW')
+                                <li><a class="dropdown-item" href="{{ route('managements') }}">Kepengurusan</a></li>
+                                <li><a class="dropdown-item" href="{{ route('dpkApindoJabar') }}">DPK APINDO Jabar</a></li>
+                            @endcan
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -74,9 +76,11 @@
                             <li><a class="dropdown-item" href="{{ route('home') }}#gallery-section">Galeri</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link fs-5" href="{{ route('regulations') }}">REGULASI</a>
-                    </li>
+                    @can('MEMBER_MENU_VIEW')
+                        <li class="nav-item">
+                            <a class="nav-link fs-5" href="{{ route('regulations') }}">REGULASI</a>
+                        </li>
+                    @endcan
                     <li class="nav-item">
                         <a class="nav-link fs-5" href="{{ route('home') }}#contact-section">KONTAK</a>
                     </li>
@@ -98,7 +102,7 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ Auth::user()->name }}
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <ul class="dropdown-menu border-0 shadow" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                     </li>
