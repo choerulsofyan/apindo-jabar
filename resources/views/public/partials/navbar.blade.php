@@ -63,7 +63,7 @@
                             KEANGGOTAAN
                         </a>
                         <ul class="dropdown-menu border-0 shadow" aria-labelledby="mediaDropdown">
-                            <li><a class="dropdown-item" href="#">Pendaftaran Anggota</a></li>
+                            <li><a class="dropdown-item" href="{{ route('register') }}">Pendaftaran Anggota</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -90,9 +90,6 @@
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link fs-5" href="{{ route('login') }}">Masuk</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link fs-5" href="{{ route('register') }}">Daftar</a>
                             </li>
                         @endguest
 
