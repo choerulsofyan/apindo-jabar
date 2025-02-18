@@ -35,7 +35,9 @@ Route::get('/history', [HomeController::class, 'history'])->name('history');
 Route::get('/vision-mission', [HomeController::class, 'visionMission'])->name('vision-mission');
 Route::get('/sectors', [HomeController::class, 'sectors'])->name('sectors');
 Route::get('/dpk-apindo-jabar', [HomeController::class, 'dpkApindoJabar'])->name('dpkApindoJabar');
+Route::get('/managements', [HomeController::class, 'managements'])->name('managements');
 Route::get('/regulations', [HomeController::class, 'regulations'])->name('regulations');
+Route::get('/news', [HomeController::class, 'news'])->name('allNews');
 
 Auth::routes();
 

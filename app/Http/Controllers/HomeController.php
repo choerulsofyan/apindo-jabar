@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Galeri;
+use App\Models\Management;
 use App\Models\News;
 use App\Models\Regulation;
 use Illuminate\View\View;
@@ -333,6 +334,37 @@ class HomeController extends Controller
         $regulations = $query->paginate($perPage);
 
         return view('public.pages.regulations', compact('regulations', 'perPage'))
+            ->with('i', ($request->input('page', 1) - 1) * $perPage);
+    }
+
+    public function managements(Request $request): View
+    {
+        $perPage = 20;
+
+        $query = Management::query();
+
+        // Search by title
+        if ($search = $request->input('search')) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        // Sort by title or date
+        $sortBy = $request->input('sort_by', 'date'); // Default sort by date
+        $sortOrder = $request->input('sort_order', 'desc'); // Default sort order (descending for date)
+
+        if (!in_array($sortBy, ['name', 'date'])) {
+            $sortBy = 'date'; // Default sort column if invalid value is provided
+        }
+
+        if (!in_array($sortOrder, ['asc', 'desc'])) {
+            $sortOrder = 'desc'; // Default sort order if invalid value is provided
+        }
+
+        $query->orderBy($sortBy, $sortOrder);
+
+        $managements = $query->paginate($perPage);
+
+        return view('public.pages.managements', compact('managements', 'perPage'))
             ->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 }
