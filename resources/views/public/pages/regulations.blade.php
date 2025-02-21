@@ -23,8 +23,8 @@
             </div>
 
             @if ($regulations->isEmpty())
-                <div class="alert alert-info">
-                    Regulasi tidak ditemukan.
+                <div class="alert alert-info text-center">
+                    Tidak ada regulasi.
                 </div>
             @else
                 <div class="table-responsive">

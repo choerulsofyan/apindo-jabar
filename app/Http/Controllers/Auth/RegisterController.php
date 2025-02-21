@@ -12,12 +12,14 @@ use Illuminate\Http\Request; // Import Request
 use Illuminate\Auth\Events\Registered; // Import Registered event
 use Illuminate\Support\Facades\DB; // Import the DB facade
 use Illuminate\Support\Facades\Log; // Import for error logging
+use Illuminate\Support\Facades\Auth; // Import the Auth facade
+
 
 class RegisterController extends Controller
 {
     use RegistersUsers;
 
-    protected $redirectTo = '/home'; // Or wherever you want to redirect after registration
+    protected $redirectTo = '/email/verify';  // Or wherever you want to redirect after registration
 
     public function __construct()
     {
@@ -48,11 +50,14 @@ class RegisterController extends Controller
             'klbi' => ['required', 'string'],
             'other_business_activities' => ['nullable', 'string'],
             'company_status' => ['required', 'string'],
-            'investment_facilities' => ['nullable', 'string'],
+            'investment_facilities_pma' => ['nullable', 'boolean'], // Now boolean
+            'investment_facilities_pmdn' => ['nullable', 'boolean'], // Now boolean
+            'investment_facilities_joint_venture' => ['nullable', 'boolean'], // Now boolean
             'number_of_employees' => ['required', 'numeric'],
             'work_regulations' => ['required', 'string'],
             'work_regulation_others' => ['nullable', 'string'],
-            'bpjs' => ['nullable', 'string'],
+            'bpjs_kesehatan' => ['nullable', 'boolean'],  // Now boolean
+            'bpjs_ketenagakerjaan' => ['nullable', 'boolean'], // Now boolean
             'is_labor_union_exists' => ['required', 'boolean'],
             'monthly_contribution_period' => ['required', 'integer'],
             'how_they_learned_about_apindo' => ['required', 'string'],
@@ -100,11 +105,14 @@ class RegisterController extends Controller
                 'klbi' => $data['klbi'],
                 'other_business_activities' => $data['other_business_activities'],
                 'company_status' => $data['company_status'],
-                'investment_facilities' => $data['investment_facilities'],
+                'investment_facilities_pma' => $data['investment_facilities_pma'] ?? 0,
+                'investment_facilities_pmdn' => $data['investment_facilities_pmdn'] ?? 0,
+                'investment_facilities_joint_venture' => $data['investment_facilities_joint_venture'] ?? 0,
                 'number_of_employees' => $data['number_of_employees'],
                 'work_regulations' => $data['work_regulations'],
                 'work_regulation_others' => isset($data['work_regulation_others']) ? $data['work_regulation_others'] : null,
-                // 'bpjs' => $data['bpjs'],
+                'bpjs_kesehatan' => $data['bpjs_kesehatan'] ?? 0, // Use ternary for boolean
+                'bpjs_ketenagakerjaan' => $data['bpjs_ketenagakerjaan'] ?? 0, // Use ternary for boolean
                 'is_labor_union_exists' => $data['is_labor_union_exists'],
                 'monthly_contribution_period' => $data['monthly_contribution_period'],
                 'how_they_learned_about_apindo' => $data['how_they_learned_about_apindo'],
@@ -118,20 +126,6 @@ class RegisterController extends Controller
                 'mobile_number' => $data['mobile_number'],
                 'user_id' => $user->id, // Associate the member with the newly created user
             ];
-            // dd($memberData);
-
-            // Handle 'investment_facilities'
-            if (isset($data['investment_facilities']) && is_array($data['investment_facilities'])) {
-                $memberData['investment_facilities'] = implode(', ', $data['investment_facilities']);
-            } else {
-                $memberData['investment_facilities'] = ''; // or null
-            }
-            // Handle 'bpjs'
-            if (isset($data['bpjs']) && is_array($data['bpjs'])) {
-                $memberData['bpjs'] = implode(', ', $data['bpjs']);
-            } else {
-                $memberData['bpjs'] = ''; // or null
-            }
 
             // Handle file uploads
             $files = ['declaration_letter', 'pp_pkb', 'company_profile', 'tdp'];
@@ -159,11 +153,9 @@ class RegisterController extends Controller
                 'exception' => $e,
             ]);
 
-            echo "<pre>";
-            print_r($data);
-            print_r($e->getMessage()); // For debugging
-            echo "</pre>";
+            print_r($e->getMessage());
             exit();
+
             // Return a user-friendly error.  Crucially, *don't* expose the raw exception.
             return back()->withInput()->withErrors(['registration' => 'An error occurred during registration. Please try again.']);
         }
@@ -176,9 +168,18 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        $this->guard()->login($user);
+        return $this->registered($request, $user) ?: redirect($this->redirectPath());
+    }
 
-        return $this->registered($request, $user)
-            ?: redirect($this->redirectPath());
+    protected function registered(Request $request, $user)
+    {
+        // return redirect()->route('verification.notice')->with('success', 'Please check your email to verify your account.');
+        return;
+    }
+
+    // Add this method to your RegisterController:
+    protected function guard()
+    {
+        return Auth::guard('web'); // Or your custom guard name if you have one
     }
 }

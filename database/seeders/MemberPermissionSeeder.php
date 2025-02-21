@@ -14,6 +14,7 @@ class MemberPermissionSeeder extends Seeder
             'KEANGGOTAAN_DELETE',
             'KEANGGOTAAN_EDIT',
             'KEANGGOTAAN_LIST',
+            'ANGGOTA_MENU_VIEW',
         ];
 
         foreach ($permissions as $permission) {

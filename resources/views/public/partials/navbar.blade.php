@@ -51,7 +51,7 @@
                             <li><a class="dropdown-item" href="{{ route('history') }}">Sejarah</a></li>
                             <li><a class="dropdown-item" href="{{ route('vision-mission') }}">Visi & Misi</a></li>
                             <li><a class="dropdown-item" href="{{ route('sectors') }}">Bidang</a></li>
-                            @can('MEMBER_MENU_VIEW')
+                            @can('ANGGOTA_MENU_VIEW')
                                 <li><a class="dropdown-item" href="{{ route('managements') }}">Kepengurusan</a></li>
                                 <li><a class="dropdown-item" href="{{ route('dpkApindoJabar') }}">DPK APINDO Jabar</a></li>
                             @endcan
@@ -63,7 +63,13 @@
                             KEANGGOTAAN
                         </a>
                         <ul class="dropdown-menu border-0 shadow" aria-labelledby="mediaDropdown">
-                            <li><a class="dropdown-item" href="{{ route('register') }}">Pendaftaran Anggota</a></li>
+                            <li>
+                                <a class="dropdown-item {{ Auth::check() ? 'disabled' : '' }}"
+                                    href="{{ Auth::check() ? '#' : route('register') }}"
+                                    @if (Auth::check()) tabindex="-1" aria-disabled="true" @endif>
+                                    Pendaftaran Anggota
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -76,7 +82,7 @@
                             <li><a class="dropdown-item" href="{{ route('home') }}#gallery-section">Galeri</a></li>
                         </ul>
                     </li>
-                    @can('MEMBER_MENU_VIEW')
+                    @can('ANGGOTA_MENU_VIEW')
                         <li class="nav-item">
                             <a class="nav-link fs-5" href="{{ route('regulations') }}">REGULASI</a>
                         </li>
@@ -92,7 +98,6 @@
                                 <a class="nav-link fs-5" href="{{ route('login') }}">Masuk</a>
                             </li>
                         @endguest
-
                         @auth
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -100,8 +105,14 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <ul class="dropdown-menu border-0 shadow" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                    @can('DASHBOARD')
+                                        <li><a class="dropdown-item" href="{{ route('mindo.home') }}">Dashboard</a></li>
+                                    @endcan
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
                                     </li>
                                 </ul>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"

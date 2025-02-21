@@ -2,7 +2,7 @@
     <div class="container">
         <h2 class="text-center fw-bolder mb-4 text-primary">BERITA</h2>
         @if ($latestNews->isEmpty())
-            <div class="alert alert-info">
+            <div class="alert alert-info text-center">
                 Tidak ada berita.
             </div>
         @else
@@ -30,9 +30,9 @@
                                         <small class="text-muted">{{ $news->formatted_date }}</small>
                                     @endif
                                 </div>
-                                <hr>
+                                <hr class="mt-2">
                                 <h5 class="card-title fw-bold">{{ $news->title }}</h5>
-                                <div class="card-text flex-grow-1">{!! $news->short_content !!}</div>
+                                <div class="card-text flex-grow-1 mb-4">{!! $news->short_content !!}</div>
                                 <a href="{{ route('news.detail', $news->id) }}"
                                     class="btn btn-outline-primary stretched-link mt-auto">
                                     Baca Selengkapnya

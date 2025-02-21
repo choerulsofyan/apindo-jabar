@@ -259,32 +259,38 @@
                                     <div class="col-md-6">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox"
-                                                name="investment_facilities[]" id="investment_facilities_PMA"
-                                                value="PMA"
-                                                {{ in_array('PMA', old('investment_facilities', [])) ? 'checked' : '' }}>
+                                                name="investment_facilities_pma" id="investment_facilities_PMA"
+                                                value="1"
+                                                {{ old('investment_facilities_pma') == '1' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="investment_facilities_PMA">
                                                 PMA
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox"
-                                                name="investment_facilities[]" id="investment_facilities_PMDN"
-                                                value="PMDN"
-                                                {{ in_array('PMDN', old('investment_facilities', [])) ? 'checked' : '' }}>
+                                                name="investment_facilities_pmdn" id="investment_facilities_PMDN"
+                                                value="1"
+                                                {{ old('investment_facilities_pmdn') == '1' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="investment_facilities_PMDN">
                                                 PMDN
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox"
-                                                name="investment_facilities[]" id="investment_facilities_Joint_Venture"
-                                                value="Joint Venture"
-                                                {{ in_array('Joint Venture', old('investment_facilities', [])) ? 'checked' : '' }}>
+                                                name="investment_facilities_joint_venture"
+                                                id="investment_facilities_Joint_Venture" value="1"
+                                                {{ old('investment_facilities_joint_venture') == '1' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="investment_facilities_Joint_Venture">
                                                 Joint Venture
                                             </label>
                                         </div>
-                                        @error('investment_facilities')
+                                        @error('investment_facilities_pma')
+                                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                                        @enderror
+                                        @error('investment_facilities_pmdn')
+                                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                                        @enderror
+                                        @error('investment_facilities_joint_venture')
                                             <div class="invalid-feedback d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -333,8 +339,8 @@
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input work-regulations-radio" type="radio"
-                                                name="work_regulations" id="work_regulations_others" value="Others"
-                                                {{ old('work_regulations') == 'Others' ? 'checked' : '' }}>
+                                                name="work_regulations" id="work_regulations_others" value="Lainnya"
+                                                {{ old('work_regulations') == 'Lainnya' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="work_regulations_others">
                                                 Lainnya, Sebutkan
                                             </label>
@@ -342,7 +348,7 @@
                                                 class="form-control mt-1 @error('work_regulation_others') is-invalid @enderror"
                                                 id="work_regulation_others" name="work_regulation_others"
                                                 value="{{ old('work_regulation_others') }}"
-                                                @if (old('work_regulations') != 'Others') disabled @endif>
+                                                @if (old('work_regulations') != 'Lainnya') disabled @endif>
                                         </div>
                                         @error('work_regulations')
                                             <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -357,22 +363,25 @@
                                     <label for="bpjs" class="col-md-4 col-form-label text-md-end">BPJS</label>
                                     <div class="col-md-6">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="bpjs[]"
-                                                id="bpjs_kesehatan" value="BPJS Kesehatan"
-                                                {{ in_array('BPJS Kesehatan', old('bpjs', [])) ? 'checked' : '' }}>
+                                            <input class="form-check-input" type="checkbox" name="bpjs_kesehatan"
+                                                id="bpjs_kesehatan" value="1"
+                                                {{ old('bpjs_kesehatan') == '1' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="bpjs_kesehatan">
                                                 BPJS Kesehatan
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="bpjs[]"
-                                                id="bpjs_ketenagakerjaan" value="BPJS Ketenagakerjaan"
-                                                {{ in_array('BPJS Ketenagakerjaan', old('bpjs', [])) ? 'checked' : '' }}>
+                                            <input class="form-check-input" type="checkbox" name="bpjs_ketenagakerjaan"
+                                                id="bpjs_ketenagakerjaan" value="1"
+                                                {{ old('bpjs_ketenagakerjaan') == '1' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="bpjs_ketenagakerjaan">
                                                 BPJS Ketenagakerjaan
                                             </label>
                                         </div>
-                                        @error('bpjs')
+                                        @error('bpjs_kesehatan')
+                                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                                        @enderror
+                                        @error('bpjs_ketenagakerjaan')
                                             <div class="invalid-feedback d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -475,44 +484,44 @@
                                         <div class="form-check">
                                             <input class="form-check-input how-they-learned-radio" type="radio"
                                                 name="how_they_learned_about_apindo"
-                                                id="how_they_learned_about_apindo_board_member"
-                                                value="Pengurus APINDO, Sebutkan"
-                                                @if (old('how_they_learned_about_apindo') == 'Pengurus APINDO, Sebutkan') checked @endif>
+                                                id="how_they_learned_about_apindo_board_member" value="Pengurus APINDO"
+                                                @if (old('how_they_learned_about_apindo') == 'Pengurus APINDO') checked @endif>
                                             <label class="form-check-label"
                                                 for="how_they_learned_about_apindo_board_member">
                                                 Pengurus APINDO, Sebutkan
                                             </label>
                                             <input type="text"
                                                 class="form-control mt-1 @error('how_they_learned_about_apindo_board_member') is-invalid @enderror"
-                                                id="how_they_learned_about_apindo_board_member"
+                                                id="how_they_learned_about_apindo_board_member_input"
                                                 name="how_they_learned_about_apindo_board_member"
                                                 value="{{ old('how_they_learned_about_apindo_board_member') }}"
                                                 placeholder="Nama Pengurus APINDO"
-                                                @if (old('how_they_learned_about_apindo') != 'Pengurus APINDO, Sebutkan') disabled @endif>
+                                                @if (old('how_they_learned_about_apindo') != 'Pengurus APINDO') disabled @endif>
+                                            @error('how_they_learned_about_apindo_board_member')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input how-they-learned-radio" type="radio"
                                                 name="how_they_learned_about_apindo"
-                                                id="how_they_learned_about_apindo_others" value="Lainnya, Sebutkan"
-                                                @if (old('how_they_learned_about_apindo') == 'Lainnya, Sebutkan') checked @endif>
+                                                id="how_they_learned_about_apindo_others" value="Lainnya"
+                                                @if (old('how_they_learned_about_apindo') == 'Lainnya') checked @endif>
                                             <label class="form-check-label" for="how_they_learned_about_apindo_others">
                                                 Lainnya, Sebutkan
                                             </label>
                                             <input type="text"
                                                 class="form-control mt-1 @error('how_they_learned_about_apindo_others') is-invalid @enderror"
-                                                id="how_they_learned_about_apindo_others"
+                                                id="how_they_learned_about_apindo_others_input"
                                                 name="how_they_learned_about_apindo_others"
                                                 value="{{ old('how_they_learned_about_apindo_others') }}"
                                                 placeholder="Sumber Lainnya"
-                                                @if (old('how_they_learned_about_apindo') != 'Lainnya, Sebutkan') disabled @endif>
+                                                @if (old('how_they_learned_about_apindo') != 'Lainnya') disabled @endif>
+
+                                            @error('how_they_learned_about_apindo_others')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         @error('how_they_learned_about_apindo')
-                                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                                        @enderror
-                                        @error('how_they_learned_about_apindo_board_member')
-                                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                                        @enderror
-                                        @error('how_they_learned_about_apindo_others')
                                             <div class="invalid-feedback d-block">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -710,8 +719,8 @@
 
             workRegulationsRadios.forEach(radio => {
                 radio.addEventListener('change', function() {
-                    workRegulationOthersTextbox.disabled = this.value !== 'Others';
-                    if (this.value !== 'Others') {
+                    workRegulationOthersTextbox.disabled = this.value !== 'Lainnya';
+                    if (this.value !== 'Lainnya') {
                         workRegulationOthersTextbox.value = '';
                     }
                 });
@@ -720,24 +729,25 @@
             // Initially disable/enable textboxes based on the currently selected radio button (for edit mode)
             const initiallySelectedWorkRegulation = document.querySelector('.work-regulations-radio:checked');
             if (initiallySelectedWorkRegulation) {
-                workRegulationOthersTextbox.disabled = initiallySelectedWorkRegulation.value !== 'Others';
+                workRegulationOthersTextbox.disabled = initiallySelectedWorkRegulation.value !== 'Lainnya';
             }
 
             // How They Learned About APINDO Radio Button Logic
             const howTheyLearnedRadios = document.querySelectorAll('.how-they-learned-radio');
-            const apindoBoardMemberTextbox = document.getElementById('how_they_learned_about_apindo_board_member');
-            const apindoOthersTextbox = document.getElementById('how_they_learned_about_apindo_others');
+            const apindoBoardMemberTextbox = document.getElementById(
+                'how_they_learned_about_apindo_board_member_input');
+            const apindoOthersTextbox = document.getElementById('how_they_learned_about_apindo_others_input');
 
             howTheyLearnedRadios.forEach(radio => {
                 radio.addEventListener('change', function() {
-                    apindoBoardMemberTextbox.disabled = this.value !== 'APINDO Board Member';
-                    apindoOthersTextbox.disabled = this.value !== 'Others';
+                    apindoBoardMemberTextbox.disabled = this.value !== 'Pengurus APINDO';
+                    apindoOthersTextbox.disabled = this.value !== 'Lainnya';
 
                     // Clear the textbox values when they are disabled
-                    if (this.value !== 'APINDO Board Member') {
+                    if (this.value !== 'Pengurus APINDO') {
                         apindoBoardMemberTextbox.value = '';
                     }
-                    if (this.value !== 'Others') {
+                    if (this.value !== 'Lainnya') {
                         apindoOthersTextbox.value = '';
                     }
                 });
@@ -746,8 +756,8 @@
 
             const initiallySelectedHowTheyLearned = document.querySelector('.how-they-learned-radio:checked');
             if (initiallySelectedHowTheyLearned) {
-                apindoBoardMemberTextbox.disabled = initiallySelectedHowTheyLearned.value !== 'APINDO Board Member';
-                apindoOthersTextbox.disabled = initiallySelectedHowTheyLearned.value !== 'Others';
+                apindoBoardMemberTextbox.disabled = initiallySelectedHowTheyLearned.value !== 'Pengurus APINDO';
+                apindoOthersTextbox.disabled = initiallySelectedHowTheyLearned.value !== 'Lainnya';
             }
 
         });

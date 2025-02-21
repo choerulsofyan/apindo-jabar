@@ -39,10 +39,10 @@ Route::get('/managements', [HomeController::class, 'managements'])->name('manage
 Route::get('/regulations', [HomeController::class, 'regulations'])->name('regulations');
 Route::get('/news', [HomeController::class, 'news'])->name('allNews');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Admin routes (prefixed with 'mindo')
-Route::middleware(['auth'])->prefix('mindo')->name('mindo.')->group(function () {
+Route::middleware(['auth', 'can:DASHBOARD'])->prefix('mindo')->name('mindo.')->group(function () {
     // Dashboard
     Route::get('/', function () {
         return view('admin.pages.dashboard.index');

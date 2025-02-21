@@ -24,11 +24,14 @@ return new class extends Migration
             $table->string('klbi')->nullable(); // KLBI
             $table->text('other_business_activities')->nullable(); // Kegiatan Usaha Lainnya
             $table->string('company_status'); // Status Perusahaan (BUMN, BUMD, Swasta Nasional, Swasta Asing)
-            $table->string('investment_facilities')->nullable(); // Fasilitas Investasi (PMA, PMDN, Joint Venture)
+            $table->boolean('investment_facilities_pma')->default(false);
+            $table->boolean('investment_facilities_pmdn')->default(false);
+            $table->boolean('investment_facilities_joint_venture')->default(false);
             $table->integer('number_of_employees'); // Jumlah Tenaga Kerja
             $table->string('work_regulations'); // Peraturan Kerja (Peraturan Perusahaan (PP), Perjanjian Kerja Bersama (PKB))
             $table->string('work_regulation_others')->nullable(); // Peraturan Kerja Lainnya (Sebutkan)
-            $table->string('bpjs')->nullable(); // BPJS (BPJS Kesehatan,  BPJS Ketenagakerjaan)
+            $table->boolean('bpjs_kesehatan')->default(false);
+            $table->boolean('bpjs_ketenagakerjaan')->default(false);
             $table->boolean('is_labor_union_exists'); // Serikat Pekerja (Ada, Belum Ada)
             $table->integer('monthly_contribution_period'); // Periode Iuran (1 Bulan, 3 Bulan, 6 Bulan, 12 Bulan)
             $table->string('how_they_learned_about_apindo')->nullable(); // Sumber Informasi Mengenai Apindo (Website APINDO)
