@@ -6,17 +6,15 @@ This is a web application built for the Association of Indonesian Entrepreneurs 
 
 -   **Public Website:**
 
-    -   Homepage with:
-        -   Hero section with a dynamic slider (latest news with images and two static slides)
-        -   "About Us" section with video and text content
-        -   Dynamic news section showcasing the latest 4 news articles
-        -   Gallery section displaying the latest 8 images
+    -   Homepage featuring:
+        -   Hero section with a dynamic slider displaying the latest news and images
+        -   "About Us" section with video and links to various APINDO Jabar sections (Vision & Mission, Branches, History, etc.)
+        -   Dynamic news section showcasing the latest news articles
+        -   Gallery section displaying images from the latest events
         -   Contact section
-        -   Affiliate logos section
-        -   Footer with copyright information
+        -   Footer with sitemap and contact details
     -   News detail page with related news
-    -   Gallery detail page (implementation not fully complete in the conversation, but planned)
-    -   Language switching (basic implementation using a `select` dropdown and `localStorage`)
+    -   Language switching using Google Translation Element
 
 -   **Admin Panel:**
     -   User management (with roles and permissions using Spatie's Laravel Permission package)
@@ -133,22 +131,3 @@ This is a web application built for the Association of Indonesian Entrepreneurs 
 -   **Admin Panel:** Access the admin panel by logging in with an administrator account. The admin routes are prefixed with `/mindo`.
 -   **Public Website:** Access the public website through the root URL (e.g., `/`).
 
-## Configuration
-
--   **`.env`:** Configure your database connection, email settings, and other environment-specific variables in the `.env` file.
--   **`config/app.php`:** Set your application's locale, timezone, and other core settings.
--   **`config/activitylog.php`:** (Optional) Customize the activity log settings (e.g., table name, model).
--   **`config/permission.php`:** Configure the Spatie Laravel Permission package (roles and permissions).
--   **`tailwind.config.js`:** If you decide to use Tailwind CSS for the public pages later, configure the content to include the paths to your Blade templates.
--   **`vite.config.js`:** Configure Vite to build your frontend assets, including separate entry points for admin and public styles.
-
-**Further Development:**
-
--   **Complete Gallery Module:** Fully implement the gallery module, including image uploads, management, and public display.
--   **Improve News Section:** Add more features to the news section, such as categories, tags, comments, or search functionality.
--   **Implement Member Registration:** Create a proper registration form and process for new members.
--   **Enhance Security:** Implement additional security measures, such as email verification, two-factor authentication, and more robust password policies.
--   **Optimize Performance:** Optimize your application's performance by caching frequently accessed data, optimizing database queries, and compressing assets.
--   **Testing:** Write unit and feature tests to ensure the quality and reliability of your code.
-
-This comprehensive `README.md` file provides a good overview of your project's structure, features, and technology stack. You can further customize it with more specific details about your application, setup instructions, and any other relevant information for developers or users.
