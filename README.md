@@ -78,7 +78,7 @@ This is a web application built for the Association of Indonesian Entrepreneurs 
         cp .env.example .env
         ```
 
-    -   Edit the `.env` file and set your database credentials (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`), application URL (`APP_URL`), and other necessary configurations.
+    -   Edit the `.env` file and set the database credentials (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`), application URL (`APP_URL`), and other necessary configurations.
 
 5.  **Generate application key:**
 
@@ -94,7 +94,7 @@ This is a web application built for the Association of Indonesian Entrepreneurs 
 
 7.  **Seed the database (optional):**
 
-    -   If you have seeders for roles, permissions, and initial data:
+    -   Seeders for roles, permissions, and initial data:
 
         ```bash
         php artisan db:seed
@@ -124,7 +124,7 @@ This is a web application built for the Association of Indonesian Entrepreneurs 
     php artisan serve
     ```
 
-    Visit `http://127.0.0.1:8000` (or the URL provided by the `serve` command) in your browser.
+    Visit `http://127.0.0.1:8000` (or the URL provided by the `serve` command) in the browser.
 
 ## Usage
 
