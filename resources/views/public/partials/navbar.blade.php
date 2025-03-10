@@ -1,10 +1,10 @@
 {{-- Wrap both elements in a fixed-top container --}}
-<div class="fixed-top shadow-lg" style="z-index: 1030;">
+<div class="fixed-top" style="z-index: 1030;">
     {{-- Top Bar --}}
     <div class="top-bar py-1" style="background-color: #f5f5f5;">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
-                <div class="text-start">
+                <div class="text-start d-none d-sm-block">
                     <i class="bi bi-telephone-fill text-primary me-2"></i>
                     <small>+62-812-2360-9501 (Whatsapp Only)</small>
                 </div>
@@ -31,7 +31,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand my-1" href="{{ route('home') }}">
-                <img src="{{ asset('assets/images/logo_white.png') }}" alt="APINDO Logo" height="50">
+                <img src="{{ asset('assets/images/logo_white.png') }}" alt="APINDO Jawa Barat" height="50">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,11 +47,14 @@
                             id="tentangKamiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             TENTANG KAMI
                         </a>
-                        <ul class="dropdown-menu border-0" aria-labelledby="tentangKamiDropdown">
-                            <li><a class="dropdown-item" href="#">Sejarah</a></li>
-                            <li><a class="dropdown-item" href="#">Visi & Misi</a></li>
-                            <li><a class="dropdown-item" href="#">Bidang</a></li>
-                            <li><a class="dropdown-item" href="#">DPK APINDO Jabar</a></li>
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="tentangKamiDropdown">
+                            <li><a class="dropdown-item" href="{{ route('history') }}">Sejarah</a></li>
+                            <li><a class="dropdown-item" href="{{ route('vision-mission') }}">Visi & Misi</a></li>
+                            <li><a class="dropdown-item" href="{{ route('sectors') }}">Bidang</a></li>
+                            @can('ANGGOTA_MENU_VIEW')
+                                <li><a class="dropdown-item" href="{{ route('managements') }}">Kepengurusan</a></li>
+                                <li><a class="dropdown-item" href="{{ route('dpkApindoJabar') }}">DPK APINDO Jabar</a></li>
+                            @endcan
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -59,8 +62,14 @@
                             id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             KEANGGOTAAN
                         </a>
-                        <ul class="dropdown-menu border-0" aria-labelledby="mediaDropdown">
-                            <li><a class="dropdown-item" href="#">Pendaftaran Anggota</a></li>
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="mediaDropdown">
+                            <li>
+                                <a class="dropdown-item {{ Auth::check() ? 'disabled' : '' }}"
+                                    href="{{ Auth::check() ? '#' : route('register') }}"
+                                    @if (Auth::check()) tabindex="-1" aria-disabled="true" @endif>
+                                    Pendaftaran Anggota
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -68,14 +77,16 @@
                             id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             MEDIA
                         </a>
-                        <ul class="dropdown-menu border-0" aria-labelledby="mediaDropdown">
-                            <li><a class="dropdown-item" href="#">Berita</a></li>
-                            <li><a class="dropdown-item" href="#">Galeri</a></li>
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="mediaDropdown">
+                            <li><a class="dropdown-item" href="{{ route('home') }}#news-section">Berita</a></li>
+                            <li><a class="dropdown-item" href="{{ route('home') }}#gallery-section">Galeri</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link fs-5" href="{{ route('home') }}#regulation-section">REGULASI</a>
-                    </li>
+                    @can('ANGGOTA_MENU_VIEW')
+                        <li class="nav-item">
+                            <a class="nav-link fs-5" href="{{ route('regulations') }}">REGULASI</a>
+                        </li>
+                    @endcan
                     <li class="nav-item">
                         <a class="nav-link fs-5" href="{{ route('home') }}#contact-section">KONTAK</a>
                     </li>
@@ -86,20 +97,22 @@
                             <li class="nav-item">
                                 <a class="nav-link fs-5" href="{{ route('login') }}">Masuk</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link fs-5" href="{{ route('register') }}">Daftar</a>
-                            </li>
                         @endguest
-
                         @auth
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ Auth::user()->name }}
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                <ul class="dropdown-menu border-0 shadow" aria-labelledby="navbarDropdown">
+                                    @can('DASHBOARD')
+                                        <li><a class="dropdown-item" href="{{ route('mindo.home') }}">Dashboard</a></li>
+                                    @endcan
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
                                     </li>
                                 </ul>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"

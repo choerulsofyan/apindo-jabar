@@ -26,6 +26,7 @@ class PermissionTableSeeder extends Seeder
             'USER_ADD',
             'USER_EDIT',
             'USER_DELETE',
+            'DASHBOARD',
         ];
 
         foreach ($permissions as $permission) {

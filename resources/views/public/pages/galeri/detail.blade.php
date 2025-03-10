@@ -1,6 +1,7 @@
 @extends('public.layouts.app')
 
-@section('title', 'galeri detail')
+@section('title', 'Galeri - APINDO Jawa Barat')
+@section('meta_description', Str::limit(strip_tags('Galeri APINDO Jawa Barat'), 155))
 
 @section('content')
     <div class="container my-5">

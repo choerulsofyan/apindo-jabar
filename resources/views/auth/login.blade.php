@@ -1,19 +1,22 @@
 @extends('public.layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
+    <div class="container py-5 my-5">
+        <div class="row justify-content-center py-5 my-5">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Login') }}</div>
+                    {{-- <div class="card-header">{{ __('Login') }}</div> --}}
 
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('login') }}">
+                    <div class="card-body pt-4 pb-5">
+                        <h1 class="text-center">
+                            Login
+                        </h1>
+
+                        <form class="mt-4" method="POST" action="{{ route('login') }}">
                             @csrf
 
                             <div class="row mb-3">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-end">Email</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -29,8 +32,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="password"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-end">Password</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -52,7 +54,7 @@
                                             {{ old('remember') ? 'checked' : '' }}>
 
                                         <label class="form-check-label" for="remember">
-                                            {{ __('Remember Me') }}
+                                            Ingat Saya
                                         </label>
                                     </div>
                                 </div>
@@ -60,13 +62,13 @@
 
                             <div class="row mb-0">
                                 <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Login') }}
+                                    <button type="submit" class="btn btn-primary px-4">
+                                        Login
                                     </button>
 
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
+                                            Lupa Password?
                                         </a>
                                     @endif
                                 </div>

@@ -1,6 +1,7 @@
 @extends('public.layouts.app')
 
-@section('title', 'APINDO - Home')
+@section('title', 'Beranda - APINDO Jawa Barat')
+@section('meta_description', Str::limit(strip_tags('Beranda APINDO Jawa Barat'), 155))
 
 @section('content')
     @include('public.partials.hero', ['newsSlides' => $newsSlides])
@@ -15,5 +16,5 @@
     @include('public.partials.gallery', ['latestImages' => $latestImages])
     @include('public.partials.contact')
     @include('public.partials.faq')
-    @include('public.partials.testimoni')
+    {{-- @include('public.partials.testimoni') --}}
 @endsection

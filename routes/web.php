@@ -31,11 +31,18 @@ use App\Http\Controllers\PesanController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/news/{news}', [HomeController::class, 'newsDetail'])->name('news.detail');
 Route::get('/gallery/{galeri}', [HomeController::class, 'galeriDetail'])->name('galeri.detail');
+Route::get('/history', [HomeController::class, 'history'])->name('history');
+Route::get('/vision-mission', [HomeController::class, 'visionMission'])->name('vision-mission');
+Route::get('/sectors', [HomeController::class, 'sectors'])->name('sectors');
+Route::get('/dpk-apindo-jabar', [HomeController::class, 'dpkApindoJabar'])->name('dpkApindoJabar');
+Route::get('/managements', [HomeController::class, 'managements'])->name('managements');
+Route::get('/regulations', [HomeController::class, 'regulations'])->name('regulations');
+Route::get('/news', [HomeController::class, 'news'])->name('allNews');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Admin routes (prefixed with 'mindo')
-Route::middleware(['auth'])->prefix('mindo')->name('mindo.')->group(function () {
+Route::middleware(['auth', 'can:DASHBOARD'])->prefix('mindo')->name('mindo.')->group(function () {
     // Dashboard
     Route::get('/', function () {
         return view('admin.pages.dashboard.index');

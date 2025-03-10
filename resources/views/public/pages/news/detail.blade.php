@@ -1,6 +1,7 @@
 @extends('public.layouts.app')
 
-@section('title', $news->title)
+@section('title', Str::limit($news->title, 50, '...') . ' - APINDO Jawa Barat')
+@section('meta_description', Str::limit(strip_tags($news->title), 155))
 
 @section('content')
     <div class="container my-5 pt-5 pb-5">
@@ -20,12 +21,12 @@
                             <img src="{{ Storage::url('images/news/' . $news->photo) }}" class="img-fluid w-100 mb-4"
                                 alt="{{ $news->title }}">
                         @else
-                            <img src="{{ asset('assets/images/logo_blue.png') }}" class="img-fluid mb-4"
-                                alt="Placeholder Image">
+                            <img src="{{ asset('assets/images/image-placeholder.png') }}" class="img-fluid mb-4"
+                                alt="{{ $item->title }}">
                         @endif
                     @else
-                        <img src="{{ asset('assets/images/logo_blue.png') }}" class="img-fluid mb-4"
-                            alt="Placeholder Image">
+                        <img src="{{ asset('assets/images/image-placeholder.png') }}" class="img-fluid mb-4"
+                            alt="{{ $item->title }}">
                     @endif
 
                     <div class="news-content">
@@ -51,12 +52,12 @@
                                                 <img src="{{ Storage::url('images/news/' . $item->photo) }}"
                                                     alt="{{ $item->title }}" class="related-news-img me-3">
                                             @else
-                                                <img src="{{ asset('assets/images/logo_blue.png') }}"
-                                                    alt="Placeholder Image" class="related-news-img me-3">
+                                                <img src="{{ asset('assets/images/image-placeholder.png') }}"
+                                                    alt="{{ $item->title }}" class="related-news-img me-3">
                                             @endif
                                         @else
-                                            <img src="{{ asset('assets/images/logo_blue.png') }}" alt="Placeholder Image"
-                                                class="related-news-img me-3">
+                                            <img src="{{ asset('assets/images/image-placeholder.png') }}"
+                                                alt="{{ $item->title }}" class="related-news-img me-3">
                                         @endif
                                         <div class="flex-grow-1">
                                             <a href="{{ route('news.detail', $item->id) }}" class="text-decoration-none">

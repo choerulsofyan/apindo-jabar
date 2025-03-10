@@ -13,34 +13,37 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->string('company_name');
-            $table->text('company_address');
-            $table->string('city');
-            $table->string('postal_code');
-            $table->string('phone_number');
-            $table->string('fax')->nullable();
-            $table->string('website')->nullable();
-            $table->string('email'); // Or company_email, consider which one is primary
-            $table->string('klbi')->nullable();
-            $table->text('other_business_activities')->nullable();
-            $table->string('company_status'); // Store as string, use checkboxes for input in the form
-            $table->string('investment_facilities')->nullable(); // Store as string, use checkboxes for input in the form
-            $table->integer('number_of_employees');
-            $table->string('work_regulations');
-            $table->string('work_regulation_others')->nullable(); // To store "Others" specification for Work Regulations
-            $table->string('bpjs')->nullable(); // Store as string, use checkboxes for input
-            $table->enum('labor_union', ['Exists', 'Does Not Exist']);
-            $table->enum('contribution_period', ['1 Month', '3 Months', '6 Months', '12 Months']);
-            $table->string('how_they_learned_about_apindo')->nullable();
-            $table->string('how_they_learned_about_apindo_board_member')->nullable(); // To store "APINDO Board Member" specification
-            $table->string('how_they_learned_about_apindo_others')->nullable(); // To store "Others" specification for How They Learned
-            $table->string('declaration_letter')->nullable(); // Path to PDF
-            $table->string('pp_pkb')->nullable(); // Path to PDF
-            $table->string('company_profile')->nullable(); // Path to PDF
-            $table->string('tdp')->nullable(); // Path to PDF
-            $table->string('contact_person');
-            $table->string('mobile_number');
-            $table->boolean('is_exraordinary_member')->default(false);
+            $table->string('company_name'); // Nama Perusahaan
+            $table->text('company_address'); // Alamat Perusahaan
+            $table->string('city'); // Kota/Kabupaten
+            $table->string('postal_code'); // Kode Pos
+            $table->string('phone_number'); // No. Telepon
+            $table->string('fax')->nullable(); // Fax
+            $table->string('website')->nullable(); // Website
+            $table->string('company_email'); // Email CP/Email Perusahaan
+            $table->string('klbi')->nullable(); // KLBI
+            $table->text('other_business_activities')->nullable(); // Kegiatan Usaha Lainnya
+            $table->string('company_status'); // Status Perusahaan (BUMN, BUMD, Swasta Nasional, Swasta Asing)
+            $table->boolean('investment_facilities_pma')->default(false);
+            $table->boolean('investment_facilities_pmdn')->default(false);
+            $table->boolean('investment_facilities_joint_venture')->default(false);
+            $table->integer('number_of_employees'); // Jumlah Tenaga Kerja
+            $table->string('work_regulations'); // Peraturan Kerja (Peraturan Perusahaan (PP), Perjanjian Kerja Bersama (PKB))
+            $table->string('work_regulation_others')->nullable(); // Peraturan Kerja Lainnya (Sebutkan)
+            $table->boolean('bpjs_kesehatan')->default(false);
+            $table->boolean('bpjs_ketenagakerjaan')->default(false);
+            $table->boolean('is_labor_union_exists'); // Serikat Pekerja (Ada, Belum Ada)
+            $table->integer('monthly_contribution_period'); // Periode Iuran (1 Bulan, 3 Bulan, 6 Bulan, 12 Bulan)
+            $table->string('how_they_learned_about_apindo')->nullable(); // Sumber Informasi Mengenai Apindo (Website APINDO)
+            $table->string('how_they_learned_about_apindo_board_member')->nullable(); // Sumber Informasi Mengenai Apindo (Pengurus APINDO, Sebutkan)
+            $table->string('how_they_learned_about_apindo_others')->nullable(); // Sumber Informasi Mengenai Apindo (Lainnya, Sebutkan)
+            $table->string('declaration_letter')->nullable(); // Surat Pernyataan (Path to PDF)
+            $table->string('pp_pkb')->nullable(); // PP & PKB (Path to PDF)
+            $table->string('company_profile')->nullable(); // Profil Perusahaan (Path to PDF)
+            $table->string('tdp')->nullable(); // TDP (Path to PDF)
+            $table->string('contact_person'); // Contact Person
+            $table->string('mobile_number'); // No. Handphone
+            $table->boolean('is_extraordinary_member')->default(false); // Tipe Anggota
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relation to User
             $table->timestamps();
         });

@@ -4,8 +4,9 @@
         <div class="swiper-slide" style="background-image: url('{{ asset('assets/images/hero-pattern.png') }}');">
             <div class="d-flex justify-content-center align-items-center h-100 position-relative">
                 <div class="text-left text-white p-4 position-absolute start-50 translate-middle-x" style="z-index: 10;">
-                    <h1 class="mb-3 display-4">Selamat datang di website APINDO Jabar</h1>
-                    <p class="mb-0 lead">KITA BISA, HARUS BISA, PASTI BISA</p>
+                    <h1 class="mb-3 display-4 fw-bolder text-white text-center">Selamat datang di website APINDO Jabar
+                    </h1>
+                    <p class="mb-0 lead fw-bold text-center">KITA BISA, HARUS BISA, PASTI BISA</p>
                 </div>
                 <div class="overlay"></div>
             </div>
@@ -13,25 +14,27 @@
 
         {{-- Dynamic Slides from News --}}
         @foreach ($newsSlides as $news)
-            <div class="swiper-slide"
+            <a href="{{ route('news.detail', $news->id) }}" class="swiper-slide"
                 style="background-image: url('{{ Storage::url('images/news/' . $news->photo) }}');">
                 <div class="d-flex justify-content-center align-items-center h-100 position-relative">
                     <div class="text-left text-white p-4 position-absolute start-50 translate-middle-x"
                         style="z-index: 10;">
-                        <h1 class="mb-3 display-4">{{ $news->title }}</h1>
-                        <p class="mb-0 lead">{{ $news->short_content }}</p>
+                        <h1 class="mb-3 display-4 fw-bold text-white">{{ $news->title }}</h1>
+                        <div class="mb-0 lead">{!! $news->short_content !!}</div>
                     </div>
-                    {{-- <div class="overlay"></div> --}}
+                    <div class="overlay-black"></div>
                 </div>
-            </div>
+            </a>
         @endforeach
 
         {{-- Static Slide 2 --}}
         <div class="swiper-slide" style="background-image: url('{{ asset('assets/images/hero-pattern.png') }}');">
             <div class="d-flex justify-content-center align-items-center h-100 position-relative">
-                <div class="text-left text-white p-4 position-absolute start-50 translate-middle-x"
+                <div class="text-left text-white text-center p-4 position-absolute start-50 translate-middle-x"
                     style="z-index: 10;">
-                    <h1 class="mb-3 display-4">Bergabunglah menjadi anggota untuk mendapatkan info regulasi dan bisnis
+                    <h1 class="mb-3 display-4 fw-bolder text-white">Bergabunglah menjadi anggota untuk mendapatkan info
+                        regulasi
+                        dan bisnis
                     </h1>
                 </div>
                 <div class="overlay"></div>
@@ -67,7 +70,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(2, 126, 182, 0.7);
+            background-color: rgba(2, 126, 182, 0.75);
+        }
+
+        .overlay-black {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
         }
     </style>
 @endpush

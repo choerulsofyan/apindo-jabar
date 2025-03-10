@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
-    <title>@yield('title', config('app.name'))</title>
+    <title>@yield('title', config('app.name', 'APINDO Jawa Barat'))</title>
+    <meta name="description" content="@yield('meta_description', Str::limit(strip_tags('APINDO adalah perkumpulan yang beranggotakan Pengusaha dan atau Perusahaan yang berdomisili di Indonesia, bersifat demokratis, bebas, mandiri, dan bertanggung jawab yang menangani kegiatan dunia usaha dalam arti yang luas.'), 155))">
 
     {{-- Include your public CSS and JS files here --}}
     @vite(['resources/sass/public/public-app.scss', 'resources/js/public/app.js'])
