@@ -11,6 +11,8 @@ export default defineConfig({
                 "node_modules/admin-lte/dist/js/adminlte.min.js",
                 "node_modules/admin-lte/dist/css/adminlte.min.css",
                 "resources/sass/public/public-app.scss",
+                "resources/js/public/swiper.js",
+                "resources/js/public/app.js",
             ],
             refresh: true,
         }),
