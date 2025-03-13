@@ -41,15 +41,15 @@ mkdir -p $LARAVEL_DIR/public/build
 echo "Step 9/10: Moving manifest file..."
 mv public_html/build/manifest.json $LARAVEL_DIR/public/build/
 
-# Langkah 10: Update index.php
-echo "Step 10/10: Modifying index.php..."
-sed -i \
-  -e "s/__DIR__.'\/..\/vendor/__DIR__.'\/..\/$LARAVEL_DIR\/vendor/g" \
-  -e "s/__DIR__.'\/..\/bootstrap/__DIR__.'\/..\/$LARAVEL_DIR\/bootstrap/g" \
+# Langkah 10: Update index.php (Fix untuk macOS)
+echo "Step 10/10: Modifying index.php (macOS compatible)..."
+sed -i '' \
+  -e "34s|../vendor|../laravel/vendor|" \
+  -e "47s|../bootstrap|../laravel/bootstrap|" \
   public_html/index.php
 
-# Tambahkan binding path public
-echo -e "\n\$app->bind('path.public', function() {\n    return __DIR__;\n});" >> public_html/index.php
+# Binding path public (tambahkan newline sebelum kode)
+printf "\n\$app->bind('path.public', function() {\n    return __DIR__;\n});" >> public_html/index.php
 
 # Set permissions
 chmod -R 755 $LARAVEL_DIR/storage
