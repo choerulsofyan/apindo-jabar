@@ -72,19 +72,17 @@
                                     <td>{{ $council->name }}</td>
                                     <td class="text-center">
                                         @can('DEWAN_LIST')
-                                            <a class="btn btn-info btn-sm"
-                                                href="{{ route('mindo.councils.show', $council->id) }}">
+                                            <a class="btn btn-info" href="{{ route('mindo.councils.show', $council->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('DEWAN_EDIT')
-                                            <a class="btn btn-warning btn-sm"
-                                                href="{{ route('mindo.councils.edit', $council->id) }}">
+                                            <a class="btn btn-warning" href="{{ route('mindo.councils.edit', $council->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('DEWAN_DELETE')
-                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#deleteConfirmationModal" data-item-id="{{ $council->id }}"
                                                 data-item-name="{{ $council->name }}"
                                                 data-delete-route="{{ route('mindo.councils.destroy', $council->id) }}">
