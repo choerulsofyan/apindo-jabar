@@ -1,106 +1,144 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Activity Log Detail')
+@section('title', 'Detail Log Aktivitas')
+
+@section('subheader')
+    @include('admin.partials.subheader', [
+        'title' => 'Manajemen Log Aktivitas',
+        'breadcrumbs' => [
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Log Aktivitas', 'url' => route('mindo.activity-logs.index')],
+            ['name' => 'Detail', 'url' => '#'],
+        ],
+    ])
+@endsection
 
 @section('content')
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Activity Log Detail</h3>
-            </div>
-            <div class="card-body">
-                <p><strong>Log Name:</strong> {{ $activity->log_name }}</p>
-                <p><strong>Description:</strong> {{ $activity->description }}</p>
-                <p><strong>Causer:</strong>
-                    @if ($activity->causer)
-                        {{ $activity->causer->name }}
-                    @else
-                        System
-                    @endif
-                </p>
-                <p><strong>Email:</strong>
-                    @if ($activity->causer)
-                        {{ $activity->causer->email }}
-                    @else
-                        -
-                    @endif
-                </p>
-                {{-- <p><strong>Subject:</strong>
-                    @if ($activity->subject)
-                        {{ class_basename($activity->subject_type) }} (ID: {{ $activity->subject_id }})
-                    @else
-                        -
-                    @endif
-                </p> --}}
-                <p><strong>Timestamp:</strong> {{ $activity->created_at->toDateTimeString() }}
-                    ({{ $activity->created_at->diffForHumans() }})</p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="card-title mb-0">Detail Log Aktivitas</h3>
+                </div>
 
-                @if ($activity->log_name === 'authentication' && $activity->properties && $activity->properties->count() > 0)
-                    <h4>Properties:</h4>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Key</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($activity->properties as $key => $value)
-                                <tr>
-                                    <td>{{ $key }}</td>
-                                    <td>
-                                        @if (is_array($value))
-                                            {{ json_encode($value) }}
-                                        @else
-                                            {{ $value }}
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @endif
+                <div class="card-body">
+                    <dl class="row mb-4">
+                        <!-- Log Name -->
+                        <dt class="col-sm-3 text-muted">Nama Log</dt>
+                        <dd class="col-sm-9">{{ $activity->log_name }}</dd>
 
-                @if ($activity->changes && $activity->changes->has('attributes'))
-                    <h4>Changes:</h4>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Attribute</th>
-                                <th>Old Value</th>
-                                <th>New Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($activity->changes['attributes'] as $attribute => $newValue)
-                                <tr>
-                                    <td>{{ $attribute }}</td>
-                                    <td>
-                                        @if (isset($activity->changes['old'][$attribute]))
-                                            @if (is_array($activity->changes['old'][$attribute]))
-                                                {{ json_encode($activity->changes['old'][$attribute]) }}
-                                            @else
-                                                {{ $activity->changes['old'][$attribute] }}
-                                            @endif
-                                        @else
-                                            -
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if (is_array($newValue))
-                                            {{ json_encode($newValue) }}
-                                        @else
-                                            {{ $newValue }}
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @endif
-            </div>
-            <div class="card-footer">
-                <a href="{{ route('mindo.activity-logs.index') }}" class="btn btn-secondary">Back to List</a>
+                        <!-- Description -->
+                        <dt class="col-sm-3 text-muted">Deskripsi</dt>
+                        <dd class="col-sm-9">{{ $activity->description }}</dd>
+
+                        <!-- Causer -->
+                        <dt class="col-sm-3 text-muted">Pemicu</dt>
+                        <dd class="col-sm-9">
+                            @if ($activity->causer)
+                                {{ $activity->causer->name }}
+                            @else
+                                Sistem
+                            @endif
+                        </dd>
+
+                        <!-- Email -->
+                        <dt class="col-sm-3 text-muted">Email</dt>
+                        <dd class="col-sm-9">
+                            @if ($activity->causer)
+                                {{ $activity->causer->email }}
+                            @else
+                                -
+                            @endif
+                        </dd>
+
+                        <!-- Timestamp -->
+                        <dt class="col-sm-3 text-muted">Waktu</dt>
+                        <dd class="col-sm-9">
+                            {{ $activity->created_at->translatedFormat('d F Y H:i') }}
+                            <small class="text-muted">({{ $activity->created_at->diffForHumans() }})</small>
+                        </dd>
+                    </dl>
+
+                    <!-- Properties Table -->
+                    @if ($activity->log_name === 'authentication' && $activity->properties && $activity->properties->count() > 0)
+                        <div class="mt-4">
+                            <h5 class="mb-3">Properti</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Kunci</th>
+                                            <th>Nilai</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($activity->properties as $key => $value)
+                                            <tr>
+                                                <td>{{ $key }}</td>
+                                                <td>
+                                                    @if (is_array($value))
+                                                        {{ json_encode($value) }}
+                                                    @else
+                                                        {{ $value }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- Changes Table -->
+                    @if ($activity->changes && $activity->changes->has('attributes'))
+                        <div class="mt-4">
+                            <h5 class="mb-3">Perubahan</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Atribut</th>
+                                            <th>Nilai Lama</th>
+                                            <th>Nilai Baru</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($activity->changes['attributes'] as $attribute => $newValue)
+                                            <tr>
+                                                <td>{{ $attribute }}</td>
+                                                <td>
+                                                    @if (isset($activity->changes['old'][$attribute]))
+                                                        @if (is_array($activity->changes['old'][$attribute]))
+                                                            {{ json_encode($activity->changes['old'][$attribute]) }}
+                                                        @else
+                                                            {{ $activity->changes['old'][$attribute] }}
+                                                        @endif
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if (is_array($newValue))
+                                                        {{ json_encode($newValue) }}
+                                                    @else
+                                                        {{ $newValue }}
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+
+                <div class="card-footer d-flex justify-content-end">
+                    <a href="{{ route('mindo.activity-logs.index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-2"></i> Kembali ke Daftar
+                    </a>
+                </div>
             </div>
         </div>
     </div>
