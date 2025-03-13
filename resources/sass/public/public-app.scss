@@ -353,6 +353,9 @@ footer a {
         url("../../../public/assets/images/bg-light-gradient.png");
 }
 
+.link-to-whatsapp {
+    text-decoration: none;
+}
 // #testimoni-section {
 //     background-position: center bottom;
 //     background-repeat: no-repeat;
@@ -377,3 +380,26 @@ footer a {
 //         url("../../../public/assets/images/bg-gradient-x2.png");
 //     background-color: var(--bs-light);
 // }
+
+#calendar {
+    max-width: 1000px;
+    margin: 40px auto;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+
+    a.fc-event {
+        text-decoration: none !important;
+        color: inherit;
+    }
+
+    // Remove underlines from date numbers *specifically* in the month view
+    .fc-daygrid-day.fc-day-today .fc-daygrid-day-number, /* Target 'today' specifically */
+    .fc-daygrid-day .fc-daygrid-day-number, .fc-col-header-cell-cushion, .fc-list-day-text, .fc-list-day-side-text {
+        /* Target all other days */
+        text-decoration: none !important;
+        color: inherit;
+        &:hover {
+            text-decoration: none !important; // Prevent hover underline
+        }
+    }
+}

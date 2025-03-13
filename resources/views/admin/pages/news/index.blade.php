@@ -41,9 +41,9 @@
                         <thead>
                             <tr>
                                 <th class="text-center w-5">#</th>
-                                <th class="w-50">Judul</th>
-                                <th class="">Dibuat</th>
-                                <th class="">Tempat</th>
+                                <th class="w-45">Judul</th>
+                                <th class="w-20 text-center">Tempat</th>
+                                <th class="w-15 text-center">Dibuat</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -52,8 +52,8 @@
                                 <tr class="align-middle">
                                     <td class="text-center">{{ ++$i }}</td>
                                     <td>{{ $item->title }}</td>
-                                    <td>{{ $item->created_at }}</td>
-                                    <td>{{ $item->place }}</td>
+                                    <td class="text-center">{{ $item->place }}</td>
+                                    <td class="text-center">{{ $item->created_at }}</td>
                                     <td class="text-center">
                                         @can('BERITA_LIST')
                                             <a class="btn btn-info" href="{{ route('mindo.news.show', $item->id) }}">

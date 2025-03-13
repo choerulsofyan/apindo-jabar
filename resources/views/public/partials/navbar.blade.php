@@ -5,8 +5,12 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="text-start d-none d-sm-block">
-                    <i class="bi bi-telephone-fill text-primary me-2"></i>
-                    <small>+62-812-2360-9501 (Whatsapp Only)</small>
+                    <i class="bi bi-whatsapp text-primary me-2"></i>
+                    <small>
+                        <a href="https://wa.me/+6281223609501" class="link-to-whatsapp">
+                            +62-812-2360-9501
+                        </a>
+                    </small>
                 </div>
                 <div class="text-end">
                     <div id="google_translate_element"></div>
@@ -52,8 +56,8 @@
                             <li><a class="dropdown-item" href="{{ route('vision-mission') }}">Visi & Misi</a></li>
                             <li><a class="dropdown-item" href="{{ route('sectors') }}">Bidang</a></li>
                             @can('ANGGOTA_MENU_VIEW')
-                                <li><a class="dropdown-item" href="{{ route('managements') }}">Kepengurusan</a></li>
                                 <li><a class="dropdown-item" href="{{ route('dpkApindoJabar') }}">DPK APINDO Jabar</a></li>
+                                <li><a class="dropdown-item" href="{{ route('calendar.index') }}">Kalender Kegiatan</a></li>
                             @endcan
                         </ul>
                     </li>
@@ -82,6 +86,11 @@
                             <li><a class="dropdown-item" href="{{ route('home') }}#gallery-section">Galeri</a></li>
                         </ul>
                     </li>
+                    @can('ANGGOTA_MENU_VIEW')
+                        <li class="nav-item">
+                            <a class="nav-link fs-5" href="{{ route('managements') }}">KEPENGURUSAN</a>
+                        </li>
+                    @endcan
                     @can('ANGGOTA_MENU_VIEW')
                         <li class="nav-item">
                             <a class="nav-link fs-5" href="{{ route('regulations') }}">REGULASI</a>

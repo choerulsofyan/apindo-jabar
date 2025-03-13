@@ -25,6 +25,9 @@ class DatabaseSeeder extends Seeder
             UserPermissionSeeder::class,
             RolesPermissionSeeder::class,
             PermissionPermissionSeeder::class,
+            DashboardPermissionSeeder::class,
+            ActivityPermissionSeeder::class,
+            LogPermissionSeeder::class,
             // modules seeders
             // PermissionTableSeeder::class,
             RoleTableSeeder::class,

@@ -1,0 +1,127 @@
+@extends('admin.layouts.app')
+
+@section('title', 'Kegiatan')
+
+@section('subheader')
+    @include('admin.partials.subheader', [
+        'title' => 'Activity Management',
+        'breadcrumbs' => [
+            ['name' => 'Dashboard', 'url' => route('mindo.home')],
+            ['name' => 'Manajemen Kegiatan', 'url' => route('mindo.activities.index')],
+            ['name' => 'Daftar Kegiatan', 'url' => route('mindo.activities.index')],
+        ],
+    ])
+@endsection
+
+@section('content')
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fa fa-check"></i>
+            {{ $message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between">
+                    <h3 class="card-title">Daftar Kegiatan</h3>
+                    @can('KEGIATAN_ADD')
+                        <a href="{{ route('mindo.activities.create') }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-plus"></i> Buat Baru
+                        </a>
+                    @endcan
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th>Judul</th>
+                                <th>Waktu Mulai</th>
+                                <th>Waktu Selesai</th>
+                                <th>Tempat</th>
+                                <th class="text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($activities as $activity)
+                                <tr class="align-middle">
+                                    <td class="text-center">{{ ++$i }}</td>
+                                    <td>{{ $activity->title }}</td>
+                                    <td>{{ $activity->start_time->format('Y-m-d H:i') }}</td>
+                                    <td>{{ $activity->end_time ? $activity->end_time->format('Y-m-d H:i') : '-' }}</td>
+                                    <td>{{ $activity->place }}</td>
+                                    <td class="text-center">
+                                        <form action="{{ route('mindo.activities.destroy', $activity) }}" method="POST"
+                                            style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            @can('KEGIATAN_LIST')
+                                                <a class="btn btn-info" href="{{ route('mindo.activities.show', $activity) }}">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            @endcan
+                                            @can('KEGIATAN_EDIT')
+                                                <a class="btn btn-warning"
+                                                    href="{{ route('mindo.activities.edit', $activity) }}">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            @endcan
+                                            @can('KEGIATAN_DELETE')
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                    data-bs-target="#deleteConfirmationModal"
+                                                    data-item-id="{{ $activity->id }}" data-item-name="{{ $activity->title }}"
+                                                    data-delete-route="{{ route('mindo.activities.destroy', $activity) }}">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            @endcan
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center">Tidak ada data.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer clearfix">
+                    <div class="text-muted float-start">
+                        Showing {{ $activities->firstItem() }} to {{ $activities->lastItem() }} of
+                        {{ $activities->total() }} results
+                    </div>
+                    @if ($activities->hasPages())
+                        <ul class="pagination pagination-sm m-0 float-end">
+                            {{-- Previous Page Link --}}
+                            @if ($activities->onFirstPage())
+                                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                            @else
+                                <li class="page-item"><a class="page-link"
+                                        href="{{ $activities->previousPageUrl() }}">&laquo;</a></li>
+                            @endif
+
+                            {{-- Pagination Elements --}}
+                            @foreach ($activities->getUrlRange(1, $activities->lastPage()) as $page => $url)
+                                <li class="page-item {{ $activities->currentPage() == $page ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endforeach
+
+                            {{-- Next Page Link --}}
+                            @if ($activities->hasMorePages())
+                                <li class="page-item"><a class="page-link"
+                                        href="{{ $activities->nextPageUrl() }}">&raquo;</a></li>
+                            @else
+                                <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                            @endif
+                        </ul>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+    @include('admin.components.delete-confirmation-modal') {{-- Include modal --}}
+@endsection

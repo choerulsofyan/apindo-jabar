@@ -33,10 +33,12 @@
                             <i class="bi bi-file-text me-2"></i>
                             Bidang-bidang
                         </a>
-                        <a href="{{ route('dpkApindoJabar') }}" class="btn btn-outline-primary">
-                            <i class="bi bi-building me-2"></i>
-                            DPK APINDO Jabar
-                        </a>
+                        @can('ANGGOTA_MENU_VIEW')
+                            <a href="{{ route('dpkApindoJabar') }}" class="btn btn-outline-primary">
+                                <i class="bi bi-building me-2"></i>
+                                DPK APINDO Jabar
+                            </a>
+                        @endcan
                     </div>
                 </div>
             </div>

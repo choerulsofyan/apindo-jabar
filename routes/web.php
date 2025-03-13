@@ -15,6 +15,7 @@ use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\PesanController;
+use App\Http\Controllers\ActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,8 @@ Route::get('/dpk-apindo-jabar', [HomeController::class, 'dpkApindoJabar'])->name
 Route::get('/managements', [HomeController::class, 'managements'])->name('managements');
 Route::get('/regulations', [HomeController::class, 'regulations'])->name('regulations');
 Route::get('/news', [HomeController::class, 'news'])->name('allNews');
+Route::get('/calendar', [HomeController::class, 'calendar'])->name('calendar.index');
+Route::get('/activity/{activity}', [HomeController::class, 'activityShow'])->name('activity.show');
 
 Auth::routes(['verify' => true]);
 
@@ -61,7 +64,8 @@ Route::middleware(['auth', 'can:DASHBOARD'])->prefix('mindo')->name('mindo.')->g
         'councils'                => CouncilController::class,
         'managements'            => ManagementController::class,
         'galeri'                 => GaleriController::class,
-        'pesan'                => PesanController::class, // Assuming you meant 'messages' here
+        'pesan'                => PesanController::class,
+        'activities'                => ActivityController::class,
     ]);
 
     // Activity logs

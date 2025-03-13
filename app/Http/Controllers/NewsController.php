@@ -89,7 +89,17 @@ class NewsController extends Controller
      */
     public function show(News $news): View
     {
-        return view('admin.pages.news.show', compact('news'));
+        $imageSrc = asset('assets/images/no-image-available.png'); // Default placeholder
+
+        if ($news->photo) {
+            if (Storage::disk('public')->exists('images/news/' . $news->photo)) {
+                $imageSrc = Storage::url('images/news/' . $news->photo);
+            } else {
+                $imageSrc = asset('assets/images/image-not-found.png');
+            }
+        }
+
+        return view('admin.pages.news.show', compact('news', 'imageSrc'));
     }
 
     /**

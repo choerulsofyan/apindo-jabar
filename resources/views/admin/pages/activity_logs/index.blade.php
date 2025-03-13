@@ -20,13 +20,13 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Log Name</th>
-                            <th>Description</th>
-                            <th>Causer</th>
+                            <th>Nama Log</th>
+                            <th>Deskripsi</th>
+                            <th class="text-center">Pemicu</th>
                             {{-- <th>Module</th> --}}
                             {{-- <th>Changes</th> --}}
-                            <th>Timestamp</th>
-                            <th>Action</th>
+                            <th class="text-center">Timestamp</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,7 +35,7 @@
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $activity->log_name }}</td>
                                 <td>{{ $activity->description }}</td>
-                                <td>
+                                <td class="text-center">
                                     @if ($activity->causer)
                                         {{ $activity->causer->name }}
                                     @else
@@ -63,12 +63,11 @@
                                     @endphp
                                     {{ $changes }}
                                 </td> --}}
-                                <td title="{{ $activity->created_at }}">
+                                <td title="{{ $activity->created_at }}" class="text-center">
                                     {{ $activity->created_at->diffForHumans() }}
                                 </td>
-                                <td>
-                                    <a href="{{ route('mindo.activity-logs.show', $activity->id) }}"
-                                        class="btn btn-sm btn-info">
+                                <td class="text-center">
+                                    <a href="{{ route('mindo.activity-logs.show', $activity->id) }}" class="btn btn-info">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

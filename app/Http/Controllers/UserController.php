@@ -89,7 +89,9 @@ class UserController extends Controller
     public function show(string $id): View
     {
         $user = User::find($id);
-        return view('admin.pages.users.show', compact('user'));
+        $roles = Role::pluck('name', 'name')->all();
+        $userRole = $user->roles->pluck('name', 'name')->all();
+        return view('admin.pages.users.show', compact('user', 'roles', 'userRole'));
     }
 
     /**

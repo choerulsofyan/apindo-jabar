@@ -9,6 +9,8 @@ window.Swiper = Swiper;
 
 import lightbox from "lightbox2";
 
+import "./calendar.js";
+
 document.addEventListener("DOMContentLoaded", function () {
     lightbox.option({
         resizeDuration: 200,
