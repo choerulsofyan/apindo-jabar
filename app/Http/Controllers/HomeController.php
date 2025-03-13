@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use App\Models\Galeri;
 use App\Models\Management;
 use App\Models\News;
@@ -349,11 +350,11 @@ class HomeController extends Controller
         }
 
         // Sort by title or date
-        $sortBy = $request->input('sort_by', 'date'); // Default sort by date
+        $sortBy = $request->input('sort_by', 'name'); // Default sort by date
         $sortOrder = $request->input('sort_order', 'desc'); // Default sort order (descending for date)
 
-        if (!in_array($sortBy, ['name', 'date'])) {
-            $sortBy = 'date'; // Default sort column if invalid value is provided
+        if (!in_array($sortBy, ['name'])) {
+            $sortBy = 'name'; // Default sort column if invalid value is provided
         }
 
         if (!in_array($sortOrder, ['asc', 'desc'])) {
@@ -366,5 +367,33 @@ class HomeController extends Controller
 
         return view('public.pages.managements', compact('managements', 'perPage'))
             ->with('i', ($request->input('page', 1) - 1) * $perPage);
+    }
+
+    public function calendar(): View
+    {
+        $activities = Activity::all(); // Get *all* activities
+
+        $events = [];
+        foreach ($activities as $activity) {
+            $events[] = [
+                'title' => $activity->title,
+                'start' => $activity->start_time->toIso8601String(), // Format for FullCalendar
+                'end' => $activity->end_time ? $activity->end_time->toIso8601String() : null, // Handle nullable end_time
+                // 'url' => route('activity.show', $activity->slug), // Example - link to a details page
+                'extendedProps' => [ //store additional data
+                    'place' => $activity->place,
+                    'description' => $activity->description
+                ]
+
+            ];
+        }
+
+        return view('public.pages.calendar', compact('events'));
+    }
+
+    // Add show method
+    public function activityShow(Activity $activity): View
+    {
+        return view('public.pages.activity_show', compact('activity'));
     }
 }

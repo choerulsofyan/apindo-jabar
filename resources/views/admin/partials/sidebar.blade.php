@@ -1,6 +1,6 @@
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
     <div class="sidebar-brand" style="background-color: #fcfcfc">
-        <a href="../index.html" class="brand-link">
+        <a href="{{ route('mindo.home') }}" class="brand-link">
             <img src="{{ asset('assets/images/logo-apindo.jpg') }}" alt="AdminLTE Logo" class="brand-image" />
             {{-- <span class="brand-text fw-light">APINDO JABAR</span> --}}
         </a>
@@ -9,7 +9,7 @@
         <nav class="mt-2">
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="../generate/theme.html"
+                    <a href="{{ route('mindo.home') }}"
                         class="nav-link {{ Request::routeIs('mindo/dashboard') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>Dashboard</p>
@@ -68,6 +68,16 @@
                     </li>
                 @endcan
 
+                @can('KEGIATAN_LIST')
+                    <li class="nav-item">
+                        <a href="{{ route('mindo.activities.index') }}"
+                            class="nav-link {{ Request::is('mindo/activities*') ? 'active' : '' }}">
+                            <i class="nav-icon fa-regular fa-calendar-days"></i>
+                            <p>Kegiatan</p>
+                        </a>
+                    </li>
+                @endcan
+
                 @can('KEANGGOTAAN_LIST')
                     <li class="nav-item">
                         <a href="{{ route('mindo.members.index') }}"
@@ -83,7 +93,7 @@
                         <a href="{{ route('mindo.regulations.index') }}"
                             class="nav-link {{ Request::is('mindo/regulations*') ? 'active' : '' }}">
                             <i class="nav-icon fa-solid fa-file-contract"></i>
-                            <p>Regulation</p>
+                            <p>Regulasi</p>
                         </a>
                     </li>
                 @endcan
