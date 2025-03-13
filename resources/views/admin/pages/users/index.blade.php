@@ -91,18 +91,17 @@
                                     </td>
                                     <td class="text-center">
                                         @can('USER_LIST')
-                                            <a class="btn btn-info btn-sm" href="{{ route('mindo.users.show', $user->id) }}">
+                                            <a class="btn btn-info" href="{{ route('mindo.users.show', $user->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('USER_EDIT')
-                                            <a class="btn btn-warning btn-sm"
-                                                href="{{ route('mindo.users.edit', $user->id) }}">
+                                            <a class="btn btn-warning" href="{{ route('mindo.users.edit', $user->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('USER_DELETE')
-                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#deleteConfirmationModal" data-item-id="{{ $user->id }}"
                                                 data-item-name="{{ $user->name }}"
                                                 data-delete-route="{{ route('mindo.users.destroy', $user->id) }}">

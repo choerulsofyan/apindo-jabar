@@ -39,7 +39,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center">#</th>
-                                <th>Company</th>
+                                <th>Perusahaan</th>
                                 <th>Contact Person</th>
                                 <th>Email</th>
                                 <th class="text-center">Actions</th>
@@ -51,7 +51,7 @@
                                     <td class="text-center">{{ ++$i }}</td>
                                     <td>{{ $member->company_name }}</td>
                                     <td>{{ $member->contact_person }}</td>
-                                    <td>{{ $member->email }}</td>
+                                    <td>{{ $member->company_email }}</td>
                                     <td class="text-center">
                                         @can('KEANGGOTAAN_LIST')
                                             <a class="btn btn-info" href="{{ route('mindo.members.show', $member->id) }}">

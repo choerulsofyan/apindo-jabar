@@ -39,9 +39,9 @@
                         <thead>
                             <tr>
                                 <th class="text-center w-5">#</th>
-                                <th class="w-20">Judul</th>
-                                <th class="w-10">Tanggal</th>
-                                <th class="">File</th>
+                                <th class="w-45">Judul</th>
+                                <th class="w-15 text-center">Tanggal</th>
+                                <th class="w-20 text-center">File Regulasi</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -50,12 +50,12 @@
                                 <tr class="align-middle">
                                     <td class="text-center">{{ ++$i }}</td>
                                     <td>{{ $item->title }}</td>
-                                    <td>{{ $item->date }}</td>
-                                    <td>
+                                    <td class="text-center">{{ $item->date }}</td>
+                                    <td class="text-center">
                                         @if ($item->file)
                                             <a href="{{ Storage::url('public/regulations/' . $item->file) }}"
-                                                target="_blank">
-                                                <i class="fa fa-file-pdf"></i> {{ $item->file }}
+                                                target="_blank" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-file-pdf me-1"></i> Lihat File Regulasi
                                             </a>
                                         @else
                                             N/A
@@ -63,19 +63,17 @@
                                     </td>
                                     <td class="text-center">
                                         @can('REGULASI_LIST')
-                                            <a class="btn btn-info btn-sm"
-                                                href="{{ route('mindo.regulations.show', $item->id) }}">
+                                            <a class="btn btn-info" href="{{ route('mindo.regulations.show', $item->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                         @endcan
                                         @can('REGULASI_EDIT')
-                                            <a class="btn btn-warning btn-sm"
-                                                href="{{ route('mindo.regulations.edit', $item->id) }}">
+                                            <a class="btn btn-warning" href="{{ route('mindo.regulations.edit', $item->id) }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         @endcan
                                         @can('REGULASI_DELETE')
-                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#deleteConfirmationModal" data-item-id="{{ $item->id }}"
                                                 data-item-name="{{ $item->title }}"
                                                 data-delete-route="{{ route('mindo.regulations.destroy', $item->id) }}">
