@@ -27,6 +27,7 @@ export default defineConfig({
             // "~quill": path.resolve(__dirname, "node_modules/quill"),
             "~swiper": path.resolve(__dirname, "node_modules/swiper"),
             "~lightbox2": path.resolve(__dirname, "node_modules/lightbox2"), // Add alias for lightbox2
+            "~quill": path.resolve(__dirname, "node_modules/quill"), // Add alias for Quill
         },
     },
 });

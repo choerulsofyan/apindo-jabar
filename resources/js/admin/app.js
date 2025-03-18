@@ -7,6 +7,9 @@ window.$ = window.jQuery = $;
 // Import AdminLTE JavaScript
 import "admin-lte/dist/js/adminlte.min.js";
 
+import Quill from "quill";
+window.Quill = Quill;
+
 // Import OverlayScrollbars JS
 
 // import "overlayscrollbars/overlayscrollbars.css";
