@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use Mews\Purifier\Facades\Purifier;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class News extends Model
 {
@@ -26,5 +29,12 @@ class News extends Model
             ->dontSubmitEmptyLogs()
             ->useLogName('Berita')
             ->setDescriptionForEvent(fn(string $eventName) => "Berita {$eventName}");
+    }
+
+    public function shortContent(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => Str::words(strip_tags(Purifier::clean($this->content), '<p><strong><em><ul><ol><li><a>'), 25, '...')
+        );
     }
 }
