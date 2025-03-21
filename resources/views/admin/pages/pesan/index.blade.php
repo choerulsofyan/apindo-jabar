@@ -36,10 +36,10 @@
                             <tr>
                                 <th class="text-center w-5">#</th>
                                 <th class="">Tanggal</th>
-                                <th class="">Nama</th>
+                                <th class="">Nama Pengirim</th>
                                 <th class="">Email</th>
-                                <th class="">Phone</th>
-                                <th class="">Pesan</th>
+                                {{-- <th class="">Pesan</th> --}}
+                                <th class="">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,14 +49,20 @@
                                     <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('Y-m-d') }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
-                                    <td>{{ $item->phone }}</td>
-                                    <td id="pesan">
+                                    {{-- <td id="pesan">
                                         {{ Str::limit($item->pesan, 50) }}
                                         @if (strlen($item->pesan) > 50)
                                             <span id="moreText" style="display:none;">{{ substr($item->pesan, 50) }}</span>
                                             <a href="javascript:void(0);" id="toggleText" class="text-primary">Lihat
                                                 lebih</a>
                                         @endif
+                                    </td> --}}
+                                    <td>
+                                        @can('PESAN_LIST')
+                                            <a class="btn btn-info" href="{{ route('mindo.pesan.show', $item->id) }}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
