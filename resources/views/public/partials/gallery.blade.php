@@ -22,7 +22,7 @@
                 @endforeach
                 <div class="text-start mt-5">
                     <h5>
-                        <a href="{{ route('home') }}" class="text-decoration-none">
+                        <a href="{{ route('gallery.all') }}" class="text-decoration-none">
                             Lihat Semua Galeri
                             <i class="bi bi-arrow-right ms-2"></i>
                         </a>

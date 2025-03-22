@@ -32,6 +32,7 @@ use App\Http\Controllers\ActivityController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/news/{news}', [HomeController::class, 'newsDetail'])->name('news.detail');
 Route::get('/gallery/{galeri}', [HomeController::class, 'galeriDetail'])->name('galeri.detail');
+Route::get('/galleryAll', [GaleriController::class, 'galleryAll'])->name('gallery.all');
 Route::get('/history', [HomeController::class, 'history'])->name('history');
 Route::get('/vision-mission', [HomeController::class, 'visionMission'])->name('vision-mission');
 Route::get('/sectors', [HomeController::class, 'sectors'])->name('sectors');
