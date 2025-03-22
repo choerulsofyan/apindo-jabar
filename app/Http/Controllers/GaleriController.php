@@ -95,4 +95,10 @@ class GaleriController extends Controller
             'alert-type' => 'success'
         ]);
     }
+
+    public function galleryAll()
+    {
+        $latestImages = Galeri::latest()->paginate(10);
+        return view('public.pages.galeri.show', compact('latestImages'));
+    }
 }
