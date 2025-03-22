@@ -9,6 +9,7 @@ use App\Models\Galeri;
 use App\Models\Management;
 use App\Models\News;
 use App\Models\Regulation;
+use App\Models\Testimoni;
 use Illuminate\View\View;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -76,7 +77,9 @@ class HomeController extends Controller
             // }
         });
 
-        return view('public.pages.index', compact('latestNews', 'latestImages', 'newsSlides'));
+        $testimonis = Testimoni::all();
+
+        return view('public.pages.index', compact('latestNews', 'latestImages', 'newsSlides', 'testimonis'));
     }
 
     public function newsDetail(News $news): View

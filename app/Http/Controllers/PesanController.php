@@ -55,9 +55,9 @@ class PesanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pesan $pesan)
+    public function show(Pesan $pesan): View
     {
-        //
+        return view('admin.pages.pesan.show', compact('pesan'));
     }
 
     /**

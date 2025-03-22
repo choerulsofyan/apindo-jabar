@@ -1,14 +1,14 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Pesan')
+@section('title', 'Testimoni')
 
 @section('subheader')
     @include('admin.partials.subheader', [
-        'title' => 'Pesan',
+        'title' => 'Testimoni',
         'breadcrumbs' => [
             ['name' => 'Dashboard', 'url' => route('mindo.home')],
-            ['name' => 'Pesan', 'url' => route('mindo.pesan.index')],
-            ['name' => 'Daftar Pesan', 'url' => route('mindo.pesan.index')],
+            ['name' => 'Testimoni', 'url' => route('mindo.testimoni.index')],
+            ['name' => 'Daftar Testimoni', 'url' => route('mindo.testimoni.index')],
         ],
     ])
 @endsection
@@ -27,7 +27,10 @@
         <div class="col-md-12">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
-                    <h3 class="card-title">Daftar Pesan</h3>
+                    <h3 class="card-title">List Testimoni</h3>
+                    <a href="{{ route('mindo.testimoni.create') }}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>
+                        Tambah
+                        Baru</a>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -35,10 +38,9 @@
                         <thead>
                             <tr>
                                 <th class="text-center w-5">#</th>
-                                <th class="">Tanggal</th>
-                                <th class="">Nama Pengirim</th>
-                                <th class="">Email</th>
-                                {{-- <th class="">Pesan</th> --}}
+                                <th class="">Nama</th>
+                                <th class="">Jenis Pekerjaan</th>
+                                <th class="">Deskripsi</th>
                                 <th class="">Aksi</th>
                             </tr>
                         </thead>
@@ -46,22 +48,33 @@
                             @foreach ($data as $key => $item)
                                 <tr class="align-middle">
                                     <td class="text-center">{{ ++$i }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('Y-m-d') }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->email }}</td>
-                                    {{-- <td id="pesan">
-                                        {{ Str::limit($item->pesan, 50) }}
-                                        @if (strlen($item->pesan) > 50)
-                                            <span id="moreText" style="display:none;">{{ substr($item->pesan, 50) }}</span>
-                                            <a href="javascript:void(0);" id="toggleText" class="text-primary">Lihat
-                                                lebih</a>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->jenis_pekerjaan }}</td>
+                                    <td style="max-width: 300px; overflow: hidden; word-wrap: break-word;">
+                                        {{ Str::limit($item->deskripsi, 50) }}
+                                        @if (strlen($item->deskripsi) > 50)
+                                            <span class="moreText" style="display: none;">{{ substr($item->deskripsi, 50) }}</span>
+                                            <a href="javascript:void(0);" class="toggleText text-primary">Lihat lebih banyak</a>
                                         @endif
-                                    </td> --}}
+                                    </td>
                                     <td>
-                                        @can('PESAN_LIST')
-                                            <a class="btn btn-info" href="{{ route('mindo.pesan.show', $item->id) }}">
+                                        @can('TESTIMONI_LIST')
+                                            <a class="btn btn-info" href="{{ route('mindo.testimoni.show', $item->id) }}">
                                                 <i class="fa fa-eye"></i>
                                             </a>
+                                        @endcan
+                                        @can('TESTIMONI_EDIT')
+                                            <a class="btn btn-warning" href="{{ route('mindo.testimoni.edit', $item->id) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        @endcan
+                                        @can('TESTIMONI_DELETE')
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteConfirmationModal" data-item-id="{{ $item->id }}"
+                                                data-item-name="{{ "Testimoni " . $item->nama }}"
+                                                data-delete-route="{{ route('mindo.testimoni.destroy', $item->id) }}">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
                                         @endcan
                                     </td>
                                 </tr>
@@ -114,18 +127,20 @@
 
 @push('scripts')
     <script>
-        document.getElementById('toggleText').addEventListener('click', function() {
-            // Menampilkan teks yang tersembunyi
-            var moreText = document.getElementById('moreText');
-            var toggleText = document.getElementById('toggleText');
-
-            if (moreText.style.display === "none") {
-                moreText.style.display = "inline";
-                toggleText.textContent = "Lihat lebih sedikit"; // Mengubah teks tautan
-            } else {
-                moreText.style.display = "none";
-                toggleText.textContent = "Lihat lebih"; // Mengubah teks tautan kembali
-            }
+       document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".toggleText").forEach(function (toggle) {
+                toggle.addEventListener("click", function () {
+                    var moreText = this.previousElementSibling;
+                    if (moreText.style.display === "none" || moreText.style.display === "") {
+                        moreText.style.display = "inline";
+                        this.textContent = "Lihat lebih sedikit";
+                    } else {
+                        moreText.style.display = "none";
+                        this.textContent = "Lihat lebih banyak";
+                    }
+                });
+            });
         });
+
     </script>
 @endpush
