@@ -176,6 +176,17 @@
                         </a>
                     </li>
                 @endcan
+
+                @can('TESTIMONI_LIST')
+                    <li class="nav-item">
+                        <a href="{{ route('mindo.testimoni.index') }}"
+                            class="nav-link {{ Request::is('mindo/testimoni*') ? 'active' : '' }}">
+                            <i class="nav-icon fa-solid fa-comment-dots"></i>
+                            <p>Testimoni</p>
+                        </a>
+                    </li>
+                @endcan
+
             </ul>
         </nav>
     </div>

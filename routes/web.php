@@ -16,6 +16,7 @@ use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\TestimoniController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,7 @@ Route::get('/regulations', [HomeController::class, 'regulations'])->name('regula
 Route::get('/news', [HomeController::class, 'news'])->name('allNews');
 Route::get('/calendar', [HomeController::class, 'calendar'])->name('calendar.index');
 Route::get('/activity/{activity}', [HomeController::class, 'activityShow'])->name('activity.show');
+Route::get('/testimoni', [TestimoniController::class, 'index'])->name('testimoni.index');
 
 Auth::routes(['verify' => true]);
 
@@ -67,6 +69,7 @@ Route::middleware(['auth', 'can:DASHBOARD'])->prefix('mindo')->name('mindo.')->g
         'galeri'                 => GaleriController::class,
         'pesan'                => PesanController::class,
         'activities'                => ActivityController::class,
+        'testimoni'                => TestimoniController::class,
     ]);
 
     // Activity logs
