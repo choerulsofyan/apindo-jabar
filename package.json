@@ -28,6 +28,7 @@
         "admin-lte": "^4.0.0-beta3",
         "bootstrap-icons": "^1.11.3",
         "jquery": "^3.7.1",
+        "mdb-ui-kit": "^8.2.0",
         "overlayscrollbars": "^2.10.1",
         "quill": "^2.0.3",
         "swiper": "^11.2.1",

@@ -16,6 +16,7 @@ use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\TestimoniController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ use App\Http\Controllers\ActivityController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/news/{news}', [HomeController::class, 'newsDetail'])->name('news.detail');
 Route::get('/gallery/{galeri}', [HomeController::class, 'galeriDetail'])->name('galeri.detail');
+Route::get('/galleryAll', [GaleriController::class, 'galleryAll'])->name('gallery.all');
 Route::get('/history', [HomeController::class, 'history'])->name('history');
 Route::get('/vision-mission', [HomeController::class, 'visionMission'])->name('vision-mission');
 Route::get('/sectors', [HomeController::class, 'sectors'])->name('sectors');
@@ -41,6 +43,7 @@ Route::get('/regulations', [HomeController::class, 'regulations'])->name('regula
 Route::get('/news', [HomeController::class, 'news'])->name('allNews');
 Route::get('/calendar', [HomeController::class, 'calendar'])->name('calendar.index');
 Route::get('/activity/{activity}', [HomeController::class, 'activityShow'])->name('activity.show');
+Route::get('/testimoni', [TestimoniController::class, 'index'])->name('testimoni.index');
 
 Auth::routes(['verify' => true]);
 
@@ -66,6 +69,7 @@ Route::middleware(['auth', 'can:DASHBOARD'])->prefix('mindo')->name('mindo.')->g
         'galeri'                 => GaleriController::class,
         'pesan'                => PesanController::class,
         'activities'                => ActivityController::class,
+        'testimoni'                => TestimoniController::class,
     ]);
 
     // Activity logs
