@@ -26,14 +26,28 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between">
-                    <h3 class="card-title">Daftar Berita</h3>
-                    @can('BERITA_ADD')
-                        <a href="{{ route('mindo.news.create') }}" class="btn btn-sm btn-primary">
-                            <i class="fa fa-plus"></i>
-                            Buat Baru
-                        </a>
-                    @endcan
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="card-title">Daftar Berita</h3>
+                        <div class="d-flex gap-1">
+                            {{-- Search Form --}}
+                            <form action="{{ route('mindo.news.index') }}" method="GET">
+                                <div class="input-group">
+                                    <input type="text" name="search" class="form-control form-control-sm"
+                                        placeholder="Search..." value="{{ request('search') }}">
+                                    <button class="btn btn-sm btn-secondary" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            @can('BERITA_ADD')
+                                <a href="{{ route('mindo.news.create') }}" class="btn btn-sm btn-primary">
+                                    <i class="fa fa-plus"></i>
+                                    Buat Baru
+                                </a>
+                            @endcan
+                        </div>
+                    </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -88,22 +102,49 @@
                     </div>
                     @if ($data->hasPages())
                         <ul class="pagination pagination-sm m-0 float-end">
+                            {{-- Previous Page Link --}}
                             @if ($data->onFirstPage())
                                 <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
                             @else
                                 <li class="page-item"><a class="page-link"
-                                        href="{{ $data->previousPageUrl() }}">&laquo;</a></li>
+                                        href="{{ $data->appends(request()->query())->previousPageUrl() }}"
+                                        rel="prev">&laquo;</a></li>
                             @endif
 
-                            @foreach ($data->getUrlRange(1, $data->lastPage()) as $page => $url)
-                                <li class="page-item {{ $data->currentPage() == $page ? 'active' : '' }}">
-                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                                </li>
-                            @endforeach
+                            {{-- Pagination Elements --}}
+                            {{-- We will use some simple logic to show only a few page numbers around the current page --}}
+                            @php
+                                $currentPage = $data->currentPage();
+                                $lastPage = $data->lastPage();
+                                $maxLinks = 5; // Number of links to show (adjust as needed)
+                                $halfMaxLinks = floor($maxLinks / 2);
 
-                            @if ($data->hasMorePages())
-                                <li class="page-item"><a class="page-link" href="{{ $data->nextPageUrl() }}">&raquo;</a>
+                                $start = max(1, $currentPage - $halfMaxLinks);
+                                $end = min($lastPage, $currentPage + $halfMaxLinks);
+
+                                // Adjust if we're near the beginning or end
+                                if ($end - $start + 1 < $maxLinks) {
+                                    if ($start == 1) {
+                                        $end = min($lastPage, $maxLinks);
+                                    } elseif ($end == $lastPage) {
+                                        $start = max(1, $lastPage - $maxLinks + 1);
+                                    }
+                                }
+                            @endphp
+
+                            @for ($page = $start; $page <= $end; $page++)
+                                <li class="page-item {{ $page == $currentPage ? 'active' : '' }}">
+                                    <a class="page-link"
+                                        href="{{ $data->appends(request()->query())->url($page) }}">{{ $page }}</a>
                                 </li>
+                            @endfor
+
+
+                            {{-- Next Page Link --}}
+                            @if ($data->hasMorePages())
+                                <li class="page-item"><a class="page-link"
+                                        href="{{ $data->appends(request()->query())->nextPageUrl() }}"
+                                        rel="next">&raquo;</a></li>
                             @else
                                 <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
                             @endif

@@ -44,6 +44,7 @@ Route::get('/news', [HomeController::class, 'news'])->name('allNews');
 Route::get('/calendar', [HomeController::class, 'calendar'])->name('calendar.index');
 Route::get('/activity/{activity}', [HomeController::class, 'activityShow'])->name('activity.show');
 Route::get('/testimoni', [TestimoniController::class, 'index'])->name('testimoni.index');
+Route::get('/news', [NewsController::class, 'allNews'])->name('news.index');
 
 Auth::routes(['verify' => true]);
 

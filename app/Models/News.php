@@ -34,7 +34,15 @@ class News extends Model
     public function shortContent(): Attribute
     {
         return Attribute::make(
-            get: fn() => Str::words(strip_tags(Purifier::clean($this->content), '<p><strong><em><ul><ol><li><a>'), 25, '...')
+            get: fn() => trim(
+                Str::words(
+                    strip_tags(
+                        html_entity_decode(Purifier::clean($this->content))
+                    ),
+                    60,
+                    '...'
+                )
+            )
         );
     }
 }
