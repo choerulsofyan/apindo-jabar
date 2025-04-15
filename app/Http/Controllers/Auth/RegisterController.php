@@ -153,22 +153,40 @@ class RegisterController extends Controller
                 'exception' => $e,
             ]);
 
-            print_r($e->getMessage());
-            exit();
-
-            // Return a user-friendly error.  Crucially, *don't* expose the raw exception.
-            return back()->withInput()->withErrors(['registration' => 'An error occurred during registration. Please try again.']);
+            // Do not terminate execution or print raw error messages
+            // Instead, throw the exception to be caught by the register method
+            throw $e;
         }
     }
 
     // Override the registration logic
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
-
-        event(new Registered($user = $this->create($request->all())));
-
-        return $this->registered($request, $user) ?: redirect($this->redirectPath());
+        // Validate the request data
+        $validator = $this->validator($request->all());
+        
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        try {
+            // Create the user and fire the Registered event
+            event(new Registered($user = $this->create($request->all())));
+            
+            // If successful, redirect as normal
+            return $this->registered($request, $user) ?: redirect($this->redirectPath());
+            
+        } catch (\Exception $e) {
+            // Log the error
+            Log::error('Registration failed: ' . $e->getMessage());
+            
+            // Return back with a friendly error message and preserve input
+            return redirect()->back()
+                ->withInput($request->except('password', 'password_confirmation'))
+                ->withErrors(['registration' => 'An error occurred during registration. Please try again or contact support.']);
+        }
     }
 
     protected function registered(Request $request, $user)

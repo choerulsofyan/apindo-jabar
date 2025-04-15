@@ -37,6 +37,16 @@
                 <div class="card">
                     <div class="card-header fw-bold">Formulir Pendaftaran Anggota APINDO DPP Jawa Barat</div>
                     <div class="card-body py-4">
+                        @if ($errors->any())
+                            <div class="alert alert-danger mb-4">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                             @csrf
                             <fieldset>
