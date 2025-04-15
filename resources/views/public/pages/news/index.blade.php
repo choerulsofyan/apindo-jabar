@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container my-5">
-        <h1 class="mb-4 text-center">Berita</h1>
+        <h1 class="mb-4 text-center pt-5 pb-5 fw-bold">Berita</h1>
 
         <div class="row mb-4 g-3 align-items-center">
             {{-- Search Form --}}
