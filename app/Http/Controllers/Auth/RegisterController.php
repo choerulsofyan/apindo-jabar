@@ -37,7 +37,24 @@ class RegisterController extends Controller
 
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        // Pre-process website field to add http:// if missing - BEFORE validation
+        if (!empty($data['website'])) {
+            // Format the domain structure first by removing any existing schema
+            $website = preg_replace("~^(?:f|ht)tps?://~i", "", $data['website']);
+            
+            // Check if the domain has a valid structure (requires at least one dot and a TLD)
+            if (!preg_match('/^[a-z0-9]+([\.\-][a-z0-9]+)+$/i', $website)) {
+                // If domain is invalid, don't modify it - let validation fail
+                $data['website_invalid'] = true; // Flag for validation
+            } else {
+                // Domain structure looks valid, add http:// if missing
+                if (!preg_match("~^(?:f|ht)tps?://~i", $data['website'])) {
+                    $data['website'] = "http://" . $data['website'];
+                }
+            }
+        }
+        
+        $validator = Validator::make($data, [
             'is_extraordinary_member' => ['required', 'boolean'],
             'company_name' => ['required', 'string'],
             'company_address' => ['required', 'string'],
@@ -45,19 +62,19 @@ class RegisterController extends Controller
             'postal_code' => ['required', 'string'],
             'phone_number' => ['required', 'string'],
             'fax' => ['nullable', 'string'],
-            'website' => ['nullable', 'url'],
+            'website' => ['nullable', 'url'], // Changed back to 'url' since we're preprocessing
             'company_email' => ['required', 'string', 'email', 'max:255', 'unique:members'],
             'klbi' => ['required', 'string'],
             'other_business_activities' => ['nullable', 'string'],
             'company_status' => ['required', 'string'],
-            'investment_facilities_pma' => ['nullable', 'boolean'], // Now boolean
-            'investment_facilities_pmdn' => ['nullable', 'boolean'], // Now boolean
-            'investment_facilities_joint_venture' => ['nullable', 'boolean'], // Now boolean
+            'investment_facilities_pma' => ['nullable', 'boolean'],
+            'investment_facilities_pmdn' => ['nullable', 'boolean'],
+            'investment_facilities_joint_venture' => ['nullable', 'boolean'],
             'number_of_employees' => ['required', 'numeric'],
             'work_regulations' => ['required', 'string'],
             'work_regulation_others' => ['nullable', 'string'],
-            'bpjs_kesehatan' => ['nullable', 'boolean'],  // Now boolean
-            'bpjs_ketenagakerjaan' => ['nullable', 'boolean'], // Now boolean
+            'bpjs_kesehatan' => ['nullable', 'boolean'],
+            'bpjs_ketenagakerjaan' => ['nullable', 'boolean'],
             'is_labor_union_exists' => ['required', 'boolean'],
             'monthly_contribution_period' => ['required', 'integer'],
             'how_they_learned_about_apindo' => ['required', 'string'],
@@ -72,6 +89,20 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+        
+        // Add custom message for website validation
+        $validator->setCustomMessages([
+            'website.url' => 'Format website tidak valid. Contoh format yang benar: example.com atau www.example.com',
+        ]);
+        
+        // Add custom validation rule for website domain format
+        if (!empty($data['website_invalid'])) {
+            $validator->after(function($validator) {
+                $validator->errors()->add('website', 'Format website tidak valid. Website harus mengandung domain dan TLD yang valid (seperti .com, .co.id, .org)');
+            });
+        }
+        
+        return $validator;
     }
 
 
@@ -162,8 +193,11 @@ class RegisterController extends Controller
     // Override the registration logic
     public function register(Request $request)
     {
-        // Validate the request data
-        $validator = $this->validator($request->all());
+        // Get the request data and prepare for validation
+        $data = $request->all();
+        
+        // Validate the request data - this also preprocesses website field
+        $validator = $this->validator($data);
         
         if ($validator->fails()) {
             return redirect()->back()
@@ -172,8 +206,8 @@ class RegisterController extends Controller
         }
         
         try {
-            // Create the user and fire the Registered event
-            event(new Registered($user = $this->create($request->all())));
+            // Create the user and fire the Registered event - use the preprocessed data
+            event(new Registered($user = $this->create($data)));
             
             // If successful, redirect as normal
             return $this->registered($request, $user) ?: redirect($this->redirectPath());
