@@ -26,8 +26,37 @@ class MemberController extends Controller
     public function index(Request $request): View
     {
         $perPage = 20;
-        $data = Member::orderBy('company_name', 'asc')->paginate($perPage);
-        return view('admin.pages.members.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+
+        $query = Member::query();
+
+        // Search by company name, contact person, or email
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('company_name', 'like', '%' . $search . '%')
+                    ->orWhere('contact_person', 'like', '%' . $search . '%')
+                    ->orWhere('company_email', 'like', '%' . $search . '%');
+            });
+        }
+
+        // Sort by company_name (default) or other fields
+        $sortBy = $request->input('sort_by', 'company_name'); // Default sort by company_name
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sort order
+
+        // Validate sort column
+        if (!in_array($sortBy, ['company_name', 'contact_person', 'company_email'])) {
+            $sortBy = 'company_name'; // Default sort column if invalid value is provided
+        }
+
+        if (!in_array($sortOrder, ['asc', 'desc'])) {
+            $sortOrder = 'asc'; // Default sort order if invalid value is provided
+        }
+
+        $query->orderBy($sortBy, $sortOrder);
+
+        $data = $query->paginate($perPage);
+
+        return view('admin.pages.members.index', compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
