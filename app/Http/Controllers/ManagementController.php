@@ -29,8 +29,37 @@ class ManagementController extends Controller
     public function index(Request $request): View
     {
         $perPage = 20;
-        $data = Management::orderBy('name', 'asc')->paginate($perPage);
-        return view('admin.pages.managements.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+        
+        $query = Management::query();
+        
+        // Search by member number, name, or company
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('member_number', 'like', '%' . $search . '%')
+                  ->orWhere('name', 'like', '%' . $search . '%')
+                  ->orWhere('company', 'like', '%' . $search . '%');
+            });
+        }
+        
+        // Sort by column (default: name)
+        $sortBy = $request->input('sort_by', 'name'); // Default sort by name
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sort order
+        
+        // Validate sort column
+        if (!in_array($sortBy, ['member_number', 'name', 'company', 'status'])) {
+            $sortBy = 'name'; // Default sort column if invalid value is provided
+        }
+        
+        if (!in_array($sortOrder, ['asc', 'desc'])) {
+            $sortOrder = 'asc'; // Default sort order if invalid value is provided
+        }
+        
+        $query->orderBy($sortBy, $sortOrder);
+        
+        $data = $query->paginate($perPage);
+        
+        return view('admin.pages.managements.index', compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -75,7 +104,7 @@ class ManagementController extends Controller
                 $constraint->upsize();
             });
 
-            $img->toJpeg(75)->save(Storage::disk('public')->path('images/management/' . $filename));
+            $img->toJpeg(75)->save(storage_path('app/public/images/management/' . $filename));
 
             $managementData['photo'] = 'images/management/' . $filename;
         }
@@ -148,7 +177,7 @@ class ManagementController extends Controller
                 $constraint->upsize();
             });
 
-            $img->toJpeg(75)->save(Storage::disk('public')->path('images/management/' . $filename));
+            $img->toJpeg(75)->save(storage_path('app/public/images/management/' . $filename));
 
             $managementData['photo'] = 'images/management/' . $filename;
         }
