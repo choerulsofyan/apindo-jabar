@@ -26,14 +26,27 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between">
-                    <h3 class="card-title">Daftar Jabatan</h3>
-                    @can('JABATAN_ADD')
-                        <a href="{{ route('mindo.organizational-positions.create') }}" class="btn btn-sm btn-primary">
-                            <i class="fa fa-plus"></i>
-                            Buat Baru
-                        </a>
-                    @endcan
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="card-title">Daftar Jabatan</h3>
+                        <div class="d-flex gap-1">
+                            <form action="{{ route('mindo.organizational-positions.index') }}" method="GET">
+                                <div class="input-group">
+                                    <input type="text" name="search" class="form-control form-control-sm"
+                                        placeholder="Search..." value="{{ request('search') }}">
+                                    <button class="btn btn-sm btn-secondary" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                            @can('JABATAN_ADD')
+                                <a href="{{ route('mindo.organizational-positions.create') }}" class="btn btn-sm btn-primary">
+                                    <i class="fa fa-plus"></i>
+                                    Buat Baru
+                                </a>
+                            @endcan
+                        </div>
+                    </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -41,7 +54,13 @@
                         <thead>
                             <tr>
                                 <th class="text-center w-5">#</th>
-                                <th class="w-75">Nama</th>
+                                <th class="w-75">
+                                    <a href="{{ route('mindo.organizational-positions.index', ['sort_order' => request('sort_order') == 'asc' ? 'desc' : 'asc', 'search' => request('search')]) }}"
+                                        class="text-decoration-none link-dark">
+                                        Nama
+                                        <i class="fa fa-sort-{{ request('sort_order', 'asc') == 'asc' ? 'up' : 'down' }}"></i>
+                                    </a>
+                                </th>
                                 <th class="text-center w-20">Aksi</th>
                             </tr>
                         </thead>
@@ -91,17 +110,21 @@
                                 <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
                             @else
                                 <li class="page-item"><a class="page-link"
-                                        href="{{ $data->previousPageUrl() }}">&laquo;</a></li>
+                                        href="{{ $data->appends(request()->query())->previousPageUrl() }}">&laquo;</a></li>
                             @endif
 
                             @foreach ($data->getUrlRange(1, $data->lastPage()) as $page => $url)
                                 <li class="page-item {{ $data->currentPage() == $page ? 'active' : '' }}">
-                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    <a class="page-link"
+                                        href="{{ $url . (strpos($url, '?') === false ? '?' : '&') . http_build_query(request()->except('page')) }}">
+                                        {{ $page }}
+                                    </a>
                                 </li>
                             @endforeach
 
                             @if ($data->hasMorePages())
-                                <li class="page-item"><a class="page-link" href="{{ $data->nextPageUrl() }}">&raquo;</a>
+                                <li class="page-item"><a class="page-link" 
+                                        href="{{ $data->appends(request()->query())->nextPageUrl() }}">&raquo;</a>
                                 </li>
                             @else
                                 <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
