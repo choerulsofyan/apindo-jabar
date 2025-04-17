@@ -51,9 +51,7 @@ Auth::routes(['verify' => true]);
 // Admin routes (prefixed with 'mindo')
 Route::middleware(['auth', 'can:DASHBOARD'])->prefix('mindo')->name('mindo.')->group(function () {
     // Dashboard
-    Route::get('/', function () {
-        return view('admin.pages.dashboard.index');
-    })->name('home');
+    Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
 
     // Resource controllers
     Route::resources([
