@@ -16,17 +16,7 @@
             <!-- Member Statistics -->
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="info-box mb-3">
-                    <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-users"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Anggota Luar Biasa</span>
-                        <span class="info-box-number">{{ $totalExtraordinaryMembers }}</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-user-plus"></i></span>
+                    <span class="info-box-icon bg-primary elevation-1"><i class="fa fa-user"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Anggota Biasa</span>
                         <span class="info-box-number">{{ $totalNonExtraordinaryMembers }}</span>
@@ -36,7 +26,17 @@
 
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="info-box mb-3">
-                    <span class="info-box-icon bg-success elevation-1"><i class="fa fa-user-friends"></i></span>
+                    <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-user-friends"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Anggota Luar Biasa</span>
+                        <span class="info-box-number">{{ $totalExtraordinaryMembers }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-success elevation-1"><i class="fa fa-users"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Total Anggota</span>
                         <span class="info-box-number">{{ $totalMembers }}</span>
@@ -79,7 +79,7 @@
         </div>
 
         <!-- Main row -->
-        <div class="row">
+        {{-- <div class="row">
             <!-- Left col -->
             <div class="col-md-8">
                 <!-- Summary Card -->
@@ -175,6 +175,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
