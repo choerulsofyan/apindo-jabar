@@ -37,6 +37,16 @@
                 <div class="card">
                     <div class="card-header fw-bold">Formulir Pendaftaran Anggota APINDO DPP Jawa Barat</div>
                     <div class="card-body py-4">
+                        @if ($errors->any())
+                            <div class="alert alert-danger mb-4">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                             @csrf
                             <fieldset>
@@ -157,8 +167,8 @@
                                         Website
                                     </label>
                                     <div class="col-md-6">
-                                        <input type="url" class="form-control @error('website') is-invalid @enderror"
-                                            id="website" name="website" value="{{ old('website') }}">
+                                        <input type="text" class="form-control @error('website') is-invalid @enderror"
+                                            id="website" name="website" value="{{ old('website') }}" placeholder="">
                                         @error('website')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -170,10 +180,10 @@
                                         Email CP/Email Perusahaan
                                     </label>
                                     <div class="col-md-6">
-                                        <input type="email"
+                                        <input type="text"
                                             class="form-control @error('company_email') is-invalid @enderror"
                                             id="company_email" name="company_email" value="{{ old('company_email') }}"
-                                            required>
+                                            placeholder="" novalidate>
                                         @error('company_email')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -649,9 +659,9 @@
                                         Email
                                     </label>
                                     <div class="col-md-6">
-                                        <input id="email" type="email"
+                                        <input id="email" type="text"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
-                                            value="{{ old('email') }}" required autocomplete="email">
+                                            value="{{ old('email') }}" placeholder="" autocomplete="email" novalidate>
 
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">

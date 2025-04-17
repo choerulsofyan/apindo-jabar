@@ -44,7 +44,7 @@
             </div>
             <div class="text-start mt-5">
                 <h5>
-                    <a href="{{ route('home') }}" class="text-decoration-none">
+                    <a href="{{ route('news.index') }}" class="text-decoration-none">
                         Lihat Semua Berita
                         <i class="bi bi-arrow-right ms-2"></i>
                     </a>

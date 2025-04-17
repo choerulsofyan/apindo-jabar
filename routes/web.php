@@ -44,15 +44,14 @@ Route::get('/news', [HomeController::class, 'news'])->name('allNews');
 Route::get('/calendar', [HomeController::class, 'calendar'])->name('calendar.index');
 Route::get('/activity/{activity}', [HomeController::class, 'activityShow'])->name('activity.show');
 Route::get('/testimoni', [TestimoniController::class, 'index'])->name('testimoni.index');
+Route::get('/news', [NewsController::class, 'allNews'])->name('news.index');
 
 Auth::routes(['verify' => true]);
 
 // Admin routes (prefixed with 'mindo')
 Route::middleware(['auth', 'can:DASHBOARD'])->prefix('mindo')->name('mindo.')->group(function () {
     // Dashboard
-    Route::get('/', function () {
-        return view('admin.pages.dashboard.index');
-    })->name('home');
+    Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
 
     // Resource controllers
     Route::resources([

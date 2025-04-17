@@ -21,12 +21,12 @@
                             <img src="{{ Storage::url('images/news/' . $news->photo) }}" class="img-fluid w-100 mb-4"
                                 alt="{{ $news->title }}">
                         @else
-                            <img src="{{ asset('assets/images/image-placeholder.png') }}" class="img-fluid mb-4"
-                                alt="{{ $item->title }}">
+                            <img src="{{ asset('assets/images/image-placeholder.png') }}" class="img-fluid w-100 mb-4"
+                                alt="{{ $news->title }}">
                         @endif
                     @else
-                        <img src="{{ asset('assets/images/image-placeholder.png') }}" class="img-fluid mb-4"
-                            alt="{{ $item->title }}">
+                        <img src="{{ asset('assets/images/image-placeholder.png') }}" class="img-fluid w-100 mb-4"
+                            alt="{{ $news->title }}">
                     @endif
 
                     <div class="news-content">

@@ -26,6 +26,12 @@
 // Import Font Awesome styles
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 
+// Import Quill's core styles
+@import "~quill/dist/quill.core.css";
+
+// Import a Quill theme (choose one):
+@import "~quill/dist/quill.snow.css"; // Recommended: Clean, modern theme
+
 .text-primary {
     color: $font-color-primary !important;
 }

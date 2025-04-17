@@ -24,9 +24,35 @@ class NewsController extends Controller
      */
     public function index(Request $request): View
     {
-        $perPage = 20;
-        $data = News::orderBy('title', 'asc')->paginate($perPage);
-        return view('admin.pages.news.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+        $perPage = 10;
+        $query = News::query();
+
+        // Search (add search logic)
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('place', 'like', '%' . $search . '%'); //search also in place
+                // ->orWhere('content', 'like', '%' . $search . '%'); //search also in content
+            });
+        }
+
+        // Sorting
+        $sortBy = $request->input('sort_by', 'created_at'); // Default sort by created_at
+        $sortOrder = $request->input('sort_order', 'desc');  // Default: newest first
+
+        if (!in_array($sortBy, ['title', 'created_at', 'place', 'slug'])) {
+            $sortBy = 'created_at'; // Default if invalid
+        }
+        if (!in_array($sortOrder, ['asc', 'desc'])) {
+            $sortOrder = 'desc'; // Default
+        }
+
+        $query->orderBy($sortBy, $sortOrder);
+
+        $data = $query->paginate($perPage);
+
+        return view('admin.pages.news.index', compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
@@ -177,5 +203,35 @@ class NewsController extends Controller
 
         $news->delete();
         return redirect()->route('mindo.news.index')->with('success', 'News deleted successfully');
+    }
+
+    public function allNews(Request $request)
+    {
+        $query = News::query();
+
+        // Search by title or content
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where(function ($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->search . '%')
+                    ->orWhere('content', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        // Sort by date
+        $sort = $request->get('sort', 'desc'); // Default to descending
+        $query->orderBy('created_at', $sort);
+
+        // Paginate with query parameters
+        $news = $query->paginate(10)->appends($request->query());
+
+        foreach ($news as $item) {
+            if (!$item->photo || !Storage::disk('public')->exists('/images/news/' . $item->photo)) {
+                $item->photo = asset('assets/images/image-placeholder.png');
+            } else {
+                $item->photo = Storage::url('/images/news/' . $item->photo);
+            }
+        }
+
+        return view('public.pages.news.index', compact('news'));
     }
 }

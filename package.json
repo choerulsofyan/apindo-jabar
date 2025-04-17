@@ -30,6 +30,7 @@
         "jquery": "^3.7.1",
         "mdb-ui-kit": "^8.2.0",
         "overlayscrollbars": "^2.10.1",
+        "quill": "^2.0.3",
         "swiper": "^11.2.1",
         "typeface-lato": "^1.1.13"
     }

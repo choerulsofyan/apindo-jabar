@@ -23,8 +23,36 @@ class RegulationController extends Controller
     public function index(Request $request): View
     {
         $perPage = 20;
-        $data = Regulation::orderBy('title', 'asc')->paginate($perPage);
-        return view('admin.pages.regulations.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * $perPage);
+        
+        $query = Regulation::query();
+        
+        // Search by title
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                  ->orWhereDate('date', 'like', '%' . $search . '%');
+            });
+        }
+        
+        // Sort by title (default) or date
+        $sortBy = $request->input('sort_by', 'title'); // Default sort by title
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sort order
+        
+        // Validate sort column
+        if (!in_array($sortBy, ['title', 'date'])) {
+            $sortBy = 'title'; // Default sort column if invalid value is provided
+        }
+        
+        if (!in_array($sortOrder, ['asc', 'desc'])) {
+            $sortOrder = 'asc'; // Default sort order if invalid value is provided
+        }
+        
+        $query->orderBy($sortBy, $sortOrder);
+        
+        $data = $query->paginate($perPage);
+        
+        return view('admin.pages.regulations.index', compact('data'))
+            ->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
 
