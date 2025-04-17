@@ -15,18 +15,58 @@
 @section('content')
     <div class="container">
         <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3 class="card-title">Activity Logs</h3>
+                    <div class="d-flex gap-1">
+                        <form action="{{ route('mindo.activity-logs.index') }}" method="GET">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control form-control-sm"
+                                    placeholder="Search..." value="{{ request('search') }}">
+                                <button class="btn btn-sm btn-secondary" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama Log</th>
-                            <th>Deskripsi</th>
-                            <th class="text-center">Pemicu</th>
+                            <th class="w-5">No</th>
+                            <th class="w-15">
+                                <a href="{{ route('mindo.activity-logs.index', ['sort_by' => 'log_name', 'sort_order' => request('sort_by') == 'log_name' && request('sort_order') == 'asc' ? 'desc' : 'asc', 'search' => request('search')]) }}"
+                                    class="text-decoration-none link-dark">
+                                    Nama Log
+                                    @if (request('sort_by') == 'log_name')
+                                        <i class="fa fa-sort-{{ request('sort_order', 'asc') == 'asc' ? 'up' : 'down' }}"></i>
+                                    @endif
+                                </a>
+                            </th>
+                            <th class="w-30">
+                                <a href="{{ route('mindo.activity-logs.index', ['sort_by' => 'description', 'sort_order' => request('sort_by') == 'description' && request('sort_order') == 'asc' ? 'desc' : 'asc', 'search' => request('search')]) }}"
+                                    class="text-decoration-none link-dark">
+                                    Deskripsi
+                                    @if (request('sort_by') == 'description')
+                                        <i class="fa fa-sort-{{ request('sort_order', 'asc') == 'asc' ? 'up' : 'down' }}"></i>
+                                    @endif
+                                </a>
+                            </th>
+                            <th class="text-center w-15">Pemicu</th>
                             {{-- <th>Module</th> --}}
                             {{-- <th>Changes</th> --}}
-                            <th class="text-center">Timestamp</th>
-                            <th class="text-center">Aksi</th>
+                            <th class="text-center w-15">
+                                <a href="{{ route('mindo.activity-logs.index', ['sort_by' => 'created_at', 'sort_order' => request('sort_by', 'created_at') == 'created_at' && request('sort_order', 'desc') == 'asc' ? 'desc' : 'asc', 'search' => request('search')]) }}"
+                                    class="text-decoration-none link-dark">
+                                    Timestamp
+                                    @if (request('sort_by', 'created_at') == 'created_at')
+                                        <i class="fa fa-sort-{{ request('sort_order', 'desc') == 'asc' ? 'up' : 'down' }}"></i>
+                                    @endif
+                                </a>
+                            </th>
+                            <th class="text-center w-10">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
