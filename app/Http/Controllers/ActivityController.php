@@ -22,9 +22,35 @@ class ActivityController extends Controller
      */
     public function index(Request $request): View
     {
-        $activities = Activity::latest()->paginate(10); // Get all, paginate
+        $perPage = 20;
+
+        $query = Activity::query();
+
+        // Search by title 
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%');
+            });
+        }
+
+        // Sort by title (default) or email
+        $sortBy = $request->input('sort_by', 'title'); // Default sort by title
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sort order
+
+        if (!in_array($sortBy, ['title'])) {
+            $sortBy = 'title'; // Default sort column if invalid value is provided
+        }
+
+        if (!in_array($sortOrder, ['asc', 'desc'])) {
+            $sortOrder = 'asc'; // Default sort order if invalid value is provided
+        }
+
+        $query->orderBy($sortBy, $sortOrder);
+
+        $activities = $query->paginate($perPage);
+
         return view('admin.pages.activities.index', compact('activities'))
-            ->with('i', ($request->input('page', 1) - 1) * 10);
+            ->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
     /**
