@@ -85,8 +85,19 @@
     </section>
 
     <style>
+        .position-relative {
+            position: relative;
+            width: 100%;
+            padding-bottom: 75%; /* 4:3 aspect ratio */
+            overflow: hidden;
+        }
+        
         .management-photo {
-            height: 250px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             object-position: center top;
         }
@@ -98,12 +109,6 @@
         .management-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
-        }
-
-        @media (max-width: 767.98px) {
-            .management-photo {
-                height: 200px;
-            }
         }
     </style>
 @endsection
