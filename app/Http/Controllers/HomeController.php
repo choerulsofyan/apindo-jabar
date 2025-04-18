@@ -345,23 +345,26 @@ class HomeController extends Controller
     {
         $perPage = 20;
 
-        $query = Management::query();
+        $query = Management::with(['organizationalPosition', 'sector', 'council']); // Eager load relationships
 
-        // Search by title
+        // Search by name or company
         if ($search = $request->input('search')) {
-            $query->where('name', 'like', '%' . $search . '%');
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('company', 'like', '%' . $search . '%');
+            });
         }
 
-        // Sort by title or date
-        $sortBy = $request->input('sort_by', 'name'); // Default sort by date
-        $sortOrder = $request->input('sort_order', 'desc'); // Default sort order (descending for date)
+        // Sort by name, company, or position
+        $sortBy = $request->input('sort_by', 'name'); // Default sort by name
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sort order (ascending for names)
 
-        if (!in_array($sortBy, ['name'])) {
+        if (!in_array($sortBy, ['name', 'company', 'organizational_position_id'])) {
             $sortBy = 'name'; // Default sort column if invalid value is provided
         }
 
         if (!in_array($sortOrder, ['asc', 'desc'])) {
-            $sortOrder = 'desc'; // Default sort order if invalid value is provided
+            $sortOrder = 'asc'; // Default sort order if invalid value is provided
         }
 
         $query->orderBy($sortBy, $sortOrder);
