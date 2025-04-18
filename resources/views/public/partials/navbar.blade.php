@@ -1,74 +1,80 @@
-{{-- Wrap both elements in a fixed-top container --}}
-<div class="fixed-top" style="z-index: 1030;">
-    {{-- Top Bar --}}
-    <div class="top-bar py-1" style="background-color: #f5f5f5;">
-        <div class="container">
+<header class="fixed-top">
+    <!-- Top Bar -->
+    <div class="top-bar py-1 bg-light border-bottom">
+        <div class="container-fluid container-lg">
             <div class="d-flex justify-content-between align-items-center">
-                <div class="text-start d-none d-sm-block">
-                    <i class="bi bi-whatsapp text-primary me-2"></i>
-                    <small>
-                        <a href="https://wa.me/+6281223609501" class="link-to-whatsapp">
-                            +62-812-2360-9501
-                        </a>
-                    </small>
+                <div class="contact-item">
+                    <a href="https://wa.me/+6281223609501" class="text-decoration-none text-body small">
+                        <i class="bi bi-whatsapp text-primary me-1"></i> +62-812-2360-9501
+                    </a>
                 </div>
-                <div class="text-end">
-                    <div id="google_translate_element"></div>
-                    {{-- <div class="dropdown">
-                        <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button"
-                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-globe me-1"></i> ID
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">ID</a></li>
-                            <li><a class="dropdown-item" href="#">EN</a></li>
-                            <li><a class="dropdown-item" href="#">JP</a></li>
-                            <li><a class="dropdown-item" href="#">FR</a></li>
-                        </ul>
-                    </div> --}}
+                <div class="ms-auto">
+                    <div id="google_translate_element" class="d-inline-block"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- Main Navigation --}}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand my-1" href="{{ route('home') }}">
-                <img src="{{ asset('assets/images/logo_white.png') }}" alt="APINDO Jawa Barat" height="50">
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-2">
+        <div class="container-fluid container-lg">
+            <!-- Brand -->
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <img src="{{ asset('assets/images/logo_white.png') }}" alt="APINDO Jawa Barat" height="50"
+                    class="d-inline-block align-text-top">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- Navigation Links -->
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto d-flex gap-3">
-                    <li class="nav-item">
-                        <a class="nav-link fs-5 active" aria-current="page" href="{{ route('home') }}">BERANDA</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link fs-5 dropdown-toggle" href="{{ route('home') }}#about-section"
-                            id="tentangKamiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            TENTANG KAMI
+                <ul class="navbar-nav ms-auto">
+                    <!-- Home -->
+                    <li class="nav-item mx-lg-2">
+                        <a class="nav-link {{ request()->routeIs('home') ? 'active fw-semibold' : '' }}"
+                            href="{{ route('home') }}">
+                            <span class="d-inline-block py-2">BERANDA</span>
                         </a>
-                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="tentangKamiDropdown">
-                            <li><a class="dropdown-item" href="{{ route('history') }}">Sejarah</a></li>
-                            <li><a class="dropdown-item" href="{{ route('vision-mission') }}">Visi & Misi</a></li>
-                            <li><a class="dropdown-item" href="{{ route('sectors') }}">Bidang</a></li>
+                    </li>
+
+                    <!-- About -->
+                    <li class="nav-item dropdown mx-lg-2">
+                        <a class="nav-link dropdown-toggle" href="{{ route('home') }}#about-section"
+                            id="tentangKamiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="d-inline-block py-2">TENTANG KAMI</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm"
+                            aria-labelledby="tentangKamiDropdown">
+                            <li><a class="dropdown-item py-2" href="{{ route('history') }}">Sejarah</a></li>
+                            <li><a class="dropdown-item py-2" href="{{ route('vision-mission') }}">Visi & Misi</a></li>
+                            <li><a class="dropdown-item py-2" href="{{ route('sectors') }}">Bidang</a></li>
                             @can('ANGGOTA_MENU_VIEW')
-                                <li><a class="dropdown-item" href="{{ route('dpkApindoJabar') }}">DPK APINDO Jabar</a></li>
-                                <li><a class="dropdown-item" href="{{ route('calendar.index') }}">Kalender Kegiatan</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item py-2" href="{{ route('dpkApindoJabar') }}">DPK APINDO Jabar</a>
+                                </li>
+                                <li><a class="dropdown-item py-2" href="{{ route('calendar.index') }}">Kalender Kegiatan</a>
+                                </li>
                             @endcan
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link fs-5 dropdown-toggle" href="{{ route('home') }}#member-section"
-                            id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            KEANGGOTAAN
+
+                    <!-- Membership -->
+                    <li class="nav-item dropdown mx-lg-2">
+                        <a class="nav-link dropdown-toggle" href="{{ route('home') }}#member-section"
+                            id="keanggotaanDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="d-inline-block py-2">KEANGGOTAAN</span>
                         </a>
-                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="mediaDropdown">
+                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm"
+                            aria-labelledby="keanggotaanDropdown">
                             <li>
-                                <a class="dropdown-item {{ Auth::check() ? 'disabled' : '' }}"
+                                <a class="dropdown-item py-2 {{ Auth::check() ? 'disabled' : '' }}"
                                     href="{{ Auth::check() ? '#' : route('register') }}"
                                     @if (Auth::check()) tabindex="-1" aria-disabled="true" @endif>
                                     Pendaftaran Anggota
@@ -76,28 +82,45 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link fs-5 dropdown-toggle" href="{{ route('home') }}#news-section"
-                            id="mediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            MEDIA
+
+                    <!-- Media -->
+                    <li class="nav-item dropdown mx-lg-2">
+                        <a class="nav-link dropdown-toggle" href="{{ route('home') }}#news-section" id="mediaDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="d-inline-block py-2">MEDIA</span>
                         </a>
-                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="mediaDropdown">
-                            <li><a class="dropdown-item" href="{{ route('home') }}#news-section">Berita</a></li>
-                            <li><a class="dropdown-item" href="{{ route('home') }}#gallery-section">Galeri</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm" aria-labelledby="mediaDropdown">
+                            <li><a class="dropdown-item py-2" href="{{ route('home') }}#news-section">Berita</a></li>
+                            <li><a class="dropdown-item py-2" href="{{ route('home') }}#gallery-section">Galeri</a>
+                            </li>
                         </ul>
                     </li>
+
+                    <!-- Management (Members Only) -->
                     @can('ANGGOTA_MENU_VIEW')
-                        <li class="nav-item">
-                            <a class="nav-link fs-5" href="{{ route('managements') }}">KEPENGURUSAN</a>
+                        <li class="nav-item mx-lg-2">
+                            <a class="nav-link {{ request()->routeIs('managements') ? 'active fw-semibold' : '' }}"
+                                href="{{ route('managements') }}">
+                                <span class="d-inline-block py-2">KEPENGURUSAN</span>
+                            </a>
                         </li>
                     @endcan
+
+                    <!-- Regulations (Members Only) -->
                     @can('ANGGOTA_MENU_VIEW')
-                        <li class="nav-item">
-                            <a class="nav-link fs-5" href="{{ route('regulations') }}">REGULASI</a>
+                        <li class="nav-item mx-lg-2">
+                            <a class="nav-link {{ request()->routeIs('regulations') ? 'active fw-semibold' : '' }}"
+                                href="{{ route('regulations') }}">
+                                <span class="d-inline-block py-2">REGULASI</span>
+                            </a>
                         </li>
                     @endcan
-                    <li class="nav-item">
-                        <a class="nav-link fs-5" href="{{ route('home') }}#contact-section">KONTAK</a>
+
+                    <!-- Contact -->
+                    <li class="nav-item mx-lg-2">
+                        <a class="nav-link" href="{{ route('home') }}#contact-section">
+                            <span class="d-inline-block py-2">KONTAK</span>
+                        </a>
                     </li>
                 </ul>
                 <div class="d-flex gap-1 fs-5 text-white">
@@ -135,7 +158,6 @@
             </div>
         </div>
     </nav>
-</div>
+</header>
 
-{{-- Spacer to prevent content from being hidden behind fixed header --}}
-<div style="margin-top: 115px;"></div>
+{{-- No spacer needed - using proper CSS in public-app.scss instead --}}

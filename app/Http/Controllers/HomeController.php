@@ -33,12 +33,12 @@ class HomeController extends Controller
      */
     public function index(): View
     {
-        $latestNews = News::latest()->take(4)->get();
+        $latestNews = News::latest()->take(8)->get();
 
         $latestNews->each(function ($news) {
             $news->formatted_date = Carbon::parse($news->created_at)->isoFormat('D MMMM Y');
             $news->title = str($news->title)->words(10, '...');
-            $news->short_content = str($news->content)->words(25, '...');
+            $news->short_content_highlight = str($news->content)->words(25, '...');
 
             // Check for image existence and use asset() for default image
             if (!$news->photo || !Storage::disk('public')->exists('/images/news/' . $news->photo)) {
@@ -349,9 +349,9 @@ class HomeController extends Controller
 
         // Search by name or company
         if ($search = $request->input('search')) {
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', '%' . $search . '%')
-                  ->orWhere('company', 'like', '%' . $search . '%');
+                    ->orWhere('company', 'like', '%' . $search . '%');
             });
         }
 

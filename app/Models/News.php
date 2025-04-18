@@ -39,7 +39,22 @@ class News extends Model
                     strip_tags(
                         html_entity_decode(Purifier::clean($this->content))
                     ),
-                    60,
+                    35,
+                    '...'
+                )
+            )
+        );
+    }
+
+    public function shortContentHighlight(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => trim(
+                Str::words(
+                    strip_tags(
+                        html_entity_decode(Purifier::clean($this->content))
+                    ),
+                    20,
                     '...'
                 )
             )

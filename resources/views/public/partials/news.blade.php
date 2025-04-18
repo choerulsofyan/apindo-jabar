@@ -1,54 +1,78 @@
-<section id="news-section" class="py-5">
+<section id="news-section" class="py-5 py-lg-7 bg-light">
     <div class="container">
-        <h2 class="text-center fw-bolder mb-4 text-primary">BERITA</h2>
+        <!-- Section Header -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 text-center">
+                <h2 class="fw-bolder text-primary mb-3">BERITA TERBARU</h2>
+                <p class="lead text-dark">Informasi terkini tentang kegiatan dan perkembangan APINDO Jawa Barat</p>
+            </div>
+        </div>
+
+        <!-- News Cards -->
         @if ($latestNews->isEmpty())
-            <div class="alert alert-info text-center">
-                Tidak ada berita.
+            <div class="alert alert-info text-center py-4">
+                <i class="bi bi-info-circle me-2"></i> Tidak ada berita saat ini.
             </div>
         @else
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <div class="row g-4">
                 @foreach ($latestNews as $news)
-                    <div class="col">
-                        <div class="card h-100 shadow-sm d-flex flex-column">
-                            <div class="news-image-container">
-                                @if ($news->photo)
-                                    <img src="{{ $news->photo }}" class="card-img-top news-image"
-                                        alt="{{ $news->title }}">
-                                @else
-                                    <img src="{{ asset('assets/images/logo.jpg') }}" class="card-img-top news-image"
-                                        alt="{{ $news->title }}">
-                                @endif
-                            </div>
-                            <div class="card-body d-flex flex-column">
-                                <div class="card-text mt-0 mb-0">
-                                    @if ($news->place)
-                                        <i class="bi bi-geo-alt-fill me-1"></i>
-                                        <small class="text-muted">{{ $news->place }}</small>
-                                    @endif
-                                    @if ($news->formatted_date)
-                                        <i class="bi bi-calendar{{ $news->place ? ' ms-3' : '' }} me-1"></i>
-                                        <small class="text-muted">{{ $news->formatted_date }}</small>
-                                    @endif
-                                </div>
-                                <hr class="mt-2">
-                                <h5 class="card-title fw-bold">{{ $news->title }}</h5>
-                                <div class="card-text flex-grow-1 mb-4">{!! $news->short_content !!}</div>
-                                <a href="{{ route('news.detail', $news->id) }}"
-                                    class="btn btn-outline-primary stretched-link mt-auto">
-                                    Baca Selengkapnya
+                    <div class="col-12 col-md-3 mb-4">
+                        <article class="news-post h-100 d-flex flex-column">
+                            <!-- News Image with Fixed Aspect Ratio -->
+                            <div class="news-image-container mb-3">
+                                <a href="{{ route('news.detail', $news->id) }}" class="d-block">
+                                    <div class="position-relative" style="padding-top: 75%"> <!-- 4:3 aspect ratio -->
+                                        @if ($news->photo)
+                                            <img src="{{ $news->photo }}"
+                                                class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+                                                alt="{{ $news->title }}">
+                                        @else
+                                            <img src="{{ asset('assets/images/logo.jpg') }}"
+                                                class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover"
+                                                alt="{{ $news->title }}">
+                                        @endif
+                                    </div>
                                 </a>
                             </div>
-                        </div>
+
+                            <!-- News Meta -->
+                            <div class="news-meta small text-muted mb-2">
+                                @if ($news->formatted_date)
+                                    <span class="news-date me-3">
+                                        <i class="bi bi-calendar3 me-1"></i>{{ $news->formatted_date }}
+                                    </span>
+                                @endif
+                                @if ($news->place)
+                                    <span class="news-category">
+                                        <i class="bi bi-geo-alt me-1"></i>{{ $news->place }}
+                                    </span>
+                                @endif
+                            </div>
+
+                            <!-- News Title -->
+                            <h3 class="news-title h5 mb-2">
+                                <a href="{{ route('news.detail', $news->id) }}"
+                                    class="text-decoration-none text-dark">{{ $news->title }}</a>
+                            </h3>
+
+                            <!-- News Excerpt -->
+                            <div class="news-excerpt text-secondary-dark mb-2">{!! $news->short_content_highlight !!}</div>
+
+                            <!-- Read More -->
+                            <a href="{{ route('news.detail', $news->id) }}" class="news-read-more text-decoration-none"
+                                aria-label="Baca selengkapnya tentang {{ $news->title }}">Baca selengkapnya <i
+                                    class="bi bi-arrow-right ms-1 small"></i></a>
+                        </article>
                     </div>
                 @endforeach
             </div>
-            <div class="text-start mt-5">
-                <h5>
-                    <a href="{{ route('news.index') }}" class="text-decoration-none">
-                        Lihat Semua Berita
-                        <i class="bi bi-arrow-right ms-2"></i>
-                    </a>
-                </h5>
+
+            <!-- View All Link -->
+            <div class="text-center mt-5">
+                <a href="{{ route('news.index') }}" class="btn btn-outline-primary px-4 py-2">
+                    Lihat Semua Berita
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </a>
             </div>
         @endif
     </div>

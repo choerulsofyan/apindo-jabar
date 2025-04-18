@@ -1,69 +1,77 @@
 <!DOCTYPE html>
-{{-- <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"> --}}
 <html lang="id">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#19385e">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="color-scheme" content="light">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/images/apple-touch-icon.png') }}">
+
     <title>@yield('title', config('app.name', 'APINDO Jawa Barat'))</title>
     <meta name="description" content="@yield('meta_description', Str::limit(strip_tags('APINDO adalah perkumpulan yang beranggotakan Pengusaha dan atau Perusahaan yang berdomisili di Indonesia, bersifat demokratis, bebas, mandiri, dan bertanggung jawab yang menangani kegiatan dunia usaha dalam arti yang luas.'), 155))">
 
-    {{-- Include your public CSS and JS files here --}}
+    <!-- Vite Assets -->
     @vite(['resources/sass/public/public-app.scss', 'resources/js/public/app.js'])
 
-    {{-- Add any other CSS or meta tags here --}}
+    <!-- Custom Styles -->
     @stack('styles')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
-<body class="bg-light"> {{-- Assuming a light background for the body --}}
-    {{-- <div id="app"> --}}
+<body class="bg-light">
+    <!-- Navbar -->
     @include('public.partials.navbar')
 
+    <!-- Main Content -->
     <main>
         @yield('content')
     </main>
 
+    <!-- Footer -->
     @include('public.partials.footer')
-    {{-- </div> --}}
 
+    <!-- Scripts -->
     @stack('scripts')
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-    </script>
+
+    <!-- Google Translate Implementation -->
     <script type="text/javascript">
+        // Define initialization function
         function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'id',
-                layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL
-            }, 'google_translate_element');
+            try {
+                if (typeof google !== 'undefined' &&
+                    typeof google.translate !== 'undefined' &&
+                    typeof google.translate.TranslateElement !== 'undefined') {
+
+                    new google.translate.TranslateElement({
+                        pageLanguage: 'id',
+                        autoDisplay: false,
+                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                    }, 'google_translate_element');
+                }
+            } catch (error) {
+                console.log('Google Translate initialization error:', error);
+            }
         }
 
-        // Re-initialize on every page change within the main content area
+        // Load Google Translate script dynamically
         document.addEventListener('DOMContentLoaded', function() {
-            googleTranslateElementInit(); // Initial load
+            var translateScript = document.createElement('script');
+            translateScript.src =
+                'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+            translateScript.async = true;
+            translateScript.defer = true;
 
-            // Listen for changes to the main content area.
-            const mainContent = document.querySelector('main');
-            if (mainContent) {
-                const observer = new MutationObserver(() => {
-                    // Check if the google translate element still exists. If remove, reinit.
-                    if (!document.getElementById('google_translate_element')) {
-                        // Re-create google translate element.
-                        const googleTranslateDiv = document.createElement('div');
-                        googleTranslateDiv.id = 'google_translate_element';
-                        document.querySelector('.top-bar .text-end').appendChild(
-                        googleTranslateDiv); // Append element in the top bar
-                        googleTranslateElementInit();
-                    }
+            // Handle script loading errors
+            translateScript.onerror = function() {
+                console.log('Failed to load Google Translate script');
+            };
 
-                });
-
-                observer.observe(mainContent, {
-                    childList: true, // Watch for changes to the children of <main>
-                    subtree: true // Watch for changes in the descendants of <main>
-                });
-            }
+            document.body.appendChild(translateScript);
         });
     </script>
 </body>

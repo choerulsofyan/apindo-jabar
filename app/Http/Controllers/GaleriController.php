@@ -98,7 +98,7 @@ class GaleriController extends Controller
 
     public function galleryAll()
     {
-        $latestImages = Galeri::latest()->paginate(10);
+        $latestImages = Galeri::latest()->paginate(15);
         return view('public.pages.galeri.show', compact('latestImages'));
     }
 }
