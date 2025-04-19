@@ -23,8 +23,8 @@
 
             <!-- Dynamic Slides from News -->
             @foreach ($newsSlides as $news)
-                <a href="{{ route('news.detail', $news->id) }}" class="swiper-slide text-decoration-none"
-                   style="background-image: url('{{ Storage::url('images/news/' . $news->photo) }}');">
+                <div class="swiper-slide"
+                    style="background-image: url('{{ Storage::url('images/news/' . $news->photo) }}');">
                     <div class="container h-100">
                         <div class="row h-100 align-items-center justify-content-center">
                             <div class="col-12 col-md-10 col-lg-8 position-relative" style="z-index: 2;">
@@ -32,16 +32,17 @@
                                     <h2 class="display-5 fw-bold text-white mb-3">{{ $news->title }}</h2>
                                     <div class="lead text-white mb-3">{!! $news->short_content !!}</div>
                                     <div class="d-flex justify-content-start mt-4">
-                                        <span class="btn btn-primary rounded-pill px-4">
+                                        <a href="{{ route('news.detail', $news->id) }}"
+                                            class="btn btn-primary rounded-pill px-4">
                                             Baca Selengkapnya <i class="bi bi-arrow-right ms-2"></i>
-                                        </span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="overlay-black"></div>
-                </a>
+                </div>
             @endforeach
 
             <!-- Static Slide 2 -->

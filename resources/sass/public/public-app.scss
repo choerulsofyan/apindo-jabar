@@ -8,8 +8,11 @@ $font-color-primary: #19385e;
 $secondary-dark: #505560; // Custom softer text color for news excerpts
 
 // Set a variable for navbar height to use across the site
-$navbar-total-height: 80px; // Consider nav height and padding
-$navbar-height-mobile: 70px; // Mobile navbar height
+// Calculate total navbar height (topbar + main navbar)
+$topbar-height: 32px;  // Height of the top bar with contact info
+$navbar-height: 65px;  // Height of the main navigation bar
+$navbar-total-height: calc($topbar-height + $navbar-height); // Total navbar height
+$navbar-height-mobile: 140px; // Mobile navbar height (may need adjustment)
 
 // Import custom variables (must be before Bootstrap's variables)
 @import "variables"; // If you have a variables file
@@ -74,17 +77,38 @@ body {
     }
 }
 
-// Simple and effective approach for fixed navbar
+// Fixed navbar handling
 header.fixed-top {
-    z-index: 1030;
+  z-index: 1030;
 }
 
+// Add padding to body to push content below fixed navbar
 body {
-    padding-top: $navbar-total-height;
+  padding-top: $navbar-total-height;
+  
+  @media (max-width: 767.98px) {
+    padding-top: $navbar-height-mobile;
+  }
+}
 
-    @media (max-width: 767.98px) {
-        padding-top: $navbar-height-mobile;
-    }
+// Hero section specific adjustments
+.hero-section {
+  // Remove any margin-top since body padding handles the spacing
+  margin-top: 0 !important;
+  
+  // Set a proper height for the hero section
+  height: calc(100vh - $navbar-total-height); // Full viewport height minus navbar
+  min-height: 500px; // Minimum height for smaller screens
+  
+  @media (max-width: 767.98px) {
+    height: calc(100vh - $navbar-height-mobile);
+    min-height: 400px;
+  }
+  
+  // Make sure the carousel takes up the full height
+  .swiper {
+    height: 100%;
+  }
 }
 
 // Simple smooth scrolling for anchor links
@@ -561,7 +585,14 @@ footer a {
         }
 
         .btn-outline-primary {
-            // Customize the download button if needed
+            border-width: 2px;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+            
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
         }
     }
 }
