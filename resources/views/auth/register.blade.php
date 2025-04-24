@@ -837,12 +837,12 @@
                             const errorDiv = document.createElement('div');
                             errorDiv.className = 'invalid-feedback d-block';
                             errorDiv.textContent =
-                            'File terlalu besar. Ukuran maksimal adalah 2MB.';
+                                'File terlalu besar. Ukuran maksimal adalah 5MB.';
                             input.parentNode.insertBefore(errorDiv, input.nextElementSibling
                                 .nextElementSibling);
                         } else {
                             feedbackElement.textContent =
-                                'File terlalu besar. Ukuran maksimal adalah 2MB.';
+                                'File terlalu besar. Ukuran maksimal adalah 5MB.';
                             feedbackElement.classList.add('d-block');
                         }
                     }
