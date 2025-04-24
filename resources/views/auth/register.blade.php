@@ -37,7 +37,7 @@
                 <div class="card">
                     <div class="card-header fw-bold">Formulir Pendaftaran Anggota APINDO DPP Jawa Barat</div>
                     <div class="card-body py-4">
-                        @if ($errors->any())
+                        {{-- @if ($errors->any())
                             <div class="alert alert-danger mb-4">
                                 <ul class="mb-0">
                                     @foreach ($errors->all() as $error)
@@ -45,9 +45,10 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif
+                        @endif --}}
 
-                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data"
+                            id="registrationForm">
                             @csrf
                             <fieldset>
                                 {{-- Tipe Anggota --}}
@@ -700,7 +701,7 @@
 
                                 <div class="row mb-0">
                                     <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-primary px-4">
+                                        <button type="submit" class="btn btn-primary px-4" id="submitBtn">
                                             Kirim
                                         </button>
                                     </div>
@@ -723,6 +724,54 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // File size validation
+            const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB in bytes
+            const fileInputs = document.querySelectorAll('input[type="file"]');
+
+            fileInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    if (this.files.length > 0) {
+                        const fileSize = this.files[0].size;
+                        const fileInput = this;
+                        const feedbackElement = this.nextElementSibling.nextElementSibling;
+
+                        if (fileSize > MAX_FILE_SIZE) {
+                            // Show error
+                            this.value = ''; // Clear the file input
+                            this.classList.add('is-invalid');
+
+                            // Create error message if it doesn't exist
+                            if (!feedbackElement || !feedbackElement.classList.contains(
+                                    'invalid-feedback')) {
+                                const errorDiv = document.createElement('div');
+                                errorDiv.className = 'invalid-feedback d-block';
+                                errorDiv.textContent =
+                                    'File terlalu besar. Ukuran maksimal adalah 5MB.';
+                                this.parentNode.insertBefore(errorDiv, this.nextElementSibling
+                                    .nextElementSibling);
+                            } else {
+                                feedbackElement.textContent =
+                                    'File terlalu besar. Ukuran maksimal adalah 5MB.';
+                                feedbackElement.classList.add('d-block');
+                            }
+
+                            // Scroll to the error
+                            this.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'center'
+                            });
+                        } else {
+                            // Clear error
+                            this.classList.remove('is-invalid');
+                            if (feedbackElement && feedbackElement.classList.contains(
+                                    'invalid-feedback')) {
+                                feedbackElement.classList.remove('d-block');
+                            }
+                        }
+                    }
+                });
+            });
+
             // Work Regulations Radio Button Logic (Keep this, as it is used for other form)
             const workRegulationsRadios = document.querySelectorAll('.work-regulations-radio');
             const workRegulationOthersTextbox = document.getElementById('work_regulation_others');
@@ -770,6 +819,54 @@
                 apindoOthersTextbox.disabled = initiallySelectedHowTheyLearned.value !== 'Lainnya';
             }
 
+            // Form submission validation
+            const form = document.getElementById('registrationForm');
+            form.addEventListener('submit', function(event) {
+                let hasLargeFile = false;
+
+                // Check all file inputs before submission
+                fileInputs.forEach(input => {
+                    if (input.files.length > 0 && input.files[0].size > MAX_FILE_SIZE) {
+                        hasLargeFile = true;
+                        input.classList.add('is-invalid');
+
+                        // Create or update error message
+                        const feedbackElement = input.nextElementSibling.nextElementSibling;
+                        if (!feedbackElement || !feedbackElement.classList.contains(
+                                'invalid-feedback')) {
+                            const errorDiv = document.createElement('div');
+                            errorDiv.className = 'invalid-feedback d-block';
+                            errorDiv.textContent =
+                            'File terlalu besar. Ukuran maksimal adalah 2MB.';
+                            input.parentNode.insertBefore(errorDiv, input.nextElementSibling
+                                .nextElementSibling);
+                        } else {
+                            feedbackElement.textContent =
+                                'File terlalu besar. Ukuran maksimal adalah 2MB.';
+                            feedbackElement.classList.add('d-block');
+                        }
+                    }
+                });
+
+                if (hasLargeFile) {
+                    event.preventDefault();
+                    // Show alert at the top of the form
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert alert-danger mb-4';
+                    alertDiv.innerHTML =
+                        '<strong>Error!</strong> Beberapa file melebihi ukuran maksimal 5MB. Silakan periksa kembali file yang diunggah.';
+
+                    // Insert at the top of the form
+                    const formContent = form.querySelector('.card-body');
+                    formContent.insertBefore(alertDiv, formContent.firstChild);
+
+                    // Scroll to the top of the form
+                    alertDiv.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 @endpush
