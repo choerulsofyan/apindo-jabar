@@ -14,34 +14,39 @@
             <div class="col-lg-6 order-2 order-lg-1">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body p-4">
-                        <form action="{{ route('mindo.pesan.store') }}" method="POST" class="needs-validation" novalidate>
+                        <form action="{{ route('mindo.pesan.store') }}" method="POST" class="needs-validation"
+                            novalidate>
                             @csrf
                             <div class="row g-4">
                                 <!-- Name Field -->
                                 <div class="col-md-6">
                                     <label for="name" class="form-label">Nama</label>
-                                    <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Nama lengkap" required>
+                                    <input type="text" class="form-control form-control-lg" id="name"
+                                        name="name" placeholder="Nama lengkap" required>
                                     <div class="invalid-feedback">Nama wajib diisi</div>
                                 </div>
 
                                 <!-- Email Field -->
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="email@example.com" required>
+                                    <input type="email" class="form-control form-control-lg" id="email"
+                                        name="email" placeholder="email@example.com" required>
                                     <div class="invalid-feedback">Email wajib diisi dengan format yang benar</div>
                                 </div>
 
                                 <!-- Subject Field -->
                                 <div class="col-12">
                                     <label for="subject" class="form-label">Judul Pesan</label>
-                                    <input type="text" class="form-control form-control-lg" id="subject" name="subject" placeholder="Topik pesan" required>
+                                    <input type="text" class="form-control form-control-lg" id="subject"
+                                        name="subject" placeholder="Topik pesan" required>
                                     <div class="invalid-feedback">Judul pesan wajib diisi</div>
                                 </div>
 
                                 <!-- Message Field -->
                                 <div class="col-12">
                                     <label for="message" class="form-label">Isi Pesan</label>
-                                    <textarea class="form-control form-control-lg" id="message" name="message" rows="5" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                                    <textarea class="form-control form-control-lg" id="message" name="message" rows="5"
+                                        placeholder="Tulis pesan Anda di sini..." required></textarea>
                                     <div class="invalid-feedback">Pesan wajib diisi</div>
                                 </div>
 
@@ -66,12 +71,12 @@
                                     class="social-icon" aria-label="Facebook">
                                     <i class="bi bi-facebook"></i>
                                 </a>
-                                <a href="https://www.youtube.com/@dppapindojabar6482" target="_blank" class="social-icon"
-                                    aria-label="YouTube">
+                                <a href="https://www.youtube.com/@dppapindojabar6482" target="_blank"
+                                    class="social-icon" aria-label="YouTube">
                                     <i class="bi bi-youtube"></i>
                                 </a>
-                                <a href="https://www.instagram.com/apindo.jabar/?hl=en" target="_blank" class="social-icon"
-                                    aria-label="Instagram">
+                                <a href="https://www.instagram.com/apindo.jabar/?hl=en" target="_blank"
+                                    class="social-icon" aria-label="Instagram">
                                     <i class="bi bi-instagram"></i>
                                 </a>
                             </div>
@@ -83,7 +88,7 @@
             <!-- Map & Contact Info Column -->
             <div class="col-lg-6 order-1 order-lg-2">
                 <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body p-4">  
+                    <div class="card-body p-4">
                         <!-- Contact Information -->
                         <h4 class="fw-bold mb-4">Informasi Kontak</h4>
                         <ul class="list-unstyled contact-info mb-4">
@@ -94,8 +99,10 @@
                                     </div>
                                     <div>
                                         <h5 class="mb-2 fw-semibold">Alamat</h5>
-                                        <p class="mb-0 text-secondary-dark">Graha BIP Lt. 11 Jl. Jend. Gatot Subroto No. 23 Kota
-                                            Bandung, Jawa Barat 40262</p>
+                                        <p class="mb-0 text-secondary-dark">
+                                            Jl. Merdeka No.2 Lantai 2 Unit 12 C, Braga, Kec. Sumur Bandung, Kota
+                                            Bandung, Jawa Barat 40111
+                                        </p>
                                     </div>
                                 </div>
                             </li>
@@ -122,7 +129,7 @@
                                 </div>
                             </li>
                         </ul>
-                        
+
                         <!-- Google Map -->
                         <div class="map-container rounded overflow-hidden mt-4" style="height: 314px;">
                             <iframe class="w-100 h-100" style="border:0;" loading="lazy" allowfullscreen

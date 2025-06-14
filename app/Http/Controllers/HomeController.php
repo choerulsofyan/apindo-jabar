@@ -55,7 +55,7 @@ class HomeController extends Controller
         });
 
         $newsSlides = News::whereNotNull('photo')
-            // ->latest()
+            ->latest()
             ->take(10)
             ->get()
             ->filter(function ($news) {
