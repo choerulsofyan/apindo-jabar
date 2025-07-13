@@ -96,6 +96,11 @@ class GaleriController extends Controller
         ]);
     }
 
+    /**
+     * Retrieves the latest gallery items paginated by 15 per page and returns the public gallery view.
+     *
+     * @return \Illuminate\View\View
+     */
     public function galleryAll()
     {
         $latestImages = Galeri::latest()->paginate(15);

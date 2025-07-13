@@ -27,9 +27,11 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Displays the homepage with the latest news, gallery images, news slides, and testimonials.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * Retrieves and formats the latest news items, gallery images, and news slides, including date formatting, content truncation, and image URL handling. Also fetches all testimonials. Passes the prepared data to the homepage view.
+     *
+     * @return \Illuminate\Contracts\View\View
      */
     public function index(): View
     {
@@ -341,6 +343,13 @@ class HomeController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * $perPage);
     }
 
+    /**
+     * Displays a paginated list of management members with search and sorting options.
+     *
+     * Allows filtering by name or company and sorting by name, company, or organizational position. Eager loads related organizational position, sector, and council data for each management member.
+     *
+     * @return View The managements listing view with paginated data.
+     */
     public function managements(Request $request): View
     {
         $perPage = 20;
