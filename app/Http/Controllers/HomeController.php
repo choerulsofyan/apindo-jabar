@@ -33,12 +33,12 @@ class HomeController extends Controller
      */
     public function index(): View
     {
-        $latestNews = News::latest()->take(4)->get();
+        $latestNews = News::latest()->take(8)->get();
 
         $latestNews->each(function ($news) {
             $news->formatted_date = Carbon::parse($news->created_at)->isoFormat('D MMMM Y');
             $news->title = str($news->title)->words(10, '...');
-            $news->short_content = str($news->content)->words(25, '...');
+            $news->short_content_highlight = str($news->content)->words(25, '...');
 
             // Check for image existence and use asset() for default image
             if (!$news->photo || !Storage::disk('public')->exists('/images/news/' . $news->photo)) {
@@ -55,7 +55,7 @@ class HomeController extends Controller
         });
 
         $newsSlides = News::whereNotNull('photo')
-            // ->latest()
+            ->latest()
             ->take(10)
             ->get()
             ->filter(function ($news) {
@@ -345,23 +345,26 @@ class HomeController extends Controller
     {
         $perPage = 20;
 
-        $query = Management::query();
+        $query = Management::with(['organizationalPosition', 'sector', 'council']); // Eager load relationships
 
-        // Search by title
+        // Search by name or company
         if ($search = $request->input('search')) {
-            $query->where('name', 'like', '%' . $search . '%');
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('company', 'like', '%' . $search . '%');
+            });
         }
 
-        // Sort by title or date
-        $sortBy = $request->input('sort_by', 'name'); // Default sort by date
-        $sortOrder = $request->input('sort_order', 'desc'); // Default sort order (descending for date)
+        // Sort by name, company, or position
+        $sortBy = $request->input('sort_by', 'name'); // Default sort by name
+        $sortOrder = $request->input('sort_order', 'asc'); // Default sort order (ascending for names)
 
-        if (!in_array($sortBy, ['name'])) {
+        if (!in_array($sortBy, ['name', 'company', 'organizational_position_id'])) {
             $sortBy = 'name'; // Default sort column if invalid value is provided
         }
 
         if (!in_array($sortOrder, ['asc', 'desc'])) {
-            $sortOrder = 'desc'; // Default sort order if invalid value is provided
+            $sortOrder = 'asc'; // Default sort order if invalid value is provided
         }
 
         $query->orderBy($sortBy, $sortOrder);

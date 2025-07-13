@@ -14,7 +14,7 @@
     </div> --}}
     @include('public.partials.news', ['latestNews' => $latestNews])
     @include('public.partials.gallery', ['latestImages' => $latestImages])
-    @include('public.partials.contact')
     @include('public.partials.faq')
-    @include('public.partials.testimoni')
+    {{-- @include('public.partials.testimoni') --}}
+    @include('public.partials.contact')
 @endsection

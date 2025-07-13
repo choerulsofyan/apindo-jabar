@@ -5,8 +5,14 @@
 $primary: #19385e;
 $secondary: #f5f5f5;
 $font-color-primary: #19385e;
-// Change body font color
-// $body-color: #353c60;
+$secondary-dark: #505560; // Custom softer text color for news excerpts
+
+// Set a variable for navbar height to use across the site
+// Calculate total navbar height (topbar + main navbar)
+$topbar-height: 32px;  // Height of the top bar with contact info
+$navbar-height: 65px;  // Height of the main navigation bar
+$navbar-total-height: calc($topbar-height + $navbar-height); // Total navbar height
+$navbar-height-mobile: 140px; // Mobile navbar height (may need adjustment)
 
 // Import custom variables (must be before Bootstrap's variables)
 @import "variables"; // If you have a variables file
@@ -45,6 +51,254 @@ body {
 
 // Import Bootstrap styles
 @import "bootstrap/scss/bootstrap";
+
+// Custom color utility classes
+.text-secondary-dark {
+    color: $secondary-dark !important;
+}
+
+// Contact section enhancements
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba($primary, 0.1);
+    color: $primary;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+  
+    &:hover {
+        background-color: $primary;
+        color: white;
+        transform: translateY(-3px);
+    }
+}
+
+// Fixed navbar handling
+header.fixed-top {
+  z-index: 1030;
+}
+
+// Add padding to body to push content below fixed navbar
+body {
+  padding-top: $navbar-total-height;
+  
+  @media (max-width: 767.98px) {
+    padding-top: $navbar-height-mobile;
+  }
+}
+
+// Hero section specific adjustments
+.hero-section {
+  // Remove any margin-top since body padding handles the spacing
+  margin-top: 0 !important;
+  
+  // Set a proper height for the hero section
+  height: calc(100vh - $navbar-total-height); // Full viewport height minus navbar
+  min-height: 500px; // Minimum height for smaller screens
+  
+  @media (max-width: 767.98px) {
+    height: calc(100vh - $navbar-height-mobile);
+    min-height: 400px;
+  }
+  
+  // Make sure the carousel takes up the full height
+  .swiper {
+    height: 100%;
+  }
+}
+
+// Simple smooth scrolling for anchor links
+html {
+    scroll-behavior: smooth;
+}
+
+// Make WhatsApp visible on all screens (topbar)
+.top-bar {
+    .contact-item {
+        display: inline-flex !important;
+    }
+}
+
+// Fix for hero section and swiper
+.hero-section {
+    .swiper {
+        height: calc(100vh - $navbar-total-height);
+        max-height: 600px;
+
+        .swiper-slide {
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+    }
+}
+
+// Perfectly round social media icons
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid $primary;
+    color: $primary;
+    transition: all 0.3s ease;
+    text-decoration: none;
+
+    &:hover {
+        background-color: $primary;
+        color: white;
+    }
+}
+
+// Minimalist news section styling (similar to the reference image)
+.news-section {
+    article.news-post {
+        height: 100%; // Ensure full height to align content
+        display: flex;
+        flex-direction: column;
+
+        // Image container with subtle hover effect
+        .news-image-container {
+            overflow: hidden;
+            margin-bottom: 1rem;
+            background-color: #f8f8f8;
+            border-radius: 4px;
+
+            img {
+                transition: transform 0.4s ease;
+            }
+
+            &:hover img {
+                transform: scale(1.02);
+            }
+        }
+
+        // Meta information (date, category)
+        .news-meta {
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #6c757d;
+            margin-bottom: 0.75rem;
+
+            i {
+                font-size: 0.9em;
+                color: $primary;
+                opacity: 0.8;
+            }
+
+            .news-date {
+                color: #888;
+            }
+
+            .news-category {
+                color: #666;
+            }
+        }
+
+        // News title with hover effect
+        .news-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+
+            a {
+                color: #212529;
+                text-decoration: none;
+                transition: color 0.2s ease;
+
+                &:hover {
+                    color: $primary;
+                }
+            }
+        }
+
+        // News excerpt
+        .news-excerpt {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: $secondary-dark; // Using custom color variable
+            margin-bottom: 1rem;
+
+            // Ensure consistent height
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            max-height: 4.8em; // 3 lines of text
+        }
+
+        // Read more link
+        .news-read-more {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: $primary;
+            position: relative;
+            transition: color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+
+            i {
+                transition: transform 0.2s ease;
+                font-size: 0.8rem;
+            }
+
+            &:hover {
+                color: darken($primary, 10%);
+
+                i {
+                    transform: translateX(3px);
+                }
+            }
+        }
+    }
+
+    // Responsive adjustments
+    @media (max-width: 991.98px) {
+        article.news-post {
+            .news-title {
+                font-size: 1rem;
+                min-height: 2.8em;
+            }
+
+            .news-excerpt {
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
+                max-height: 3.2em; // 2 lines of text
+                font-size: 0.9rem;
+            }
+
+            .news-read-more {
+                font-size: 0.85rem;
+            }
+        }
+    }
+}
+
+// Contact form improvements
+.contact-section {
+    .form-control {
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+
+        &:focus {
+            box-shadow: 0 0 0 0.25rem rgba(25, 56, 94, 0.25);
+        }
+    }
+
+    .form-label {
+        font-weight: 500;
+    }
+}
 
 // ... Your own custom SCSS styles for public pages ...
 // Fonts
@@ -331,7 +585,14 @@ footer a {
         }
 
         .btn-outline-primary {
-            // Customize the download button if needed
+            border-width: 2px;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+            
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
         }
     }
 }
